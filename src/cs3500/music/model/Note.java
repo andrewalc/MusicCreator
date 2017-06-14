@@ -30,7 +30,8 @@ public class Note {
    *                                  and if the note does not have a positive number of beats.
    * @throws NullPointerException     If the given tone is null.
    */
-  public Note(Tones tone, int octave, int startingBeat, int beats) throws IllegalArgumentException,
+  public Note(Tones tone, int octave, int startingBeat, int beats, int instrument, int volume)
+          throws IllegalArgumentException,
           NullPointerException {
     if (tone == null) {
       throw new NullPointerException("Given tone is null.");

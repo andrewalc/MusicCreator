@@ -7,9 +7,10 @@ import java.util.Arrays;
  * Enumeration representing all tones C through B ranging from octave 1 to octave 10.
  */
 public enum Tones {
-  C("C"), C_SHARP("C#"), D("D"), D_SHARP("D#"), E("E"), F("F"), F_SHARP("F#"), G("G"),
-  G_SHARP("G#"), A("A"), A_SHARP("A#"), B("B");
+  C("C", 0), C_SHARP("C#", 1), D("D", 2), D_SHARP("D#", 3), E("E", 4), F("F", 5), F_SHARP("F#",
+          6), G("G", 7),G_SHARP("G#", 8), A("A", 9), A_SHARP("A#", 10), B("B", 11);
   private final String tone;
+  private final int toneVal;
   private final static int NUM_TONES = 12;
 
 
@@ -20,8 +21,9 @@ public enum Tones {
    *
    * @param tone String representing the tone, structured as described above.
    */
-  Tones(String tone) {
+  Tones(String tone, int toneVal) {
     this.tone = tone;
+    this.toneVal = toneVal;
   }
 
   /**
@@ -33,6 +35,12 @@ public enum Tones {
   public String getToneStr() {
     return this.tone;
   }
+
+  /**
+   * Method that returns the tone's tone value, C starting at 0 and B ending at 11.
+   * @return This tone's tone value.
+   */
+  public int getToneVal() { return this.toneVal; }
 
   /**
    * Method that returns a tone that is one pitch higher than this tone.
