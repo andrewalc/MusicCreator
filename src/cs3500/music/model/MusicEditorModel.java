@@ -37,26 +37,28 @@ public class MusicEditorModel implements IMusicEditorModel {
   }
 
   @Override
-  public void addNote(Tones tone, int octave, int startingBeat, int beats) throws
+  public void addNote(Tones tone, int octave, int startingBeat, int beats, int instrument, int
+          volume) throws
           NullPointerException {
-    this.piece.addNote(new Note(tone, octave, startingBeat, beats));
+    this.piece.addNote(new Note(tone, octave, startingBeat, beats, instrument, volume));
   }
 
   @Override
-  public void removeNote(Tones tone, int octave, int startingBeat, int beats) throws
+  public void removeNote(Tones tone, int octave, int startingBeat, int beats, int instrument, int
+          volume) throws
           NullPointerException, NoSuchElementException {
-    this.piece.removeNote(new Note(tone, octave, startingBeat, beats));
+    this.piece.removeNote(new Note(tone, octave, startingBeat, beats, instrument, volume));
   }
 
   @Override
-  public void modifyNote(Tones tone, int octave, int startingBeat, int beats, Tones modTone, int
-          modOctave, int modStartingBeat, int
-                                 modBeats)
+  public void modifyNote(Tones tone, int octave, int startingBeat, int beats, int instrument, int
+          volume, Tones modTone, int
+                                 modOctave, int modStartingBeat, int modBeats, int modInstrument,
+                         int modVolume)
           throws
           NullPointerException, IllegalArgumentException, NoSuchElementException {
-    this.piece.modifyNote(new Note(tone, octave, startingBeat, beats), modTone, modOctave,
-            modStartingBeat,
-            modBeats);
+    this.piece.modifyNote(new Note(tone, octave, startingBeat, beats, instrument, volume),
+            modTone, modOctave, modStartingBeat, modBeats, modInstrument, modVolume);
   }
 
   @Override
@@ -81,7 +83,7 @@ public class MusicEditorModel implements IMusicEditorModel {
     for (ArrayList<Note> pitchList : otherNotes.values()) {
       for (Note note : pitchList) {
         this.addNote(note.getPitch().getTone(), note.getPitch().getOctave(), note.getStartingBeat(),
-                note.getBeats());
+                note.getBeats(), note.getInstrument(), note.getVolume());
       }
     }
   }
@@ -99,7 +101,8 @@ public class MusicEditorModel implements IMusicEditorModel {
     for (ArrayList<Note> pitchList : otherNotes.values()) {
       for (Note note : pitchList) {
         dummy.addNote(new Note(note.getPitch().getTone(), note.getPitch().getOctave(), note
-                .getStartingBeat() + this.piece.getMaxBeats() + 1, note.getBeats()));
+                .getStartingBeat() + this.piece.getMaxBeats() + 1, note.getBeats(),
+                note.getInstrument(), note.getVolume()));
       }
     }
     this.loadPiece(dummy);

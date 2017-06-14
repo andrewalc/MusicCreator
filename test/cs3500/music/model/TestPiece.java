@@ -14,14 +14,14 @@ public class TestPiece {
   TreeMap<Pitch, ArrayList<Note>> p1TreeMap; // the treemap from p1
 
   // Pre-created notes for easy access
-  Note c1For0And4 = new Note(Tones.C, 1, 0, 4);
-  Note cSharp1For0And4 = new Note(Tones.C_SHARP, 1, 0, 4);
-  Note d1For6And4 = new Note(Tones.D, 1, 6, 4);
-  Note d1For7And5 = new Note(Tones.D, 1, 7, 5);
+  Note c1For0And4 = new Note(Tones.C, 1, 0, 4, 1, 10);
+  Note cSharp1For0And4 = new Note(Tones.C_SHARP, 1, 0, 4, 1, 10);
+  Note d1For6And4 = new Note(Tones.D, 1, 6, 4, 1, 10);
+  Note d1For7And5 = new Note(Tones.D, 1, 7, 5, 1, 10);
 
-  Note dSharp1For6And4 = new Note(Tones.D_SHARP, 1, 6, 4);
-  Note cSharp2For3And2 = new Note(Tones.C_SHARP, 2, 3, 2);
-  Note cSharp2For10And1 = new Note(Tones.C_SHARP, 2, 10, 1);
+  Note dSharp1For6And4 = new Note(Tones.D_SHARP, 1, 6, 4, 1, 10);
+  Note cSharp2For3And2 = new Note(Tones.C_SHARP, 2, 3, 2, 1, 10);
+  Note cSharp2For10And1 = new Note(Tones.C_SHARP, 2, 10, 1, 1, 10);
 
 
   void initData() {
@@ -138,21 +138,21 @@ public class TestPiece {
   @Test(expected = NoSuchElementException.class)
   public void testRemoveNoteNotFound1() {
     initData();
-    p1.removeNote(new Note(Tones.B, 10, 0, 10));
+    p1.removeNote(new Note(Tones.B, 10, 0, 10, 1, 10));
   }
 
   @Test(expected = NoSuchElementException.class)
   public void testRemoveNoteNotFound2() {
     initData();
     // close to D1For6and4
-    p1.removeNote(new Note(Tones.D, 1, 6, 5));
+    p1.removeNote(new Note(Tones.D, 1, 6, 5, 1, 10));
   }
 
   @Test(expected = NoSuchElementException.class)
   public void testRemoveNoteNotFound3() {
     initData();
     // close to D1For6and4
-    p1.removeNote(new Note(Tones.D, 2, 6, 4));
+    p1.removeNote(new Note(Tones.D, 2, 6, 4, 1, 10));
   }
 
   @Test
@@ -193,19 +193,19 @@ public class TestPiece {
   @Test(expected = NullPointerException.class)
   public void testModifyNoteNullNote() {
     initData();
-    p1.modifyNote(null, Tones.C, 1, 0, 10);
+    p1.modifyNote(null, Tones.C, 1, 0, 10, 1, 10);
   }
 
   @Test(expected = NullPointerException.class)
   public void testModifyNoteNullTone() {
     initData();
-    p1.modifyNote(d1For6And4, null, 1, 0, 10);
+    p1.modifyNote(d1For6And4, null, 1, 0, 10, 1, 10);
   }
 
   @Test(expected = NoSuchElementException.class)
   public void testModifyNoteNotFound() {
     initData();
-    p1.modifyNote(new Note(Tones.C, 1, 0, 1), Tones.C, 1, 0, 10);
+    p1.modifyNote(new Note(Tones.C, 1, 0, 1, 1, 10), Tones.C, 1, 0, 10, 1, 10);
   }
 
   @Test
@@ -213,7 +213,7 @@ public class TestPiece {
     initData();
     assertEquals(p1.getNumberOfNotes(), 7);
     assertEquals(p1.getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
-    p1.modifyNote(cSharp2For10And1, Tones.A_SHARP, 8, 0, 2);
+    p1.modifyNote(cSharp2For10And1, Tones.A_SHARP, 8, 0, 2, 1, 10);
     assertEquals(p1.getNumberOfNotes(), 7);
     assertEquals(p1.getHighestPitch(), new Pitch(Tones.A_SHARP, 8));
   }
@@ -223,10 +223,10 @@ public class TestPiece {
     initData();
     assertEquals(p1.getNumberOfNotes(), 7);
     assertEquals(p1.getLowestPitch(), new Pitch(Tones.C, 1));
-    p1.modifyNote(c1For0And4, Tones.D, 2, 7, 10);
+    p1.modifyNote(c1For0And4, Tones.D, 2, 7, 10, 1, 10);
     assertEquals(p1.getNumberOfNotes(), 7);
     assertEquals(p1.getLowestPitch(), new Pitch(Tones.C_SHARP, 1));
-    p1.modifyNote(cSharp1For0And4, Tones.C_SHARP, 5, 5, 3);
+    p1.modifyNote(cSharp1For0And4, Tones.C_SHARP, 5, 5, 3, 1, 10);
     assertEquals(p1.getNumberOfNotes(), 7);
     assertEquals(p1.getLowestPitch(), new Pitch(Tones.D, 1));
 
@@ -293,7 +293,7 @@ public class TestPiece {
                     "11            |                                                         \n" +
                     "12                                                                      \n");
 
-    p1.addNote(new Note(Tones.G, 1, 1, 5));
+    p1.addNote(new Note(Tones.G, 1, 1, 5, 1, 10));
     assertEquals(p1.toString(),
             "    C1  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X    X                                                              \n" +
@@ -318,7 +318,7 @@ public class TestPiece {
     assertEquals(p0.toString(),
             "");
 
-    p0.addNote(new Note(Tones.G, 1, 1, 5));
+    p0.addNote(new Note(Tones.G, 1, 1, 5, 1, 10));
     assertEquals(p0.toString(),
             "   G1 \n" +
                     "0     \n" +
@@ -328,7 +328,7 @@ public class TestPiece {
                     "4  |  \n" +
                     "5  |  \n" +
                     "6     \n");
-    p0.addNote(new Note(Tones.B, 1, 0, 8));
+    p0.addNote(new Note(Tones.B, 1, 0, 8, 1, 10));
     assertEquals(p0.toString(),
             "   G1  G#1   A1  A#1   B1 \n" +
                     "0                      X  \n" +
@@ -340,7 +340,7 @@ public class TestPiece {
                     "6                      |  \n" +
                     "7                      |  \n" +
                     "8                         \n");
-    p0.addNote(new Note(Tones.B, 1, 6, 4));
+    p0.addNote(new Note(Tones.B, 1, 6, 4, 1, 10));
     assertEquals(p0.toString(),
             "    G1  G#1   A1  A#1   B1 \n" +
                     " 0                      X  \n" +
@@ -354,7 +354,7 @@ public class TestPiece {
                     " 8                      |  \n" +
                     " 9                      |  \n" +
                     "10                         \n");
-    p0.addNote(new Note(Tones.F, 1, 4, 16));
+    p0.addNote(new Note(Tones.F, 1, 4, 16, 1, 10));
     assertEquals(p0.toString(),
             "    F1  F#1   G1  G#1   A1  A#1   B1 \n" +
                     " 0                                X  \n" +
@@ -387,8 +387,8 @@ public class TestPiece {
     initData();
     assertEquals(p0.toString(),
             "");
-    p0.addNote(new Note(Tones.F, 10, 40, 123));
-    p0.addNote(new Note(Tones.B, 10, 50, 30));
+    p0.addNote(new Note(Tones.F, 10, 40, 123, 1, 10));
+    p0.addNote(new Note(Tones.B, 10, 50, 30, 1, 10));
 
     assertEquals(p0.toString(),
             "    F10  F#10 G10  G#10 A10  A#10 B10 \n" +
@@ -578,7 +578,7 @@ public class TestPiece {
                     "11            |                                                         \n" +
                     "12                                                                      \n");
 
-    p1.removeNote(new Note(Tones.D, 1, 7, 5));
+    p1.removeNote(new Note(Tones.D, 1, 7, 5, 1, 10));
     assertEquals(p1.toString(),
             "    C1  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X    X                                                              \n" +
@@ -593,7 +593,7 @@ public class TestPiece {
                     " 9            |    |                                                    \n" +
                     "10                                                                   X  \n" +
                     "11                                                                      \n");
-    p1.removeNote(new Note(Tones.D, 1, 6, 4));
+    p1.removeNote(new Note(Tones.D, 1, 6, 4, 1, 10));
     assertEquals(p1.toString(),
             "    C1  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X    X                                                              \n" +
@@ -631,7 +631,7 @@ public class TestPiece {
                     "11            |                                                         \n" +
                     "12                                                                      \n");
 
-    p1.removeNote(new Note(Tones.D, 1, 7, 5));
+    p1.removeNote(new Note(Tones.D, 1, 7, 5, 1, 10));
     assertEquals(p1.toString(),
             "    C1  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X    X                                                              \n" +
@@ -646,7 +646,7 @@ public class TestPiece {
                     " 9            |    |                                                    \n" +
                     "10                                                                   X  \n" +
                     "11                                                                      \n");
-    p1.removeNote(new Note(Tones.D, 1, 6, 4));
+    p1.removeNote(new Note(Tones.D, 1, 6, 4, 1, 10));
     assertEquals(p1.toString(),
             "    C1  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X    X                                                              \n" +
@@ -661,8 +661,8 @@ public class TestPiece {
                     " 9                 |                                                    \n" +
                     "10                                                                   X  \n" +
                     "11                                                                      \n");
-    p1.removeNote(new Note(Tones.C_SHARP, 2, 3, 2));
-    p1.removeNote(new Note(Tones.C_SHARP, 2, 10, 1));
+    p1.removeNote(new Note(Tones.C_SHARP, 2, 3, 2, 1, 10));
+    p1.removeNote(new Note(Tones.C_SHARP, 2, 10, 1, 1, 10));
     assertEquals(p1.toString(),
             "    C1  C#1   D1  D#1 \n" +
                     " 0  X    X            \n" +
@@ -676,7 +676,7 @@ public class TestPiece {
                     " 8                 |  \n" +
                     " 9                 |  \n" +
                     "10                    \n");
-    p1.removeNote(new Note(Tones.D_SHARP, 1, 6, 4));
+    p1.removeNote(new Note(Tones.D_SHARP, 1, 6, 4, 1, 10));
     assertEquals(p1.toString(),
             "   C1  C#1 \n" +
                     "0  X    X  \n" +
@@ -684,7 +684,7 @@ public class TestPiece {
                     "2  |    |  \n" +
                     "3  |    |  \n" +
                     "4          \n");
-    p1.removeNote(new Note(Tones.C, 1, 0, 4));
+    p1.removeNote(new Note(Tones.C, 1, 0, 4, 1, 10));
     assertEquals(p1.toString(),
             "  C#1 \n" +
                     "0  X  \n" +
@@ -692,7 +692,7 @@ public class TestPiece {
                     "2  |  \n" +
                     "3  |  \n" +
                     "4     \n");
-    p1.removeNote(new Note(Tones.C_SHARP, 1, 0, 4));
+    p1.removeNote(new Note(Tones.C_SHARP, 1, 0, 4, 1, 10));
     assertEquals(p1.toString(),
             "");
 
@@ -716,7 +716,7 @@ public class TestPiece {
                     "10            |                                                      X  \n" +
                     "11            |                                                         \n" +
                     "12                                                                      \n");
-    p1.modifyNote(new Note(Tones.C, 1, 0, 4), Tones.G, 1, 2, 3);
+    p1.modifyNote(new Note(Tones.C, 1, 0, 4, 1, 10), Tones.G, 1, 2, 3, 1, 10);
     assertEquals(p1.toString(),
             "   C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X                                                              \n" +
@@ -732,7 +732,7 @@ public class TestPiece {
                     "10       |                                                      X  \n" +
                     "11       |                                                         \n" +
                     "12                                                                 \n");
-    p1.modifyNote(d1For7And5, Tones.A_SHARP, 1, 10, 5);
+    p1.modifyNote(d1For7And5, Tones.A_SHARP, 1, 10, 5, 1, 10);
     assertEquals(p1.toString(),
             "   C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X                                                              \n" +
@@ -751,7 +751,7 @@ public class TestPiece {
                     "13                                               |                 \n" +
                     "14                                               |                 \n" +
                     "15                                                                 \n");
-    p1.modifyNote(dSharp1For6And4, Tones.D_SHARP, 1, 3, 3);
+    p1.modifyNote(dSharp1For6And4, Tones.D_SHARP, 1, 3, 3, 1, 10);
     assertEquals(p1.toString(),
             "   C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X                                                              \n" +
@@ -855,7 +855,7 @@ public class TestPiece {
                     "10               \n");
     assertEquals(p0.getNumberOfNotes(), 4);
     //should only modify ONE
-    p0.modifyNote(cSharp1For0And4, Tones.D, 1, 2, 3);
+    p0.modifyNote(cSharp1For0And4, Tones.D, 1, 2, 3, 1, 10);
     assertEquals(p0.toString(),
             "   C#1   D1  D#1 \n" +
                     " 0  X            \n" +
@@ -872,7 +872,7 @@ public class TestPiece {
     assertEquals(p0.getNumberOfNotes(), 4);
 
     // modify another
-    p0.modifyNote(cSharp1For0And4, Tones.D, 1, 9, 1);
+    p0.modifyNote(cSharp1For0And4, Tones.D, 1, 9, 1, 1, 10);
     assertEquals(p0.toString(),
             "   C#1   D1  D#1 \n" +
                     " 0  X            \n" +

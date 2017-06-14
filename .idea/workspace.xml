@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="106c4025-9472-47f2-8388-2e1e2426393c" name="Default" comment="" />
+    <list default="true" id="106c4025-9472-47f2-8388-2e1e2426393c" name="Default" comment="Changed Tone signature to add int instrument and int volume.&#10;Fixed all associated tests to add a 1,10 for instrument volume to allow tests to pass, except a select few.&#10;&#10;Pitch hashCode now generates based on MIDI's pitch says a pitch should be as an int.">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/model/IMusicEditorModel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/model/IMusicEditorModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/model/MusicEditorModel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/model/MusicEditorModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/model/Note.java" afterPath="$PROJECT_DIR$/src/cs3500/music/model/Note.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/model/Piece.java" afterPath="$PROJECT_DIR$/src/cs3500/music/model/Piece.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/model/Pitch.java" afterPath="$PROJECT_DIR$/src/cs3500/music/model/Pitch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/MusicEditor.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/MusicEditor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/cs3500/music/model/TestMusicEditorModel.java" afterPath="$PROJECT_DIR$/test/cs3500/music/model/TestMusicEditorModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/cs3500/music/model/TestNote.java" afterPath="$PROJECT_DIR$/test/cs3500/music/model/TestNote.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/cs3500/music/model/TestPiece.java" afterPath="$PROJECT_DIR$/test/cs3500/music/model/TestPiece.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/cs3500/music/model/TestPitch.java" afterPath="$PROJECT_DIR$/test/cs3500/music/model/TestPitch.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,31 +34,8 @@
       <file leaf-file-name="Piece.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/Piece.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="72" column="7" lean-forward="true" selection-start-line="72" selection-start-column="7" selection-end-line="72" selection-end-column="7" />
-              <folding>
-                <element signature="e#816#817#0" expanded="true" />
-                <element signature="e#895#896#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EditorPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MusicEditorView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/MusicEditorView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="52" column="46" lean-forward="false" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
+              <caret line="241" column="13" lean-forward="false" selection-start-line="241" selection-start-column="13" selection-end-line="241" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -55,33 +44,21 @@
       <file leaf-file-name="Pitch.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/Pitch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="128" column="4" lean-forward="true" selection-start-line="128" selection-start-column="4" selection-end-line="128" selection-end-column="4" />
+            <state relative-caret-position="777">
+              <caret line="149" column="65" lean-forward="false" selection-start-line="149" selection-start-column="65" selection-end-line="149" selection-end-column="65" />
               <folding>
-                <element signature="e#1317#1318#0" expanded="true" />
-                <element signature="e#1338#1339#0" expanded="true" />
                 <element signature="e#4517#4518#0" expanded="true" />
-                <element signature="e#4578#4579#0" expanded="true" />
+                <element signature="e#4588#4589#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PitchComparator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/PitchComparator.java">
+      <file leaf-file-name="TestPitch.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestPitch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="16" column="19" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Tones.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/Tones.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+            <state relative-caret-position="559">
+              <caret line="207" column="34" lean-forward="false" selection-start-line="207" selection-start-column="34" selection-end-line="207" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -90,29 +67,36 @@
       <file leaf-file-name="IMusicEditorModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/IMusicEditorModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-729">
-              <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="99" column="75" lean-forward="false" selection-start-line="99" selection-start-column="75" selection-end-line="99" selection-end-column="75" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KeyboardPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/KeyboardPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Note.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Note.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/Note.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="81" lean-forward="false" selection-start-line="32" selection-start-column="81" selection-end-line="32" selection-end-column="81" />
-              <folding />
+            <state relative-caret-position="195">
+              <caret line="16" column="2" lean-forward="false" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+              <folding>
+                <element signature="e#4134#4135#0" expanded="true" />
+                <element signature="e#4161#4162#0" expanded="true" />
+                <element signature="e#4270#4271#0" expanded="true" />
+                <element signature="e#4293#4294#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MusicEditorModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/MusicEditorModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="53" column="14" lean-forward="false" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -120,8 +104,41 @@
       <file leaf-file-name="MusicEditor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/MusicEditor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state relative-caret-position="330">
+              <caret line="30" column="68" lean-forward="false" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestPiece.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestPiece.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="21" column="7" lean-forward="false" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestNote.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestNote.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="97" column="23" lean-forward="false" selection-start-line="97" selection-start-column="23" selection-end-line="97" selection-end-column="23" />
+              <folding>
+                <element signature="e#286#287#0" expanded="true" />
+                <element signature="e#338#339#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestMusicEditorModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestMusicEditorModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-753">
+              <caret line="463" column="42" lean-forward="false" selection-start-line="463" selection-start-column="42" selection-end-line="463" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -196,6 +213,7 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
@@ -218,29 +236,30 @@
         <option value="$PROJECT_DIR$/test/cs3500/music/model/testNote.java" />
         <option value="$PROJECT_DIR$/test/cs3500/music/model/testPiece.java" />
         <option value="$PROJECT_DIR$/test/cs3500/music/model/testMusicEditorModel.java" />
-        <option value="$PROJECT_DIR$/test/cs3500/music/model/TestPitch.java" />
         <option value="$PROJECT_DIR$/test/cs3500/music/model/TestTones.java" />
-        <option value="$PROJECT_DIR$/src/cs3500/music/model/Piece.java" />
-        <option value="$PROJECT_DIR$/test/cs3500/music/model/TestPiece.java" />
-        <option value="$PROJECT_DIR$/src/cs3500/music/model/IMusicEditorModel.java" />
-        <option value="$PROJECT_DIR$/src/cs3500/music/model/MusicEditorModel.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/view/RunEverything.java" />
-        <option value="$PROJECT_DIR$/src/cs3500/music/view/MusicEditor.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/view/KeyboardPanel.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/view/MusicEditorView.java" />
-        <option value="$PROJECT_DIR$/test/cs3500/music/model/TestMusicEditorModel.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/model/Tones.java" />
-        <option value="$PROJECT_DIR$/src/cs3500/music/model/Pitch.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/model/PitchComparator.java" />
+        <option value="$PROJECT_DIR$/src/cs3500/music/model/Piece.java" />
+        <option value="$PROJECT_DIR$/src/cs3500/music/model/IMusicEditorModel.java" />
+        <option value="$PROJECT_DIR$/src/cs3500/music/model/Pitch.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/model/Note.java" />
+        <option value="$PROJECT_DIR$/src/cs3500/music/model/MusicEditorModel.java" />
+        <option value="$PROJECT_DIR$/src/cs3500/music/view/MusicEditor.java" />
+        <option value="$PROJECT_DIR$/test/cs3500/music/model/TestPiece.java" />
+        <option value="$PROJECT_DIR$/test/cs3500/music/model/TestNote.java" />
+        <option value="$PROJECT_DIR$/test/cs3500/music/model/TestMusicEditorModel.java" />
+        <option value="$PROJECT_DIR$/test/cs3500/music/model/TestPitch.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="width" value="1924" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -259,6 +278,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -335,17 +357,14 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_63435a79518b44808827aa3194b76bea96231189/cmd/git.exe" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -364,7 +383,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestMusicEditorModel">
+  <component name="RunManager" selected="JUnit.TestPitch">
     <configuration default="false" name="TestMusicEditorModel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -438,32 +457,6 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="TestMusicEditorModel.testGetNotesAtBeatTwoBeats" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="cs3500.music.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Music Creator" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="cs3500.music.model" />
-      <option name="MAIN_CLASS_NAME" value="cs3500.music.model.TestMusicEditorModel" />
-      <option name="METHOD_NAME" value="testGetNotesAtBeatTwoBeats" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="false" name="MusicEditor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -482,6 +475,32 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="Music Creator" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="TestPitch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="cs3500.music.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Music Creator" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="cs3500.music.model" />
+      <option name="MAIN_CLASS_NAME" value="cs3500.music.model.TestPitch" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -692,16 +711,16 @@
       <item index="0" class="java.lang.String" itemvalue="JUnit.TestMusicEditorModel" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.All in Music Creator" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.cs3500.music.model in Music Creator" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.TestMusicEditorModel.testGetNotesAtBeatTwoBeats" />
-      <item index="4" class="java.lang.String" itemvalue="Application.MusicEditor" />
+      <item index="3" class="java.lang.String" itemvalue="Application.MusicEditor" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TestPitch" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.TestMusicEditorModel" />
-        <item index="1" class="java.lang.String" itemvalue="Application.MusicEditor" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.cs3500.music.model in Music Creator" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.All in Music Creator" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.TestMusicEditorModel.testGetNotesAtBeatTwoBeats" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.TestPitch" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TestMusicEditorModel" />
+        <item index="2" class="java.lang.String" itemvalue="Application.MusicEditor" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.cs3500.music.model in Music Creator" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.All in Music Creator" />
       </list>
     </recent_temporary>
   </component>
@@ -719,23 +738,23 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestMusicEditorModel - 2017.06.14 at 00h 42m 33s.xml">
-      <configuration name="TestMusicEditorModel" configurationId="JUnit" />
+    <history-entry file="TestPitch - 2017.06.14 at 11h 41m 44s.xml">
+      <configuration name="TestPitch" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestMusicEditorModel - 2017.06.14 at 00h 43m 27s.xml">
-      <configuration name="TestMusicEditorModel" configurationId="JUnit" />
+    <history-entry file="TestPitch - 2017.06.14 at 11h 42m 25s.xml">
+      <configuration name="TestPitch" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestMusicEditorModel - 2017.06.14 at 00h 43m 31s.xml">
-      <configuration name="TestMusicEditorModel" configurationId="JUnit" />
+    <history-entry file="TestPitch - 2017.06.14 at 11h 42m 49s.xml">
+      <configuration name="TestPitch" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestMusicEditorModel - 2017.06.14 at 00h 43m 49s.xml">
-      <configuration name="TestMusicEditorModel" configurationId="JUnit" />
+    <history-entry file="TestPitch - 2017.06.14 at 11h 43m 26s.xml">
+      <configuration name="TestPitch" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestMusicEditorModel - 2017.06.14 at 00h 44m 04s.xml">
-      <configuration name="TestMusicEditorModel" configurationId="JUnit" />
+    <history-entry file="TestPitch - 2017.06.14 at 11h 44m 10s.xml">
+      <configuration name="TestPitch" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestMusicEditorModel - 2017.06.14 at 00h 44m 32s.xml">
-      <configuration name="TestMusicEditorModel" configurationId="JUnit" />
+    <history-entry file="TestPitch - 2017.06.14 at 11h 46m 17s.xml">
+      <configuration name="TestPitch" configurationId="JUnit" />
     </history-entry>
     <history-entry file="cs3500_music_model_in_Music_Creator - 2017.06.13 at 02h 32m 07s.xml">
       <configuration name="cs3500.music.model in Music Creator" configurationId="JUnit" />
@@ -750,19 +769,26 @@
       <configuration name="cs3500.music.model in Music Creator" configurationId="JUnit" />
     </history-entry>
   </component>
+  <component name="TodoView" selected-index="4">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.49790356" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="92" y="92" width="1732" height="856" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5020964" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22832981" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -770,7 +796,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23489584" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23480085" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -781,13 +808,54 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="92" y="92" width="1732" height="856" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changed Tone signature to add int instrument and int volume.&#10;Fixed all associated tests to add a 1,10 for instrument volume to allow tests to pass, except a select few.&#10;&#10;Pitch hashCode now generates based on MIDI's pitch says a pitch should be as an int." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed Tone signature to add int instrument and int volume.&#10;Fixed all associated tests to add a 1,10 for instrument volume to allow tests to pass, except a select few.&#10;&#10;Pitch hashCode now generates based on MIDI's pitch says a pitch should be as an int." />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -804,23 +872,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="26" column="50" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#287#288#0" expanded="false" />
-            <element signature="e#328#329#0" expanded="false" />
-            <element signature="e#432#433#0" expanded="false" />
-            <element signature="e#483#484#0" expanded="false" />
-            <element signature="e#584#585#0" expanded="false" />
-            <element signature="e#634#635#0" expanded="false" />
-            <element signature="e#740#741#0" expanded="false" />
-            <element signature="e#791#792#0" expanded="false" />
-            <element signature="e#3230#3231#0" expanded="false" />
-            <element signature="e#3292#3293#0" expanded="false" />
-            <element signature="e#3334#3335#0" expanded="false" />
-            <element signature="e#3396#3397#0" expanded="false" />
-            <element signature="e#3443#3444#0" expanded="false" />
-            <element signature="e#3512#3513#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -838,42 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
-          <folding>
-            <element signature="e#192#193#0" expanded="false" />
-            <element signature="e#239#240#0" expanded="false" />
-            <element signature="e#277#278#0" expanded="false" />
-            <element signature="e#331#332#0" expanded="false" />
-            <element signature="e#372#373#0" expanded="false" />
-            <element signature="e#419#420#0" expanded="false" />
-            <element signature="e#460#461#0" expanded="false" />
-            <element signature="e#507#508#0" expanded="false" />
-            <element signature="e#553#554#0" expanded="false" />
-            <element signature="e#607#608#0" expanded="false" />
-            <element signature="e#678#679#0" expanded="false" />
-            <element signature="e#738#739#0" expanded="false" />
-            <element signature="e#787#788#0" expanded="false" />
-            <element signature="e#847#848#0" expanded="false" />
-            <element signature="e#891#892#0" expanded="false" />
-            <element signature="e#945#946#0" expanded="false" />
-            <element signature="e#989#990#0" expanded="false" />
-            <element signature="e#1043#1044#0" expanded="false" />
-            <element signature="e#1092#1093#0" expanded="false" />
-            <element signature="e#1152#1153#0" expanded="false" />
-            <element signature="e#1201#1202#0" expanded="false" />
-            <element signature="e#1261#1262#0" expanded="false" />
-            <element signature="e#1330#1331#0" expanded="false" />
-            <element signature="e#1384#1385#0" expanded="false" />
-            <element signature="e#1433#1434#0" expanded="false" />
-            <element signature="e#1493#1494#0" expanded="false" />
-            <element signature="e#1537#1538#0" expanded="false" />
-            <element signature="e#1597#1598#0" expanded="false" />
-            <element signature="e#1641#1642#0" expanded="false" />
-            <element signature="e#1701#1702#0" expanded="false" />
-            <element signature="e#1750#1751#0" expanded="false" />
-            <element signature="e#1810#1811#0" expanded="false" />
-            <element signature="e#1859#1860#0" expanded="false" />
-            <element signature="e#1919#1920#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -895,7 +911,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1830">
           <caret line="130" column="60" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4134#4135#0" expanded="true" />
+            <element signature="e#4161#4162#0" expanded="true" />
+            <element signature="e#4270#4271#0" expanded="true" />
+            <element signature="e#4293#4294#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -949,42 +970,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
           <caret line="103" column="59" lean-forward="true" selection-start-line="103" selection-start-column="59" selection-end-line="103" selection-end-column="59" />
-          <folding>
-            <element signature="e#192#193#0" expanded="false" />
-            <element signature="e#239#240#0" expanded="false" />
-            <element signature="e#277#278#0" expanded="false" />
-            <element signature="e#331#332#0" expanded="false" />
-            <element signature="e#372#373#0" expanded="false" />
-            <element signature="e#419#420#0" expanded="false" />
-            <element signature="e#460#461#0" expanded="false" />
-            <element signature="e#507#508#0" expanded="false" />
-            <element signature="e#553#554#0" expanded="false" />
-            <element signature="e#607#608#0" expanded="false" />
-            <element signature="e#678#679#0" expanded="false" />
-            <element signature="e#738#739#0" expanded="false" />
-            <element signature="e#787#788#0" expanded="false" />
-            <element signature="e#847#848#0" expanded="false" />
-            <element signature="e#891#892#0" expanded="false" />
-            <element signature="e#945#946#0" expanded="false" />
-            <element signature="e#989#990#0" expanded="false" />
-            <element signature="e#1043#1044#0" expanded="false" />
-            <element signature="e#1092#1093#0" expanded="false" />
-            <element signature="e#1152#1153#0" expanded="false" />
-            <element signature="e#1201#1202#0" expanded="false" />
-            <element signature="e#1261#1262#0" expanded="false" />
-            <element signature="e#1330#1331#0" expanded="false" />
-            <element signature="e#1384#1385#0" expanded="false" />
-            <element signature="e#1433#1434#0" expanded="false" />
-            <element signature="e#1493#1494#0" expanded="false" />
-            <element signature="e#1537#1538#0" expanded="false" />
-            <element signature="e#1597#1598#0" expanded="false" />
-            <element signature="e#1641#1642#0" expanded="false" />
-            <element signature="e#1701#1702#0" expanded="false" />
-            <element signature="e#1750#1751#0" expanded="false" />
-            <element signature="e#1810#1811#0" expanded="false" />
-            <element signature="e#1859#1860#0" expanded="false" />
-            <element signature="e#1919#1920#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1006,7 +991,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="870">
           <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4134#4135#0" expanded="true" />
+            <element signature="e#4161#4162#0" expanded="true" />
+            <element signature="e#4270#4271#0" expanded="true" />
+            <element signature="e#4293#4294#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1022,10 +1012,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1035">
           <caret line="77" column="38" lean-forward="false" selection-start-line="77" selection-start-column="38" selection-end-line="77" selection-end-column="38" />
-          <folding>
-            <element signature="e#816#817#0" expanded="true" />
-            <element signature="e#895#896#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1033,10 +1020,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#816#817#0" expanded="true" />
-            <element signature="e#895#896#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,42 +1042,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2835">
           <caret line="288" column="58" lean-forward="false" selection-start-line="288" selection-start-column="58" selection-end-line="288" selection-end-column="58" />
-          <folding>
-            <element signature="e#192#193#0" expanded="false" />
-            <element signature="e#239#240#0" expanded="false" />
-            <element signature="e#277#278#0" expanded="false" />
-            <element signature="e#331#332#0" expanded="false" />
-            <element signature="e#372#373#0" expanded="false" />
-            <element signature="e#419#420#0" expanded="false" />
-            <element signature="e#460#461#0" expanded="false" />
-            <element signature="e#507#508#0" expanded="false" />
-            <element signature="e#553#554#0" expanded="false" />
-            <element signature="e#607#608#0" expanded="false" />
-            <element signature="e#678#679#0" expanded="false" />
-            <element signature="e#738#739#0" expanded="false" />
-            <element signature="e#787#788#0" expanded="false" />
-            <element signature="e#847#848#0" expanded="false" />
-            <element signature="e#891#892#0" expanded="false" />
-            <element signature="e#945#946#0" expanded="false" />
-            <element signature="e#989#990#0" expanded="false" />
-            <element signature="e#1043#1044#0" expanded="false" />
-            <element signature="e#1092#1093#0" expanded="false" />
-            <element signature="e#1152#1153#0" expanded="false" />
-            <element signature="e#1201#1202#0" expanded="false" />
-            <element signature="e#1261#1262#0" expanded="false" />
-            <element signature="e#1330#1331#0" expanded="false" />
-            <element signature="e#1384#1385#0" expanded="false" />
-            <element signature="e#1433#1434#0" expanded="false" />
-            <element signature="e#1493#1494#0" expanded="false" />
-            <element signature="e#1537#1538#0" expanded="false" />
-            <element signature="e#1597#1598#0" expanded="false" />
-            <element signature="e#1641#1642#0" expanded="false" />
-            <element signature="e#1701#1702#0" expanded="false" />
-            <element signature="e#1750#1751#0" expanded="false" />
-            <element signature="e#1810#1811#0" expanded="false" />
-            <element signature="e#1859#1860#0" expanded="false" />
-            <element signature="e#1919#1920#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1101,7 +1049,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4134#4135#0" expanded="true" />
+            <element signature="e#4161#4162#0" expanded="true" />
+            <element signature="e#4270#4271#0" expanded="true" />
+            <element signature="e#4293#4294#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1125,86 +1078,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestPitch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="26" column="50" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#287#288#0" expanded="false" />
-            <element signature="e#328#329#0" expanded="false" />
-            <element signature="e#432#433#0" expanded="false" />
-            <element signature="e#483#484#0" expanded="false" />
-            <element signature="e#584#585#0" expanded="false" />
-            <element signature="e#634#635#0" expanded="false" />
-            <element signature="e#740#741#0" expanded="false" />
-            <element signature="e#791#792#0" expanded="false" />
-            <element signature="e#3230#3231#0" expanded="false" />
-            <element signature="e#3292#3293#0" expanded="false" />
-            <element signature="e#3334#3335#0" expanded="false" />
-            <element signature="e#3396#3397#0" expanded="false" />
-            <element signature="e#3443#3444#0" expanded="false" />
-            <element signature="e#3512#3513#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestPiece.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12315">
-          <caret line="827" column="30" lean-forward="false" selection-start-line="827" selection-start-column="30" selection-end-line="827" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestNote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="203" column="26" lean-forward="false" selection-start-line="203" selection-start-column="26" selection-end-line="203" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestTones.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding>
-            <element signature="e#192#193#0" expanded="false" />
-            <element signature="e#239#240#0" expanded="false" />
-            <element signature="e#277#278#0" expanded="false" />
-            <element signature="e#331#332#0" expanded="false" />
-            <element signature="e#372#373#0" expanded="false" />
-            <element signature="e#419#420#0" expanded="false" />
-            <element signature="e#460#461#0" expanded="false" />
-            <element signature="e#507#508#0" expanded="false" />
-            <element signature="e#553#554#0" expanded="false" />
-            <element signature="e#607#608#0" expanded="false" />
-            <element signature="e#678#679#0" expanded="false" />
-            <element signature="e#738#739#0" expanded="false" />
-            <element signature="e#787#788#0" expanded="false" />
-            <element signature="e#847#848#0" expanded="false" />
-            <element signature="e#891#892#0" expanded="false" />
-            <element signature="e#945#946#0" expanded="false" />
-            <element signature="e#989#990#0" expanded="false" />
-            <element signature="e#1043#1044#0" expanded="false" />
-            <element signature="e#1092#1093#0" expanded="false" />
-            <element signature="e#1152#1153#0" expanded="false" />
-            <element signature="e#1201#1202#0" expanded="false" />
-            <element signature="e#1261#1262#0" expanded="false" />
-            <element signature="e#1330#1331#0" expanded="false" />
-            <element signature="e#1384#1385#0" expanded="false" />
-            <element signature="e#1433#1434#0" expanded="false" />
-            <element signature="e#1493#1494#0" expanded="false" />
-            <element signature="e#1537#1538#0" expanded="false" />
-            <element signature="e#1597#1598#0" expanded="false" />
-            <element signature="e#1641#1642#0" expanded="false" />
-            <element signature="e#1701#1702#0" expanded="false" />
-            <element signature="e#1750#1751#0" expanded="false" />
-            <element signature="e#1810#1811#0" expanded="false" />
-            <element signature="e#1859#1860#0" expanded="false" />
-            <element signature="e#1919#1920#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1222,7 +1099,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="8139" column="26" lean-forward="false" selection-start-line="8139" selection-start-column="18" selection-end-line="8139" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1332,60 +1208,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestMusicEditorModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="284" column="35" lean-forward="true" selection-start-line="284" selection-start-column="35" selection-end-line="284" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/MusicEditorModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/IMusicEditorModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-729">
-          <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/KeyboardPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
+        <state relative-caret-position="450">
           <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/MusicEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/MusicEditorView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
+        <state relative-caret-position="675">
           <caret line="52" column="46" lean-forward="false" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/PitchComparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -1398,43 +1254,96 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/PitchComparator.java">
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/Pitch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="19" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        <state relative-caret-position="777">
+          <caret line="149" column="65" lean-forward="false" selection-start-line="149" selection-start-column="65" selection-end-line="149" selection-end-column="65" />
+          <folding>
+            <element signature="e#4517#4518#0" expanded="true" />
+            <element signature="e#4588#4589#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/MusicEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" column="68" lean-forward="false" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="68" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/Piece.java">
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/MusicEditorModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="72" column="7" lean-forward="true" selection-start-line="72" selection-start-column="7" selection-end-line="72" selection-end-column="7" />
+        <state relative-caret-position="195">
+          <caret line="53" column="14" lean-forward="false" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
           <folding>
-            <element signature="e#816#817#0" expanded="true" />
-            <element signature="e#895#896#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/Pitch.java">
+    <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestMusicEditorModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="128" column="4" lean-forward="true" selection-start-line="128" selection-start-column="4" selection-end-line="128" selection-end-column="4" />
-          <folding>
-            <element signature="e#1317#1318#0" expanded="true" />
-            <element signature="e#1338#1339#0" expanded="true" />
-            <element signature="e#4517#4518#0" expanded="true" />
-            <element signature="e#4578#4579#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-753">
+          <caret line="463" column="42" lean-forward="false" selection-start-line="463" selection-start-column="42" selection-end-line="463" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestPitch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="207" column="34" lean-forward="false" selection-start-line="207" selection-start-column="34" selection-end-line="207" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestPiece.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="21" column="7" lean-forward="false" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/Note.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="81" lean-forward="false" selection-start-line="32" selection-start-column="81" selection-end-line="32" selection-end-column="81" />
+        <state relative-caret-position="195">
+          <caret line="16" column="2" lean-forward="false" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+          <folding>
+            <element signature="e#4134#4135#0" expanded="true" />
+            <element signature="e#4161#4162#0" expanded="true" />
+            <element signature="e#4270#4271#0" expanded="true" />
+            <element signature="e#4293#4294#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/Piece.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="241" column="13" lean-forward="false" selection-start-line="241" selection-start-column="13" selection-end-line="241" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/IMusicEditorModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="99" column="75" lean-forward="false" selection-start-line="99" selection-start-column="75" selection-end-line="99" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/cs3500/music/model/TestNote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="97" column="23" lean-forward="false" selection-start-line="97" selection-start-column="23" selection-end-line="97" selection-end-column="23" />
+          <folding>
+            <element signature="e#286#287#0" expanded="true" />
+            <element signature="e#338#339#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

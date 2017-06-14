@@ -147,6 +147,6 @@ public class Pitch {
    * @return The hashcode int of this pitch.
    */
   public int hashCode() {
-    return (this.tone.getToneVal() * 100) + this.octave;
+    return ((this.octave + 1) * 12) + this.getTone().getToneVal();
   }
 }

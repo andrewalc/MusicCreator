@@ -182,7 +182,32 @@ public class TestPitch {
     assertEquals(p1, p2);
   }
 
-  // testing HashCode
+  // testing
+
+  @Test
+  public void testHashCodeC1() {
+    Pitch p1 = new Pitch(Tones.C, 1);
+    assertEquals(p1.hashCode(), 24);
+  }
+
+  @Test
+  public void testHashCodeCSharp1() {
+    Pitch p1 = new Pitch(Tones.C_SHARP, 1);
+    assertEquals(p1.hashCode(), 25);
+  }
+
+  @Test
+  public void testHashCodeB4() {
+    Pitch p1 = new Pitch(Tones.B, 4);
+    assertEquals(p1.hashCode(), 71);
+  }
+
+  @Test
+  public void testHashCodeDSharp7() {
+    Pitch p1 = new Pitch(Tones.D_SHARP, 7);
+    assertEquals(p1.hashCode(), 99);
+  }
+
 
   @Test
   public void testHashCodeSame() {

@@ -17,14 +17,14 @@ public class TestMusicEditorModel {
   Piece p0; // assigned as an empty piece
   Piece p1; // a piece with notes added beforehand
   // Pre-created notes for easy access
-  Note c1For0And4 = new Note(Tones.C, 1, 0, 4);
-  Note cSharp1For0And4 = new Note(Tones.C_SHARP, 1, 0, 4);
-  Note d1For6And4 = new Note(Tones.D, 1, 6, 4);
-  Note d1For7And5 = new Note(Tones.D, 1, 7, 5);
+  Note c1For0And4 = new Note(Tones.C, 1, 0, 4, 1, 10);
+  Note cSharp1For0And4 = new Note(Tones.C_SHARP, 1, 0, 4, 1, 10);
+  Note d1For6And4 = new Note(Tones.D, 1, 6, 4, 1, 10);
+  Note d1For7And5 = new Note(Tones.D, 1, 7, 5, 1, 10);
 
-  Note dSharp1For6And4 = new Note(Tones.D_SHARP, 1, 6, 4);
-  Note cSharp2For3And2 = new Note(Tones.C_SHARP, 2, 3, 2);
-  Note cSharp2For10And1 = new Note(Tones.C_SHARP, 2, 10, 1);
+  Note dSharp1For6And4 = new Note(Tones.D_SHARP, 1, 6, 4, 1, 10);
+  Note cSharp2For3And2 = new Note(Tones.C_SHARP, 2, 3, 2, 1, 10);
+  Note cSharp2For10And1 = new Note(Tones.C_SHARP, 2, 10, 1, 1, 10);
 
 
   void initData() {
@@ -67,14 +67,14 @@ public class TestMusicEditorModel {
   @Test(expected = NullPointerException.class)
   public void testAddNoteNull() {
     initData();
-    model0.addNote(null, 2, 4, 2);
+    model0.addNote(null, 2, 4, 2, 1, 10);
   }
 
   @Test
   public void testAddNote1() {
     initData();
     assertEquals(model0.getPiece().getNumberOfNotes(), 0);
-    model0.addNote(Tones.C, 1, 0, 4);
+    model0.addNote(Tones.C, 1, 0, 4, 1, 10);
     assertEquals(model0.getPiece().getNumberOfNotes(), 1);
     assertEquals(model0.getPiece().getLowestPitch(), new Pitch(Tones.C, 1));
     assertEquals(model0.getPiece().getHighestPitch(), new Pitch(Tones.C, 1));
@@ -85,8 +85,8 @@ public class TestMusicEditorModel {
   public void testAddNote2() {
     initData();
     assertEquals(model0.getPiece().getNumberOfNotes(), 0);
-    model0.addNote(Tones.C, 1, 0, 4);
-    model0.addNote(Tones.D_SHARP, 1, 6, 4);
+    model0.addNote(Tones.C, 1, 0, 4, 1, 10);
+    model0.addNote(Tones.D_SHARP, 1, 6, 4, 1, 10);
     assertEquals(model0.getPiece().getNumberOfNotes(), 2);
     assertEquals(model0.getPiece().getLowestPitch(), new Pitch(Tones.C, 1));
     assertEquals(model0.getPiece().getHighestPitch(), new Pitch(Tones.D_SHARP, 1));
@@ -97,8 +97,8 @@ public class TestMusicEditorModel {
   public void testAddNote3ExactSame() {
     initData();
     assertEquals(model0.getPiece().getNumberOfNotes(), 0);
-    model0.addNote(Tones.C_SHARP, 2, 10, 1);
-    model0.addNote(Tones.C_SHARP, 2, 10, 1);
+    model0.addNote(Tones.C_SHARP, 2, 10, 1, 1, 10);
+    model0.addNote(Tones.C_SHARP, 2, 10, 1, 1, 10);
     assertEquals(model0.getPiece().getNumberOfNotes(), 2);
     assertEquals(model0.getPiece().getLowestPitch(), new Pitch(Tones.C_SHARP, 2));
     assertEquals(model0.getPiece().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
@@ -109,8 +109,8 @@ public class TestMusicEditorModel {
   public void testAddNote4Overlap() {
     initData();
     assertEquals(model0.getPiece().getNumberOfNotes(), 0);
-    model0.addNote(Tones.D, 1, 6, 4);
-    model0.addNote(Tones.D, 1, 7, 5);
+    model0.addNote(Tones.D, 1, 6, 4, 1, 10);
+    model0.addNote(Tones.D, 1, 7, 5, 1, 10);
     assertEquals(model0.getPiece().getNumberOfNotes(), 2);
     assertEquals(model0.getPiece().getLowestPitch(), new Pitch(Tones.D, 1));
     assertEquals(model0.getPiece().getHighestPitch(), new Pitch(Tones.D, 1));
@@ -122,34 +122,34 @@ public class TestMusicEditorModel {
   @Test(expected = NullPointerException.class)
   public void testRemoveNoteNull() {
     initData();
-    model1.removeNote(null, 0, 0, 1);
+    model1.removeNote(null, 0, 0, 1, 1, 10);
   }
 
   @Test(expected = NoSuchElementException.class)
   public void testRemoveNoteNotFound1() {
     initData();
-    model1.removeNote(Tones.B, 10, 0, 10);
+    model1.removeNote(Tones.B, 10, 0, 10, 1, 10);
   }
 
   @Test(expected = NoSuchElementException.class)
   public void testRemoveNoteNotFound2() {
     initData();
     // close to D1For6and4
-    model1.removeNote(Tones.D, 1, 6, 5);
+    model1.removeNote(Tones.D, 1, 6, 5, 1, 10);
   }
 
   @Test(expected = NoSuchElementException.class)
   public void testRemoveNoteNotFound3() {
     initData();
     // close to D1For6and4
-    model1.removeNote(Tones.D, 2, 6, 4);
+    model1.removeNote(Tones.D, 2, 6, 4, 1, 10);
   }
 
   @Test
   public void testRemoveNote1() {
     initData();
     assertEquals(model1.getPiece().getNumberOfNotes(), 7);
-    model1.removeNote(Tones.D, 1, 6, 4);
+    model1.removeNote(Tones.D, 1, 6, 4, 1, 10);
     assertEquals(model1.getPiece().getNumberOfNotes(), 6);
   }
 
@@ -158,7 +158,7 @@ public class TestMusicEditorModel {
     initData();
     assertEquals(model1.getPiece().getNumberOfNotes(), 7);
     assertEquals(model1.getPiece().getLowestPitch(), new Pitch(Tones.C, 1));
-    model1.removeNote(Tones.C, 1, 0, 4);
+    model1.removeNote(Tones.C, 1, 0, 4, 1, 10);
     assertEquals(model1.getPiece().getNumberOfNotes(), 6);
     assertEquals(model1.getPiece().getLowestPitch(), new Pitch(Tones.C_SHARP, 1));
 
@@ -169,10 +169,10 @@ public class TestMusicEditorModel {
     initData();
     assertEquals(model1.getPiece().getNumberOfNotes(), 7);
     assertEquals(model1.getPiece().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
-    model1.removeNote(Tones.C_SHARP, 2, 10, 1);
+    model1.removeNote(Tones.C_SHARP, 2, 10, 1, 1, 10);
     assertEquals(model1.getPiece().getNumberOfNotes(), 6);
     assertEquals(model1.getPiece().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
-    model1.removeNote(Tones.C_SHARP, 2, 3, 2);
+    model1.removeNote(Tones.C_SHARP, 2, 3, 2, 1, 10);
     assertEquals(model1.getPiece().getNumberOfNotes(), 5);
     assertEquals(model1.getPiece().getHighestPitch(), new Pitch(Tones.D_SHARP, 1));
 
@@ -183,19 +183,19 @@ public class TestMusicEditorModel {
   @Test(expected = NullPointerException.class)
   public void testModifyNoteNullNote() {
     initData();
-    model1.modifyNote(null, 3, 1, 10, Tones.A, 4, 9, 12);
+    model1.modifyNote(null, 3, 1, 10, 1, 10, Tones.A, 4, 9, 12, 1, 10);
   }
 
   @Test(expected = NullPointerException.class)
   public void testModifyNoteNullTone() {
     initData();
-    model1.modifyNote(Tones.D, 1, 6, 4, null, 1, 0, 10);
+    model1.modifyNote(Tones.D, 1, 6, 4, 1, 10, null, 1, 0, 10, 1, 10);
   }
 
   @Test(expected = NoSuchElementException.class)
   public void testModifyNoteNotFound() {
     initData();
-    model1.modifyNote(Tones.C, 1, 0, 1, Tones.C, 1, 0, 10);
+    model1.modifyNote(Tones.C, 1, 0, 1, 1, 10, Tones.C, 1, 0, 10, 1, 10);
   }
 
   @Test
@@ -203,7 +203,7 @@ public class TestMusicEditorModel {
     initData();
     assertEquals(model1.getPiece().getNumberOfNotes(), 7);
     assertEquals(model1.getPiece().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
-    model1.modifyNote(Tones.C_SHARP, 2, 10, 1, Tones.A_SHARP, 8, 0, 2);
+    model1.modifyNote(Tones.C_SHARP, 2, 10, 1, 1, 10, Tones.A_SHARP, 8, 0, 2, 1, 10);
     assertEquals(model1.getPiece().getNumberOfNotes(), 7);
     assertEquals(model1.getPiece().getHighestPitch(), new Pitch(Tones.A_SHARP, 8));
   }
@@ -213,10 +213,10 @@ public class TestMusicEditorModel {
     initData();
     assertEquals(model1.getPiece().getNumberOfNotes(), 7);
     assertEquals(model1.getPiece().getLowestPitch(), new Pitch(Tones.C, 1));
-    model1.modifyNote(Tones.C, 1, 0, 4, Tones.D, 2, 7, 10);
+    model1.modifyNote(Tones.C, 1, 0, 4, 1, 10, Tones.D, 2, 7, 10, 1, 10);
     assertEquals(model1.getPiece().getNumberOfNotes(), 7);
     assertEquals(model1.getPiece().getLowestPitch(), new Pitch(Tones.C_SHARP, 1));
-    model1.modifyNote(Tones.C_SHARP, 1, 0, 4, Tones.C_SHARP, 5, 5, 3);
+    model1.modifyNote(Tones.C_SHARP, 1, 0, 4, 1, 10, Tones.C_SHARP, 5, 5, 3, 1, 10);
     assertEquals(model1.getPiece().getNumberOfNotes(), 7);
     assertEquals(model1.getPiece().getLowestPitch(), new Pitch(Tones.D, 1));
 
@@ -239,7 +239,7 @@ public class TestMusicEditorModel {
   @Test
   public void testGetNotesAtBeatNoBeats() {
     initData();
-    model1.removeNote(Tones.C_SHARP, 2, 3, 2);
+    model1.removeNote(Tones.C_SHARP, 2, 3, 2, 1, 10);
     assertEquals(model1.getNotesAtBeat(5), new ArrayList<Note>());
 
   }
@@ -281,8 +281,8 @@ public class TestMusicEditorModel {
   @Test
   public void testCombinePieceOnTop() {
     initData();
-    model0.addNote(Tones.G, 1, 3, 2);
-    model0.addNote(Tones.A, 1, 5, 3);
+    model0.addNote(Tones.G, 1, 3, 2, 1, 10);
+    model0.addNote(Tones.A, 1, 5, 3, 1, 10);
     assertEquals(model0.toString(),
             "   G1  G#1   A1 \n" +
                     "0               \n" +
@@ -330,9 +330,9 @@ public class TestMusicEditorModel {
   @Test
   public void testCombinePieceOnTopOverlap() {
     initData();
-    model0.addNote(Tones.G, 1, 3, 2);
-    model0.addNote(Tones.A, 1, 5, 3);
-    model0.addNote(Tones.C_SHARP, 1, 3, 4);
+    model0.addNote(Tones.G, 1, 3, 2, 1, 10);
+    model0.addNote(Tones.A, 1, 5, 3, 1, 10);
+    model0.addNote(Tones.C_SHARP, 1, 3, 4, 1, 10);
     assertEquals(model0.toString(),
             "  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1 \n" +
                     "0                                             \n" +
@@ -380,9 +380,9 @@ public class TestMusicEditorModel {
   @Test
   public void testCombinePieceOnTopElongate() {
     initData();
-    model0.addNote(Tones.G, 1, 3, 2);
-    model0.addNote(Tones.A, 1, 5, 3);
-    model0.addNote(Tones.F_SHARP, 1, 10, 14);
+    model0.addNote(Tones.G, 1, 3, 2, 1, 10);
+    model0.addNote(Tones.A, 1, 5, 3, 1, 10);
+    model0.addNote(Tones.F_SHARP, 1, 10, 14, 1, 10);
     assertEquals(model0.toString(),
             "   F#1   G1  G#1   A1 \n" +
                     " 0                    \n" +
@@ -460,8 +460,8 @@ public class TestMusicEditorModel {
   @Test
   public void testCombinePieceAtEnd() {
     initData();
-    model0.addNote(Tones.G, 1, 0, 2);
-    model0.addNote(Tones.A, 1, 5, 3);
+    model0.addNote(Tones.G, 1, 0, 2, 1, 10);
+    model0.addNote(Tones.A, 1, 5, 3, 1, 10);
     assertEquals(model0.toString(),
             "   G1  G#1   A1 \n" +
                     "0  X            \n" +

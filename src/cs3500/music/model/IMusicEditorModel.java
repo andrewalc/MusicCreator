@@ -37,7 +37,8 @@ public interface IMusicEditorModel {
    * @param beats           The number of beats of the note you wish to add lasts for.
    * @throws NullPointerException If the given note is null.
    */
-  void addNote(Tones tone, int octave, int startingBeat, int beats) throws NullPointerException;
+  void addNote(Tones tone, int octave, int startingBeat, int beats, int instrument, int volume)
+          throws NullPointerException;
 
   /**
    * Remove a note of the given tone, starting beat, and beat duration from the piece of music in
@@ -51,7 +52,8 @@ public interface IMusicEditorModel {
    * @throws NullPointerException   If the given note is null.
    * @throws NoSuchElementException If the requested note is not found within the piece.
    */
-  void removeNote(Tones tone, int octave, int startingBeat, int beats) throws
+  void removeNote(Tones tone, int octave, int startingBeat, int beats, int instrument, int
+          volume) throws
           NullPointerException, NoSuchElementException;
 
   /**
@@ -64,17 +66,40 @@ public interface IMusicEditorModel {
    * @param octave          The octave of the note you wish to modify.
    * @param startingBeat    The starting beat of the note you wish to modify.
    * @param beats           The number of beats of the note you wish to modify lasts for.
+   * @param instrument
+   * @param volume
    * @param modTone         The new tone to set this note to.
    * @param modOctave       The new octave value to set this note to.
    * @param modStartingBeat The new starting beat value to set this note to.
    * @param modBeats        The new number of beats value to set this note to.
+   * @param modInstrument
+   * @param modVolume
    * @throws IllegalArgumentException If startingBeat and beats get invalid parameters
    * @throws NoSuchElementException   if the given note is not found in the piece.
    * @throws NullPointerException     If the given note is null.
    */
-  void modifyNote(Tones tone, int octave, int startingBeat, int beats, Tones modTone, int
-          modOctave, int modStartingBeat, int
-                          modBeats) throws
+
+  /**
+   *
+   * @param tone
+   * @param octave
+   * @param startingBeat
+   * @param beats
+   * @param instrument
+   * @param volume
+   * @param modTone
+   * @param modOctave
+   * @param modStartingBeat
+   * @param modBeats
+   * @param modInstrument
+   * @param modVolume
+   * @throws NullPointerException
+   * @throws IllegalArgumentException
+   * @throws NoSuchElementException
+   */
+  void modifyNote(Tones tone, int octave, int startingBeat, int beats, int instrument, int
+          volume, Tones modTone, int modOctave, int modStartingBeat, int modBeats, int
+                          modInstrument, int modVolume) throws
           NullPointerException, IllegalArgumentException, NoSuchElementException;
 
   /**

@@ -154,7 +154,8 @@ public class Piece {
    * @throws NoSuchElementException   if the given note is not found in the piece.
    * @throws NullPointerException     If the given note is null.
    */
-  protected void modifyNote(Note note, Tones tone, int octave, int startingBeat, int beats) throws
+  protected void modifyNote(Note note, Tones tone, int octave, int startingBeat, int beats, int
+          instrument, int volume) throws
           NullPointerException, IllegalArgumentException {
     if (note == null || tone == null) {
       throw new NullPointerException("Note and tone cannot be null");
@@ -163,7 +164,7 @@ public class Piece {
     // check if the given note is in the piece
     if (allNotes.containsKey(originalPitch) && allNotes.get(originalPitch).contains(note)) {
       this.removeNote(note);
-      this.addNote(new Note(tone, octave, startingBeat, beats));
+      this.addNote(new Note(tone, octave, startingBeat, beats, instrument, volume));
     } else {
       throw new NoSuchElementException("Cannot modify given note, it does not exist in this " +
               "piece");

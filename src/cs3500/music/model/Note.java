@@ -11,6 +11,8 @@ public class Note {
   private Pitch pitch;
   private int startingBeat;
   private int beats;
+  private int instrument;
+  private int volume;
   public final static String STR_NOTE_HEAD = "  X  ";
   public final static String STR_NOTE_SUSTAIN = "  |  ";
   public final static String STR_NOTE_EMPTY = "     ";
@@ -48,6 +50,9 @@ public class Note {
     this.pitch = new Pitch(tone, octave);
     this.startingBeat = startingBeat;
     this.beats = beats;
+    //@TODO ADD CONSTRAINTS
+    this.instrument = instrument;
+    this.volume = volume;
   }
 
   /**
@@ -124,6 +129,25 @@ public class Note {
    */
   public int getBeats() {
     return beats;
+  }
+
+  /**
+   * Returns the int representing the note's instrument
+   *
+   * @return The notes instrument
+   * @TODO ADD CONSTRAINTS
+   */
+  public int getInstrument() {
+    return instrument;
+  }
+
+  /**
+   * Returns the note's volume.
+   *
+   * @return The note's volume.
+   */
+  public int getVolume() {
+    return volume;
   }
 
   /**
