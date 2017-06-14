@@ -52,14 +52,14 @@ public class TestMusicEditorModel {
   public void testLoadPiece() {
     initData();
     model0.loadPiece(p1);
-    assertEquals(model1.getPiece(), model1.getPiece());
+    assertEquals(model1.getAllNotes(), model1.getAllNotes());
   }
 
   @Test
   public void testLoadPiece2() {
     initData();
     model1.loadPiece(new Piece());
-    assertEquals(model0.getPiece(), model1.getPiece());
+    assertEquals(model0.getAllNotes(), model1.getAllNotes());
   }
 
   // testing addNote
@@ -73,48 +73,48 @@ public class TestMusicEditorModel {
   @Test
   public void testAddNote1() {
     initData();
-    assertEquals(model0.getPiece().getNumberOfNotes(), 0);
+    assertEquals(model0.getAllNotes().getNumberOfNotes(), 0);
     model0.addNote(Tones.C, 1, 0, 4, 1, 10);
-    assertEquals(model0.getPiece().getNumberOfNotes(), 1);
-    assertEquals(model0.getPiece().getLowestPitch(), new Pitch(Tones.C, 1));
-    assertEquals(model0.getPiece().getHighestPitch(), new Pitch(Tones.C, 1));
-    assertEquals(model0.getPiece().getMaxBeats(), 4);
+    assertEquals(model0.getAllNotes().getNumberOfNotes(), 1);
+    assertEquals(model0.getAllNotes().getLowestPitch(), new Pitch(Tones.C, 1));
+    assertEquals(model0.getAllNotes().getHighestPitch(), new Pitch(Tones.C, 1));
+    assertEquals(model0.getAllNotes().getMaxBeats(), 4);
   }
 
   @Test
   public void testAddNote2() {
     initData();
-    assertEquals(model0.getPiece().getNumberOfNotes(), 0);
+    assertEquals(model0.getAllNotes().getNumberOfNotes(), 0);
     model0.addNote(Tones.C, 1, 0, 4, 1, 10);
     model0.addNote(Tones.D_SHARP, 1, 6, 4, 1, 10);
-    assertEquals(model0.getPiece().getNumberOfNotes(), 2);
-    assertEquals(model0.getPiece().getLowestPitch(), new Pitch(Tones.C, 1));
-    assertEquals(model0.getPiece().getHighestPitch(), new Pitch(Tones.D_SHARP, 1));
-    assertEquals(model0.getPiece().getMaxBeats(), 10);
+    assertEquals(model0.getAllNotes().getNumberOfNotes(), 2);
+    assertEquals(model0.getAllNotes().getLowestPitch(), new Pitch(Tones.C, 1));
+    assertEquals(model0.getAllNotes().getHighestPitch(), new Pitch(Tones.D_SHARP, 1));
+    assertEquals(model0.getAllNotes().getMaxBeats(), 10);
   }
 
   @Test
   public void testAddNote3ExactSame() {
     initData();
-    assertEquals(model0.getPiece().getNumberOfNotes(), 0);
+    assertEquals(model0.getAllNotes().getNumberOfNotes(), 0);
     model0.addNote(Tones.C_SHARP, 2, 10, 1, 1, 10);
     model0.addNote(Tones.C_SHARP, 2, 10, 1, 1, 10);
-    assertEquals(model0.getPiece().getNumberOfNotes(), 2);
-    assertEquals(model0.getPiece().getLowestPitch(), new Pitch(Tones.C_SHARP, 2));
-    assertEquals(model0.getPiece().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
-    assertEquals(model0.getPiece().getMaxBeats(), 11);
+    assertEquals(model0.getAllNotes().getNumberOfNotes(), 2);
+    assertEquals(model0.getAllNotes().getLowestPitch(), new Pitch(Tones.C_SHARP, 2));
+    assertEquals(model0.getAllNotes().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
+    assertEquals(model0.getAllNotes().getMaxBeats(), 11);
   }
 
   @Test
   public void testAddNote4Overlap() {
     initData();
-    assertEquals(model0.getPiece().getNumberOfNotes(), 0);
+    assertEquals(model0.getAllNotes().getNumberOfNotes(), 0);
     model0.addNote(Tones.D, 1, 6, 4, 1, 10);
     model0.addNote(Tones.D, 1, 7, 5, 1, 10);
-    assertEquals(model0.getPiece().getNumberOfNotes(), 2);
-    assertEquals(model0.getPiece().getLowestPitch(), new Pitch(Tones.D, 1));
-    assertEquals(model0.getPiece().getHighestPitch(), new Pitch(Tones.D, 1));
-    assertEquals(model0.getPiece().getMaxBeats(), 12);
+    assertEquals(model0.getAllNotes().getNumberOfNotes(), 2);
+    assertEquals(model0.getAllNotes().getLowestPitch(), new Pitch(Tones.D, 1));
+    assertEquals(model0.getAllNotes().getHighestPitch(), new Pitch(Tones.D, 1));
+    assertEquals(model0.getAllNotes().getMaxBeats(), 12);
   }
 
   // testing removeNote
@@ -148,33 +148,33 @@ public class TestMusicEditorModel {
   @Test
   public void testRemoveNote1() {
     initData();
-    assertEquals(model1.getPiece().getNumberOfNotes(), 7);
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 7);
     model1.removeNote(Tones.D, 1, 6, 4, 1, 10);
-    assertEquals(model1.getPiece().getNumberOfNotes(), 6);
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 6);
   }
 
   @Test
   public void testRemoveNote2() {
     initData();
-    assertEquals(model1.getPiece().getNumberOfNotes(), 7);
-    assertEquals(model1.getPiece().getLowestPitch(), new Pitch(Tones.C, 1));
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 7);
+    assertEquals(model1.getAllNotes().getLowestPitch(), new Pitch(Tones.C, 1));
     model1.removeNote(Tones.C, 1, 0, 4, 1, 10);
-    assertEquals(model1.getPiece().getNumberOfNotes(), 6);
-    assertEquals(model1.getPiece().getLowestPitch(), new Pitch(Tones.C_SHARP, 1));
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 6);
+    assertEquals(model1.getAllNotes().getLowestPitch(), new Pitch(Tones.C_SHARP, 1));
 
   }
 
   @Test
   public void testRemoveNote3() {
     initData();
-    assertEquals(model1.getPiece().getNumberOfNotes(), 7);
-    assertEquals(model1.getPiece().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 7);
+    assertEquals(model1.getAllNotes().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
     model1.removeNote(Tones.C_SHARP, 2, 10, 1, 1, 10);
-    assertEquals(model1.getPiece().getNumberOfNotes(), 6);
-    assertEquals(model1.getPiece().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 6);
+    assertEquals(model1.getAllNotes().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
     model1.removeNote(Tones.C_SHARP, 2, 3, 2, 1, 10);
-    assertEquals(model1.getPiece().getNumberOfNotes(), 5);
-    assertEquals(model1.getPiece().getHighestPitch(), new Pitch(Tones.D_SHARP, 1));
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 5);
+    assertEquals(model1.getAllNotes().getHighestPitch(), new Pitch(Tones.D_SHARP, 1));
 
   }
 
@@ -201,24 +201,24 @@ public class TestMusicEditorModel {
   @Test
   public void testModifyNote1() {
     initData();
-    assertEquals(model1.getPiece().getNumberOfNotes(), 7);
-    assertEquals(model1.getPiece().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 7);
+    assertEquals(model1.getAllNotes().getHighestPitch(), new Pitch(Tones.C_SHARP, 2));
     model1.modifyNote(Tones.C_SHARP, 2, 10, 1, 1, 10, Tones.A_SHARP, 8, 0, 2, 1, 10);
-    assertEquals(model1.getPiece().getNumberOfNotes(), 7);
-    assertEquals(model1.getPiece().getHighestPitch(), new Pitch(Tones.A_SHARP, 8));
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 7);
+    assertEquals(model1.getAllNotes().getHighestPitch(), new Pitch(Tones.A_SHARP, 8));
   }
 
   @Test
   public void testModifyNote2() {
     initData();
-    assertEquals(model1.getPiece().getNumberOfNotes(), 7);
-    assertEquals(model1.getPiece().getLowestPitch(), new Pitch(Tones.C, 1));
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 7);
+    assertEquals(model1.getAllNotes().getLowestPitch(), new Pitch(Tones.C, 1));
     model1.modifyNote(Tones.C, 1, 0, 4, 1, 10, Tones.D, 2, 7, 10, 1, 10);
-    assertEquals(model1.getPiece().getNumberOfNotes(), 7);
-    assertEquals(model1.getPiece().getLowestPitch(), new Pitch(Tones.C_SHARP, 1));
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 7);
+    assertEquals(model1.getAllNotes().getLowestPitch(), new Pitch(Tones.C_SHARP, 1));
     model1.modifyNote(Tones.C_SHARP, 1, 0, 4, 1, 10, Tones.C_SHARP, 5, 5, 3, 1, 10);
-    assertEquals(model1.getPiece().getNumberOfNotes(), 7);
-    assertEquals(model1.getPiece().getLowestPitch(), new Pitch(Tones.D, 1));
+    assertEquals(model1.getAllNotes().getNumberOfNotes(), 7);
+    assertEquals(model1.getAllNotes().getLowestPitch(), new Pitch(Tones.D, 1));
 
   }
 
@@ -309,7 +309,7 @@ public class TestMusicEditorModel {
                     "10            |                                                      X  \n" +
                     "11            |                                                         \n" +
                     "12                                                                      \n");
-    model1.combinePieceOnTop(model0.getPiece());
+    model1.combinePieceOnTop(model0.getAllNotes());
     assertEquals(model1.toString(),
             "    C1  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X    X                                                              \n" +
@@ -359,7 +359,7 @@ public class TestMusicEditorModel {
                     "10            |                                                      X  \n" +
                     "11            |                                                         \n" +
                     "12                                                                      \n");
-    model1.combinePieceOnTop(model0.getPiece());
+    model1.combinePieceOnTop(model0.getAllNotes());
     assertEquals(model1.toString(),
             "    C1  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X    X                                                              \n" +
@@ -425,7 +425,7 @@ public class TestMusicEditorModel {
                     "10            |                                                      X  \n" +
                     "11            |                                                         \n" +
                     "12                                                                      \n");
-    model1.combinePieceOnTop(model0.getPiece());
+    model1.combinePieceOnTop(model0.getAllNotes());
     assertEquals(model1.toString(),
             "    C1  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X    X                                                              \n" +
@@ -488,7 +488,7 @@ public class TestMusicEditorModel {
                     "10            |                                                      X  \n" +
                     "11            |                                                         \n" +
                     "12                                                                      \n");
-    model1.combinePieceAtEnd(model0.getPiece());
+    model1.combinePieceAtEnd(model0.getAllNotes());
     assertEquals(model1.toString(),
             "    C1  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1   C2  C#2 \n" +
                     " 0  X    X                                                              \n" +
@@ -562,6 +562,7 @@ public class TestMusicEditorModel {
                     "23            |                                                      X  \n" +
                     "24            |                                                         \n" +
                     "25                                                                      \n");
+    assertEquals(model1.getAllNotes().toString(), "");
   }
 
 }

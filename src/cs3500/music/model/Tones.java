@@ -1,5 +1,6 @@
 package cs3500.music.model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -76,6 +77,11 @@ public enum Tones {
             (values.indexOf(this) + (((shift % NUM_TONES) + NUM_TONES) % NUM_TONES))
                     % NUM_TONES;
     return values.get(potentialIndex);
+  }
+
+  public static Tones getToneAtToneVal(int toneVal) {
+    ArrayList<Tones> tones = new ArrayList<Tones>(Arrays.asList(Tones.values()));
+    return tones.get(toneVal);
   }
 
   /**

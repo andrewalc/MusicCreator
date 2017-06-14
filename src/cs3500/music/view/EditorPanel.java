@@ -1,11 +1,12 @@
 package cs3500.music.view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.TreeMap;
 
 import javax.swing.*;
@@ -13,11 +14,8 @@ import javax.swing.*;
 import cs3500.music.model.IMusicEditorModel;
 import cs3500.music.model.Note;
 import cs3500.music.model.Pitch;
+import cs3500.music.model.Tones;
 
-
-/**
- * Created by Andrew Alcala on 6/12/2017.
- */
 
 public class EditorPanel extends JPanel {
 
@@ -34,27 +32,43 @@ public class EditorPanel extends JPanel {
   private int numOfMeasures;
   private int currentBeat;
   private ArrayList<String> pitchStrings = new ArrayList<String>();
-  private TreeMap<Pitch, ArrayList<Note>> notes;
+  private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
 
 
+  private int getNumberOfNotes() {
+    int count = 0;
+    for (ArrayList<ArrayList<Integer>> pitchBucket : notes.values()) {
+      count += pitchBucket.size();
+    }
+    return count;
+  }
+
+  private int getLowestPitch() {
+    ArrayList<Integer> pitches = new ArrayList<Integer>(this.notes.keySet());
+    return pitches.get(0);
+  }
+
+  private int getHighestPitch() {
+    ArrayList<Integer> pitches = new ArrayList<Integer>(this.notes.keySet());
+    return pitches.get(pitches.size() - 1);
+  }
 
 
-
-  public EditorPanel(IMusicEditorModel model) {
-    this.rowWidth = model.getPiece().getMaxBeats() * BEAT_UNIT_LENGTH;
+  public EditorPanel(Map<Integer, ArrayList<ArrayList<Integer>>> notes, int maxBeats) {
+    this.rowWidth = maxBeats * BEAT_UNIT_LENGTH;
     this.numOfMeasures = rowWidth / MEASURE_WIDTH;
-    this.notes = model.getPiece().getAllNotes();
-    this.currentBeat = currentBeat;
-    if(model.getPiece().getNumberOfNotes() > 1){
+    this.notes = notes;
+    this.currentBeat = 0;
+    if (this.getNumberOfNotes() > 1) {
       // generate list of pitch strings
-      Pitch currPitch = model.getPiece().getHighestPitch();
-      Pitch lowest = model.getPiece().getLowestPitch();
+      int currPitch = this.getHighestPitch();
+      int lowest = this.getLowestPitch();
       while (true) {
-        this.pitchStrings.add(currPitch.toString());
-        if (currPitch.equals(lowest)) {
+        this.pitchStrings.add(Tones.getToneAtToneVal(currPitch).toString());
+        if (currPitch == lowest) {
           break;
         } else {
-          currPitch = currPitch.getPrevPitch();
+          currPitch -= 1;
         }
       }
     }

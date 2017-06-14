@@ -2,6 +2,8 @@ package cs3500.music.model;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 public interface IMusicEditorModel {
@@ -18,14 +20,16 @@ public interface IMusicEditorModel {
    * @param piece A piece of music.
    * @throws NullPointerException If given piece is null.
    */
-  void loadPiece(Piece piece) throws NullPointerException;
+  void loadPiece(Map<Integer, ArrayList<ArrayList<Integer>>> piece) throws NullPointerException;
 
   /**
    * Returns a copy of the piece currently loaded in the editor.
+   * The ArrayList<Integer< represents a note where its integer contents are as follows:
+   * (startBeat, endBeat, instrument, pitch, and volume).
    *
    * @return A copy of the piece currently loaded in the editor.
    */
-  Piece getPiece();
+  Map<Integer, ArrayList<ArrayList<Integer>>> getAllNotes();
 
   /**
    * Adds a note of the given tone to the piece of music in the editor. Requires a Note with a
@@ -79,24 +83,6 @@ public interface IMusicEditorModel {
    * @throws NullPointerException     If the given note is null.
    */
 
-  /**
-   *
-   * @param tone
-   * @param octave
-   * @param startingBeat
-   * @param beats
-   * @param instrument
-   * @param volume
-   * @param modTone
-   * @param modOctave
-   * @param modStartingBeat
-   * @param modBeats
-   * @param modInstrument
-   * @param modVolume
-   * @throws NullPointerException
-   * @throws IllegalArgumentException
-   * @throws NoSuchElementException
-   */
   void modifyNote(Tones tone, int octave, int startingBeat, int beats, int instrument, int
           volume, Tones modTone, int modOctave, int modStartingBeat, int modBeats, int
                           modInstrument, int modVolume) throws
@@ -109,7 +95,7 @@ public interface IMusicEditorModel {
    * @param beat an Integer representing the beat to look for note playing in.
    * @return An ArrayList of note that are playing at the given beat.
    */
-  ArrayList<Note> getNotesAtBeat(int beat) throws IllegalArgumentException;
+  ArrayList<ArrayList<Integer>> getNotesAtBeat(int beat) throws IllegalArgumentException;
 
   /**
    * Combines the currently loaded piece of music with a given piece of music, stacking notes
@@ -117,7 +103,7 @@ public interface IMusicEditorModel {
    *
    * @param other A piece of music to combine an existing piece of music with on top.
    */
-  void combinePieceOnTop(Piece other);
+  void combinePieceOnTop(Map<Integer, ArrayList<ArrayList<Integer>>> other);
 
   /**
    * Combines the currently loaded piece of music with a given piece of music by adding all notes
@@ -125,7 +111,8 @@ public interface IMusicEditorModel {
    *
    * @param other A piece of music to combine an existing piece of music with at the end.
    */
-  void combinePieceAtEnd(Piece other) throws IllegalArgumentException;
+  void combinePieceAtEnd(Map<Integer, ArrayList<ArrayList<Integer>>> other) throws
+          IllegalArgumentException;
 
   /**
    * Prints out a string that is separated into pitch columns from the piece's lowest to highest

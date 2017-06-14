@@ -384,4 +384,12 @@ public class Piece {
   public int hashCode() {
     return (31 * this.allNotes.hashCode()) + this.toString().hashCode();
   }
+
+  public void updateEmptyMapBuckets() {
+    for (Pitch pitch : this.allNotes.keySet()) {
+      if (allNotes.get(pitch).size() == 0) {
+        allNotes.remove(pitch);
+      }
+    }
+  }
 }

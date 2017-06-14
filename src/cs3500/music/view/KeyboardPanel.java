@@ -3,6 +3,7 @@ package cs3500.music.view;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -19,7 +20,7 @@ public class KeyboardPanel extends JPanel {
   public static final int KEY_WIDTH = 20;
   public static final int KEY_HEIGHT = 300;
 
-  public KeyboardPanel(IMusicEditorModel model) {
+  public KeyboardPanel() {
     setMaximumSize(new Dimension(EditorPanel.BORDER_SHIFT* 2 + (KEY_WIDTH * NUM_WHITEKEYS),
             KEY_HEIGHT));
 

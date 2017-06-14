@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.*;
 
@@ -16,7 +19,7 @@ public class MusicEditorView extends JFrame {
 
   private int currentBeat;
 
-  public MusicEditorView(IMusicEditorModel model) {
+  public MusicEditorView(Map<Integer, ArrayList<ArrayList<Integer>>> notes, int maxBeats) {
     super("MIDI Music Editor");
     currentBeat = 0;
     setSize(1600, 900);
@@ -25,7 +28,9 @@ public class MusicEditorView extends JFrame {
     setBackground(Color.WHITE);
 
 
-
+    TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes = new TreeMap<>(new
+            IntegerComparator());
+    sortedNotes.putAll(notes);
 
 
 
@@ -49,8 +54,8 @@ public class MusicEditorView extends JFrame {
     JPanel container = new JPanel();
     container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
     // Two panels
-    JPanel keyboardPanel = new KeyboardPanel(model);
-    JPanel editorPanel = new EditorPanel(model);
+    JPanel keyboardPanel = new KeyboardPanel();
+    JPanel editorPanel = new EditorPanel(sortedNotes, maxBeats);
 
     // Enable scrolling
     JScrollPane editorScrPanel = new JScrollPane(editorPanel);
