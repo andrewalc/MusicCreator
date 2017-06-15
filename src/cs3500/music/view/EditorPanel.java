@@ -1,19 +1,11 @@
 package cs3500.music.view;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javax.swing.*;
 
-import cs3500.music.model.IMusicEditorModel;
-import cs3500.music.model.Note;
-import cs3500.music.model.Pitch;
 import cs3500.music.model.Tones;
 
 
@@ -23,7 +15,7 @@ public class EditorPanel extends JPanel {
   public static final int TOP_SCREEN_SHIFT = 100;
   public static final int BORDER_SHIFT = 70;
   public static final int PITCH_MIDI_GAP = 80;
-  public static final int ROW_HEIGHT = 30;
+  private int rowHeight = 11;
   public static final int FONT_SIZE = 20;
 
   private static final int BEAT_UNIT_LENGTH = 40;
@@ -77,12 +69,15 @@ public class EditorPanel extends JPanel {
         }
       }
     }
+    System.out.println(pitchStrings.size());
+
+
   }
 
   @Override
   public Dimension getPreferredSize() {
     return new Dimension(BORDER_SHIFT + PITCH_MIDI_GAP + rowWidth + BORDER_SHIFT,
-            TOP_SCREEN_SHIFT + (ROW_HEIGHT * pitchStrings.size()));
+            TOP_SCREEN_SHIFT + (rowHeight * pitchStrings.size()));
   }
 
   private String convertIntPitchToStringPitch(int pitch) {
@@ -109,7 +104,7 @@ public class EditorPanel extends JPanel {
             TOP_SCREEN_SHIFT -
                     FONT_SIZE,
             BORDER_SHIFT + PITCH_MIDI_GAP + (this.currentBeat * BEAT_UNIT_LENGTH),
-            TOP_SCREEN_SHIFT + (ROW_HEIGHT * this.pitchStrings.size()) - FONT_SIZE);
+            TOP_SCREEN_SHIFT + (rowHeight * this.pitchStrings.size()) - FONT_SIZE);
     g.setColor(Color.BLACK);
   }
 
@@ -147,11 +142,11 @@ public class EditorPanel extends JPanel {
             g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + (startingBeat *
                             BEAT_UNIT_LENGTH), spacing - FONT_SIZE, ((endBeat - startingBeat) +
                             1) * BEAT_UNIT_LENGTH,
-                    ROW_HEIGHT);
+                    rowHeight);
             g2d.setColor(Color.BLACK);
             g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + startingBeat *
                             BEAT_UNIT_LENGTH, spacing - FONT_SIZE, BEAT_UNIT_LENGTH,
-                    ROW_HEIGHT);
+                    rowHeight);
             g2d.setColor(Color.GREEN);
 
           }
@@ -167,13 +162,13 @@ public class EditorPanel extends JPanel {
         g2d.drawLine(BORDER_SHIFT + PITCH_MIDI_GAP + measureSpacing, spacing -
                         FONT_SIZE,
                 BORDER_SHIFT + PITCH_MIDI_GAP + measureSpacing, spacing - FONT_SIZE +
-                        ROW_HEIGHT);
+                        rowHeight);
         measureSpacing += MEASURE_WIDTH;
         count++;
       }
       // draw the measure box for this row
-      g2d.drawRect(BORDER_SHIFT + PITCH_MIDI_GAP, spacing - FONT_SIZE, rowWidth, ROW_HEIGHT);
-      spacing += ROW_HEIGHT;
+      g2d.drawRect(BORDER_SHIFT + PITCH_MIDI_GAP, spacing - FONT_SIZE, rowWidth, rowHeight);
+      spacing += rowHeight;
     }
 
   }

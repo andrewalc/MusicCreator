@@ -1,9 +1,13 @@
 package cs3500.music.view;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
 import javax.swing.*;
 
 import cs3500.music.model.IMusicEditorModel;

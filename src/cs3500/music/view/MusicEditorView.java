@@ -64,7 +64,9 @@ public class MusicEditorView extends JFrame implements IMusicEditorView {
     JScrollPane editorScrPanel = new JScrollPane(editorPanel);
     editorScrPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     editorScrPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-    editorScrPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 2));
+    editorScrPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() - KeyboardPanel
+            .KEY_HEIGHT - 60));
+    System.out.println(keyboardPanel.getHeight());
 
     container.add(editorScrPanel, BorderLayout.NORTH);
     container.add(keyboardPanel, BorderLayout.SOUTH);

@@ -1,5 +1,8 @@
 package cs3500.music.view;
 
+import com.sun.media.sound.SimpleInstrument;
+import com.sun.media.sound.SimpleSoundbank;
+
 import java.util.ArrayList;
 
 import javax.sound.midi.*;
@@ -56,14 +59,10 @@ public class MidiView implements IMusicEditorView {
   public void playNote() throws InvalidMidiDataException {
     int currentTime = 0;
     int tempo = model.getTempo();
-    System.out.println("Tempo: " + tempo);
-    System.out.println("MaxBeats: " + model.getMaxBeats());
 
     for (int beat = 0; beat < model.getMaxBeats(); beat++) {
-      System.out.println("Playing beat: " + beat);
       ArrayList<ArrayList<Integer>> currentNotes = model.getNotesAtBeat(beat);
       for (ArrayList<Integer> note : currentNotes) {
-        System.out.println("Number of notes: " + currentNotes.size());
 
         int startingBeat = note.get(0);
         int endBeat = note.get(1);
@@ -72,27 +71,24 @@ public class MidiView implements IMusicEditorView {
         int volume = note.get(4);
         if (startingBeat == beat) {
           MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, 0, pitch, volume);
+          MidiMessage change = new ShortMessage(ShortMessage.PROGRAM_CHANGE, 0, instrument, 0);
           MidiMessage stop = new ShortMessage(ShortMessage.NOTE_OFF, 0, pitch, volume);
+          this.receiver.send(change, currentTime);
           this.receiver.send(start, currentTime);
           this.receiver.send(stop, this.synth.getMicrosecondPosition() + (tempo * (endBeat -
                   startingBeat + 1)));
         }
-
-        System.out.println("reached end");
       }
 
       currentTime += tempo;
 
       try {
-        System.out.println("sleeping");
 
         Thread.sleep(tempo / 1000);
-        System.out.println("finished sleeping");
 
       } catch (InterruptedException e) {
         System.out.println(e.getMessage());
       }
-      System.out.println("next beat");
 
     }
 
