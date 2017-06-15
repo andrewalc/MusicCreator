@@ -63,13 +63,14 @@ public class MidiView implements IMusicEditorView {
     for (int beat = 0; beat < model.getMaxBeats(); beat++) {
       ArrayList<ArrayList<Integer>> currentNotes = model.getNotesAtBeat(beat);
       for (ArrayList<Integer> note : currentNotes) {
-
         int startingBeat = note.get(0);
         int endBeat = note.get(1);
         int instrument = note.get(2);
         int pitch = note.get(3);
         int volume = note.get(4);
         if (startingBeat == beat) {
+          System.out.println(note);
+
           MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, 0, pitch, volume);
           MidiMessage change = new ShortMessage(ShortMessage.PROGRAM_CHANGE, 0, instrument, 0);
           MidiMessage stop = new ShortMessage(ShortMessage.NOTE_OFF, 0, pitch, volume);
@@ -77,6 +78,8 @@ public class MidiView implements IMusicEditorView {
           this.receiver.send(start, currentTime);
           this.receiver.send(stop, this.synth.getMicrosecondPosition() + (tempo * (endBeat -
                   startingBeat + 1)));
+          System.out.println("finished");
+
         }
       }
 

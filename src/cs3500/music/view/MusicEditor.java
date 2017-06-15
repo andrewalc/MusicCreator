@@ -30,13 +30,15 @@ class MusicEditor {
   public static void main(String[] args) {
     MusicEditorModel.MusicEditorBuilder model1 = new MusicEditorModel.MusicEditorBuilder();
 
-    /*model1.addNote(0,3,1,24, 10);
-    model1.addNote(0,3,1, 25, 10);
-    model1.addNote(6, 9, 1, 26, 10);
-    model1.addNote( 7, 11, 1, 26, 10);
-    model1.addNote(6, 9, 1, 27, 10);
-    model1.addNote(25, 78, 3, 39, 10);
-    model1.addNote(7, 106, 1, 32,  10);*/
+//    model1.addNote(0,3,1,55, 64);
+//    model1.addNote(0,3,1, 68, 64);
+//    model1.addNote(6, 9, 1, 67, 64);
+//    model1.addNote( 7, 11, 1, 65, 64);
+//    model1.addNote(6, 9, 1, 55, 64);
+//    model1.addNote(25, 78, 3, 67, 64);
+//    model1.addNote(7, 106, 1, 25,  64);
+//    model1.setTempo(100000);
+
     try {
       MusicReader.parseFile(new FileReader("df-ttfaf.txt"), model1);
     } catch (FileNotFoundException e) {
