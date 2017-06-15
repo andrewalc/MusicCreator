@@ -114,6 +114,8 @@ public interface IMusicEditorModel {
   void combinePieceAtEnd(Map<Integer, ArrayList<ArrayList<Integer>>> other) throws
           IllegalArgumentException;
 
+  int getMaxBeats();
+
   /**
    * Prints out a string that is separated into pitch columns from the piece's lowest to highest
    * pitch and beat number rows. Notes that are present will appear as "  X  " at its head, and

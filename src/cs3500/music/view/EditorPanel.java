@@ -64,7 +64,7 @@ public class EditorPanel extends JPanel {
       int currPitch = this.getHighestPitch();
       int lowest = this.getLowestPitch();
       while (true) {
-        this.pitchStrings.add(Tones.getToneAtToneVal(currPitch).toString());
+        this.pitchStrings.add(this.convertIntPitchToStringPitch(currPitch));
         if (currPitch == lowest) {
           break;
         } else {
@@ -85,9 +85,13 @@ public class EditorPanel extends JPanel {
 
       @Override
       public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == 37){
-
+        System.out.println(e);
+        if (e.getKeyCode() == 37 && currentBeat > 0) {
+          currentBeat--;
+        } else if (e.getKeyCode() == 39 && currentBeat < maxBeats) {
+          currentBeat++;
         }
+        repaint();
       }
 
       @Override
@@ -95,12 +99,11 @@ public class EditorPanel extends JPanel {
 
       }
     });
-    revalidate();
   }
 
-  public void addNotify() {
-    super.addNotify();
-    requestFocus();
+  private String convertIntPitchToStringPitch(int pitch) {
+    int numTones = Tones.values().length;
+    return Tones.getToneAtToneVal(pitch % numTones).toString() + ((pitch / numTones) - 1);
   }
 
   @Override
@@ -108,19 +111,20 @@ public class EditorPanel extends JPanel {
     super.paintComponent(g);
     if(rowWidth > 0){
       paintMeasureNumbers(g);
-      paintRows(g, this.pitchStrings);
-      paintPlayLine(g, this.currentBeat);
+      paintRows(g);
+      paintPlayLine(g);
     }
 
   }
 
-  private void paintPlayLine(Graphics g, int beatNumber) {
+  private void paintPlayLine(Graphics g) {
     g.setColor(Color.RED);
     Graphics2D g2d = (Graphics2D) g.create();
     g2d.setStroke(new BasicStroke(3));
-    g2d.drawLine(BORDER_SHIFT+ PITCH_MIDI_GAP + (beatNumber * BEAT_UNIT_LENGTH), TOP_SCREEN_SHIFT -
+    g2d.drawLine(BORDER_SHIFT + PITCH_MIDI_GAP + (this.currentBeat * BEAT_UNIT_LENGTH),
+            TOP_SCREEN_SHIFT -
                     FONT_SIZE,
-            BORDER_SHIFT + PITCH_MIDI_GAP + (beatNumber * BEAT_UNIT_LENGTH),
+            BORDER_SHIFT + PITCH_MIDI_GAP + (this.currentBeat * BEAT_UNIT_LENGTH),
             TOP_SCREEN_SHIFT + (ROW_HEIGHT * this.pitchStrings.size()) - FONT_SIZE);
     g.setColor(Color.BLACK);
   }
@@ -135,7 +139,7 @@ public class EditorPanel extends JPanel {
     }
   }
 
-  public void paintRows(Graphics g, ArrayList<String> contents) {
+  public void paintRows(Graphics g) {
     g.setColor(Color.BLACK);
     g.setFont(new Font("ComicSans", Font.BOLD, FONT_SIZE));
     Graphics2D g2d = (Graphics2D) g.create();
@@ -143,22 +147,25 @@ public class EditorPanel extends JPanel {
 
 
     int spacing = TOP_SCREEN_SHIFT;
-    for (String str : contents) {
+    for (String str : this.pitchStrings) {
 
       // generate the Pitch headers
       g.drawString(str, BORDER_SHIFT, spacing);
 
-      for(Pitch pitch : notes.keySet()){
+      for (Integer pitch : notes.keySet()) {
 
-        if(pitch.toString().equals(str)){
-          for(Note note: notes.get(pitch)){
+        if (convertIntPitchToStringPitch(pitch).equals(str)) {
+          for (ArrayList<Integer> note : notes.get(pitch)) {
+            int startingBeat = note.get(0);
+            int endBeat = note.get(1);
             g2d.setColor(Color.GREEN);
 
-            g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + (note.getStartingBeat() *
-                    BEAT_UNIT_LENGTH), spacing - FONT_SIZE, note.getBeats() * BEAT_UNIT_LENGTH,
+            g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + (startingBeat *
+                            BEAT_UNIT_LENGTH), spacing - FONT_SIZE, (endBeat - startingBeat) *
+                            BEAT_UNIT_LENGTH,
                     ROW_HEIGHT);
             g2d.setColor(Color.BLACK);
-            g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + note.getStartingBeat() *
+            g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + startingBeat *
                             BEAT_UNIT_LENGTH, spacing - FONT_SIZE, BEAT_UNIT_LENGTH,
                     ROW_HEIGHT);
             g2d.setColor(Color.GREEN);

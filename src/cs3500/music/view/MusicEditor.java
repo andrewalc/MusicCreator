@@ -37,8 +37,8 @@ class MusicEditor {
     model1.addNote(Tones.D_SHARP, 1, 6, 4, 1, 10);
    // model1.addNote(Tones.C_SHARP, 2, 3, 2);
     //model1.addNote(Tones.C_SHARP, 2, 10, 1);
-    //model1.addNote(Tones.G_SHARP, 1,7,100);
-    JFrame gui1 = new MusicEditorView(model1);
+    model1.addNote(Tones.G_SHARP, 1, 7, 100, 1, 10);
+    JFrame gui1 = new MusicEditorView(model1.getAllNotes(), model1.getMaxBeats());
     gui1.revalidate();
   }
 }

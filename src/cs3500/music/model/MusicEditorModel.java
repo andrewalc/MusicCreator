@@ -142,7 +142,8 @@ public class MusicEditorModel implements IMusicEditorModel {
     int instrument = note.get(2);
     int pitch = note.get(3);
     int volume = note.get(4);
-    return new Note(Tones.getToneAtToneVal(pitch % 12), (pitch / 12) - 1,
+    int numTones = Tones.values().length;
+    return new Note(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1,
             startingBeat, endBeat - startingBeat, instrument, volume);
   }
 
@@ -171,6 +172,11 @@ public class MusicEditorModel implements IMusicEditorModel {
       }
     }
     this.loadPiece(dummy);
+  }
+
+  @Override
+  public int getMaxBeats() {
+    return this.piece.getMaxBeats();
   }
 
   @Override

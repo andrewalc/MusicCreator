@@ -12,8 +12,6 @@ public enum Tones {
           6), G("G", 7),G_SHARP("G#", 8), A("A", 9), A_SHARP("A#", 10), B("B", 11);
   private final String tone;
   private final int toneVal;
-  private final static int NUM_TONES = 12;
-
 
   /**
    * Constructor for a Tone, requires an String representing this tone's pitch structured with the
@@ -73,9 +71,10 @@ public enum Tones {
     ArrayList<Tones> values = new ArrayList<Tones>(Arrays.asList(Tones.values()));
     // get the index of the next tone in the arraylist of all tones
     // (this tones index + the shift mod the size all tones) mod the size of all tones
+    int numTones = Tones.values().length;
     int potentialIndex =
-            (values.indexOf(this) + (((shift % NUM_TONES) + NUM_TONES) % NUM_TONES))
-                    % NUM_TONES;
+            (values.indexOf(this) + (((shift % numTones) + numTones) % numTones))
+                    % numTones;
     return values.get(potentialIndex);
   }
 

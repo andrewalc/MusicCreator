@@ -18,10 +18,12 @@ import cs3500.music.model.IMusicEditorModel;
 public class MusicEditorView extends JFrame {
 
   private int currentBeat;
+  private int maxBeats;
 
   public MusicEditorView(Map<Integer, ArrayList<ArrayList<Integer>>> notes, int maxBeats) {
     super("MIDI Music Editor");
-    currentBeat = 0;
+    this.currentBeat = 0;
+    this.maxBeats = maxBeats;
     setSize(1600, 900);
     setResizable(true);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -54,7 +56,7 @@ public class MusicEditorView extends JFrame {
     JPanel container = new JPanel();
     container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
     // Two panels
-    JPanel keyboardPanel = new KeyboardPanel();
+    JPanel keyboardPanel = new KeyboardPanel(sortedNotes, maxBeats);
     JPanel editorPanel = new EditorPanel(sortedNotes, maxBeats);
 
     // Enable scrolling
@@ -68,7 +70,25 @@ public class MusicEditorView extends JFrame {
 
     getContentPane().add(container);
     setVisible(true);
-    requestFocus();
 
+  }
+
+  public ArrayList<ArrayList<Integer>> getNotesAtBeat(Map<Integer, ArrayList<ArrayList<Integer>>>
+                                                              notes, int beat) throws
+          IllegalArgumentException {
+    if (beat < 0 || beat > maxBeats) {
+      throw new IllegalArgumentException("beat must be within the beat bounds of the music piece.");
+    }
+    ArrayList<ArrayList<Integer>> notesAtBeat = new ArrayList<ArrayList<Integer>>();
+    for (ArrayList<ArrayList<Integer>> pitchBucket : notes.values()) {
+      for (ArrayList<Integer> note : pitchBucket) {
+        int startingBeat = note.get(0);
+        int endBeat = note.get(1);
+        if (beat >= startingBeat && beat < endBeat) {
+          notesAtBeat.add(note);
+        }
+      }
+    }
+    return notesAtBeat;
   }
 }
