@@ -77,9 +77,12 @@ public class EditorPanel extends JPanel {
         }
       }
     }
-    setMaximumSize(new Dimension(BORDER_SHIFT + PITCH_MIDI_GAP + rowWidth + BORDER_SHIFT,
-            TOP_SCREEN_SHIFT + (ROW_HEIGHT * 14)));
+  }
 
+  @Override
+  public Dimension getPreferredSize() {
+    return new Dimension(BORDER_SHIFT + PITCH_MIDI_GAP + rowWidth + BORDER_SHIFT,
+            0);
   }
 
   private String convertIntPitchToStringPitch(int pitch) {
@@ -142,8 +145,8 @@ public class EditorPanel extends JPanel {
             g2d.setColor(Color.GREEN);
 
             g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + (startingBeat *
-                            BEAT_UNIT_LENGTH), spacing - FONT_SIZE, (endBeat - startingBeat) *
-                            BEAT_UNIT_LENGTH,
+                            BEAT_UNIT_LENGTH), spacing - FONT_SIZE, ((endBeat - startingBeat) +
+                            1) * BEAT_UNIT_LENGTH,
                     ROW_HEIGHT);
             g2d.setColor(Color.BLACK);
             g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + startingBeat *

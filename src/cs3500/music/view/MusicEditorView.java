@@ -54,7 +54,7 @@ public class MusicEditorView extends JFrame {
 
     // running stuff
     JPanel container = new JPanel();
-    container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
+    container.setLayout(new BorderLayout(0, 0));
     // Two panels
     KeyboardPanel keyboardPanel = new KeyboardPanel(this.getNotesAtBeat(notes, currentBeat));
     EditorPanel editorPanel = new EditorPanel(sortedNotes, maxBeats);
@@ -64,10 +64,10 @@ public class MusicEditorView extends JFrame {
     JScrollPane editorScrPanel = new JScrollPane(editorPanel);
     editorScrPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     editorScrPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-    editorScrPanel.setMaximumSize(editorPanel.getMaximumSize());
+    editorScrPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 2));
 
-    container.add(editorScrPanel);
-    container.add(keyboardPanel);
+    container.add(editorScrPanel, BorderLayout.NORTH);
+    container.add(keyboardPanel, BorderLayout.SOUTH);
     container.setFocusable(true);
     container.requestFocusInWindow();
     container.addKeyListener(new KeyListener() {
@@ -113,7 +113,7 @@ public class MusicEditorView extends JFrame {
       for (ArrayList<Integer> note : pitchBucket) {
         int startingBeat = note.get(0);
         int endBeat = note.get(1);
-        if (beat >= startingBeat && beat < endBeat) {
+        if (beat >= startingBeat && beat < endBeat + 1) {
           notesAtBeat.add(note);
         }
       }

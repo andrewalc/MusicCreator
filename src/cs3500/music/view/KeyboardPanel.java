@@ -3,6 +3,7 @@ package cs3500.music.view;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -39,6 +40,12 @@ public class KeyboardPanel extends JPanel {
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     paintPianoKeys(g);
+  }
+
+  @Override
+  public Dimension getPreferredSize() {
+    return new Dimension(EditorPanel.BORDER_SHIFT + NUM_WHITEKEYS * KEY_WIDTH +
+            EditorPanel.BORDER_SHIFT, KEY_HEIGHT);
   }
 
   private void paintPianoKeys(Graphics g) {

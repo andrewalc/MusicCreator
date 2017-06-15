@@ -40,5 +40,6 @@ class MusicEditor {
     model1.addNote(Tones.G_SHARP, 1, 7, 100, 1, 10);
     JFrame gui1 = new MusicEditorView(model1.getAllNotes(), model1.getMaxBeats());
     gui1.revalidate();
+    System.out.println("Hello".substring(0, 1));
   }
 }

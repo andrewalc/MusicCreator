@@ -126,4 +126,8 @@ public interface IMusicEditorModel {
    * @return a String representing the loaded piece's music.
    */
   String toString();
+
+  int getTempo();
+
+  void setTempo(int tempo);
 }

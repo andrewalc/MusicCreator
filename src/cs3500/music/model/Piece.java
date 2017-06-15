@@ -14,6 +14,7 @@ import java.util.TreeMap;
 public class Piece {
 
   private TreeMap<Pitch, ArrayList<Note>> allNotes;
+  private int tempo = 0;
   // represents the very last beat number ever reached in this piece
   private int maxBeats = 0;
 
@@ -221,6 +222,16 @@ public class Piece {
               " in this piece of music.");
     }
   }
+
+
+  public int getTempo() {
+    return tempo;
+  }
+
+  public void setTempo(int tempo) {
+    this.tempo = tempo;
+  }
+
 
   /**
    * Prints out a string that is separated into pitch columns from the piece's lowest to highest

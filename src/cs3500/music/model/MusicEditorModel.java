@@ -144,11 +144,12 @@ public class MusicEditorModel implements IMusicEditorModel {
     int volume = note.get(4);
     int numTones = Tones.values().length;
     return new Note(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1,
-            startingBeat, endBeat - startingBeat, instrument, volume);
+            startingBeat, (endBeat - startingBeat) + 1, instrument, volume);
   }
 
   private Pitch convertIntPitchToPitch(int pitch) {
-    return new Pitch(Tones.getToneAtToneVal(pitch % 12), (pitch / 12) - 1);
+    int numTones = Tones.values().length;
+    return new Pitch(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1);
   }
 
   @Override
@@ -184,4 +185,15 @@ public class MusicEditorModel implements IMusicEditorModel {
     return this.piece.toString();
 
   }
+
+  @Override
+  public int getTempo() {
+    return this.piece.getTempo();
+  }
+
+  @Override
+  public void setTempo(int tempo) {
+    this.piece.setTempo(tempo);
+  }
+
 }
