@@ -26,7 +26,7 @@ public class KeyboardPanel extends JPanel {
 
   public KeyboardPanel(ArrayList<ArrayList<Integer>> currentNotes) {
     this.currentNotes = currentNotes;
-    setMaximumSize(new Dimension(EditorPanel.BORDER_SHIFT* 2 + (KEY_WIDTH * NUM_WHITEKEYS),
+    setMaximumSize(new Dimension(EditorPanel.BORDER_SHIFT * 2 + (KEY_WIDTH * NUM_WHITEKEYS),
             KEY_HEIGHT));
 
   }
@@ -36,11 +36,11 @@ public class KeyboardPanel extends JPanel {
   }
 
   @Override
-  public void paintComponent(Graphics g){
+  public void paintComponent(Graphics g) {
     super.paintComponent(g);
     paintPianoKeys(g);
   }
-  
+
   private void paintPianoKeys(Graphics g) {
     ArrayList<Integer> currentPitches = new ArrayList<Integer>();
     for (ArrayList<Integer> note : currentNotes) {
@@ -84,22 +84,46 @@ public class KeyboardPanel extends JPanel {
 
     g.setColor(Color.BLACK);
 
-    // generates the double set of black keys
-    int numBlackKey = 1;
+    // generates black keys
+    int blackKeyNumber = 25;
+    int blackSwitchCounter = 1;
     for (int i = 1; i <= NUM_WHITEKEYS; i++) {
-      for (int j = 0; j < NUM_BLACKKEYS; j++) {
-        g.fillRect(numBlackKey * KEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
+      if (blackSwitchCounter != 3 && blackSwitchCounter != 7) {
+
+        g.setColor(Color.BLACK);
+        g.fillRect(i * KEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
                 0,
                 BLKEY_WIDTH,
                 BLKEY_HEIGHT);
-        numBlackKey++;
-        g.fillRect(numBlackKey * KEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT, 0,
+        for (Integer pitch : currentPitches) {
+          if (blackKeyNumber == pitch) {
+            g.setColor(Color.orange);
+            g.fillRect(i * KEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
+                    0,
+                    BLKEY_WIDTH,
+                    BLKEY_HEIGHT);
+          }
+        }
+        g.setColor(Color.black);
+        g.drawRect(i * KEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
+                0,
                 BLKEY_WIDTH,
                 BLKEY_HEIGHT);
-        numBlackKey += 6;
+      }
+
+      if (blackSwitchCounter == 3 || blackSwitchCounter == 7) { // may be 3/6 or 2/7
+        blackKeyNumber += 1;
+        if (blackSwitchCounter == 7) {
+          blackSwitchCounter = 1;
+        } else {
+          blackSwitchCounter += 1;
+        }
+      } else {
+        blackKeyNumber += 2;
+        blackSwitchCounter += 1;
       }
     }
-
   }
+
 
 }
