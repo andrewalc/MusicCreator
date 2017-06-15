@@ -1,13 +1,14 @@
 package cs3500.music.model;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
+
+import cs3500.music.util.*;
 
 /**
  * Class for the music editor model implementation.
@@ -18,11 +19,40 @@ import java.util.TreeMap;
  * Changed instances of type Piece to a Hashmap of Integer to ArrayList ArrayList of Integers to
  * represent a collection of notes.
  */
-public class MusicEditorModel implements IMusicEditorModel {
+public final class MusicEditorModel implements IMusicEditorModel {
   private Piece piece;
 
   public MusicEditorModel() {
     this.newPiece();
+  }
+
+  public static final class MusicEditorBuilder implements CompositionBuilder<IMusicEditorModel> {
+
+    IMusicEditorModel model;
+
+    public MusicEditorBuilder() {
+      model = new MusicEditorModel();
+    }
+
+    @Override
+    public IMusicEditorModel build() {
+      return model;
+    }
+
+    @Override
+    public CompositionBuilder<IMusicEditorModel> setTempo(int tempo) {
+      model.setTempo(tempo);
+      return this;
+    }
+
+    @Override
+    public CompositionBuilder<IMusicEditorModel> addNote(int start, int end, int instrument, int
+            pitch, int volume) {
+      int numTones = Tones.values().length;
+      model.addNote(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1,
+              start, end - start, instrument, volume);
+      return this;
+    }
   }
 
   @Override

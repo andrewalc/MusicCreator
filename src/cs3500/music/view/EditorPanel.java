@@ -82,7 +82,7 @@ public class EditorPanel extends JPanel {
   @Override
   public Dimension getPreferredSize() {
     return new Dimension(BORDER_SHIFT + PITCH_MIDI_GAP + rowWidth + BORDER_SHIFT,
-            0);
+            TOP_SCREEN_SHIFT + (ROW_HEIGHT * pitchStrings.size()));
   }
 
   private String convertIntPitchToStringPitch(int pitch) {

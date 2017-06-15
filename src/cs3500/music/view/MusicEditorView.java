@@ -15,7 +15,7 @@ import cs3500.music.model.IMusicEditorModel;
 /**
  * Created by Andrew Alcala on 6/12/2017.
  */
-public class MusicEditorView extends JFrame {
+public class MusicEditorView extends JFrame implements IMusicEditorView {
 
   private int currentBeat;
   private int maxBeats;
@@ -78,7 +78,6 @@ public class MusicEditorView extends JFrame {
 
       @Override
       public void keyPressed(KeyEvent e) {
-        System.out.println(e);
         if (e.getKeyCode() == 37 && currentBeat > 0) {
           currentBeat--;
           editorPanel.setCurrentBeat(currentBeat);
@@ -98,7 +97,6 @@ public class MusicEditorView extends JFrame {
     });
 
     getContentPane().add(container);
-    setVisible(true);
 
   }
 
@@ -119,5 +117,10 @@ public class MusicEditorView extends JFrame {
       }
     }
     return notesAtBeat;
+  }
+
+  @Override
+  public void initialize() {
+    this.setVisible(true);
   }
 }
