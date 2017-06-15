@@ -44,17 +44,35 @@ public class KeyboardPanel extends JPanel {
 
     // generates 10 octaves of white keys
     g.setColor(Color.BLACK);
+
     int keyNumber = 24;
+    int switchCounter = 1;
+
     for (int i = 0; i < NUM_WHITEKEYS; i++) {
+
+      for (Integer pitch : currentPitches) {
+        if (keyNumber == pitch) {
+          g.setColor(Color.orange);
+          g.fillRect((i * KEY_WIDTH) + EditorPanel.BORDER_SHIFT,
+                  0, KEY_WIDTH, KEY_HEIGHT);
+        }
+      }
+      g.setColor(Color.black);
       g.drawRect((i * KEY_WIDTH) + EditorPanel.BORDER_SHIFT,
               0, KEY_WIDTH, KEY_HEIGHT);
-      //if(){
-      //  keyNumber += 2;
-      //}
-      //else{
-      //  keyNumber += 1;
-      // }
+
+
+      if (switchCounter == 3 || switchCounter == 7) {
+        keyNumber += 1;
+        if (switchCounter == 7) {
+          switchCounter = 1;
+        }
+      } else {
+        keyNumber += 2;
+      }
     }
+
+
     g.setColor(Color.BLACK);
 
     // generates the double set of black keys

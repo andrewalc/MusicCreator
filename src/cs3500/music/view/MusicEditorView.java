@@ -56,7 +56,7 @@ public class MusicEditorView extends JFrame {
     JPanel container = new JPanel();
     container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
     // Two panels
-    JPanel keyboardPanel = new KeyboardPanel(sortedNotes, maxBeats);
+    JPanel keyboardPanel = new KeyboardPanel(this.getNotesAtBeat(notes, currentBeat));
     JPanel editorPanel = new EditorPanel(sortedNotes, maxBeats);
 
     // Enable scrolling
