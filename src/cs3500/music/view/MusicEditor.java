@@ -33,9 +33,8 @@ class MusicEditor {
     model1.addNote(6, 9, 1, 27, 10);
     model1.addNote(25, 78, 3, 39, 10);
     model1.addNote(7, 106, 1, 32,  10);*/
-    model1.setTempo(1000000);
     try {
-      MusicReader.parseFile(new FileReader("mary-little-lamb.txt"), model1);
+      MusicReader.parseFile(new FileReader("df-ttfaf.txt"), model1);
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }
@@ -44,8 +43,12 @@ class MusicEditor {
     IMusicEditorModel modelFinal = model1.build();
 
     ViewFactory factory = new ViewFactory(modelFinal);
-    IMusicEditorView view = factory.getView("midi");
-    view.initialize();
+    IMusicEditorView view2 = factory.getView("visual");
+    view2.initialize();
+    IMusicEditorView view1 = factory.getView("midi");
+    view1.initialize();
+
+
 
   }
 }

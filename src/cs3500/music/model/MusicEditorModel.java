@@ -50,7 +50,7 @@ public final class MusicEditorModel implements IMusicEditorModel {
             pitch, int volume) {
       int numTones = Tones.values().length;
       model.addNote(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1,
-              start, end - start, instrument, volume);
+              start, (end - start) + 1, instrument, volume);
       return this;
     }
   }
