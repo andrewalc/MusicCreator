@@ -30,6 +30,7 @@ public class EditorPanel extends JPanel {
   private static final int MEASURE_WIDTH = BEAT_UNIT_LENGTH * 4;
   private int rowWidth;
   private int numOfMeasures;
+
   private int currentBeat;
   private ArrayList<String> pitchStrings = new ArrayList<String>();
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
@@ -53,6 +54,10 @@ public class EditorPanel extends JPanel {
     return pitches.get(pitches.size() - 1);
   }
 
+  public void setCurrentBeat(int currentBeat) {
+    this.currentBeat = currentBeat;
+  }
+
 
   public EditorPanel(Map<Integer, ArrayList<ArrayList<Integer>>> notes, int maxBeats) {
     this.rowWidth = maxBeats * BEAT_UNIT_LENGTH;
@@ -74,31 +79,7 @@ public class EditorPanel extends JPanel {
     }
     setMaximumSize(new Dimension(BORDER_SHIFT + PITCH_MIDI_GAP + rowWidth + BORDER_SHIFT,
             TOP_SCREEN_SHIFT + (ROW_HEIGHT * 14)));
-    setFocusable(true);
-    requestFocusInWindow();
 
-    addKeyListener(new KeyListener() {
-      @Override
-      public void keyTyped(KeyEvent e) {
-
-      }
-
-      @Override
-      public void keyPressed(KeyEvent e) {
-        System.out.println(e);
-        if (e.getKeyCode() == 37 && currentBeat > 0) {
-          currentBeat--;
-        } else if (e.getKeyCode() == 39 && currentBeat < maxBeats) {
-          currentBeat++;
-        }
-        repaint();
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e) {
-
-      }
-    });
   }
 
   private String convertIntPitchToStringPitch(int pitch) {

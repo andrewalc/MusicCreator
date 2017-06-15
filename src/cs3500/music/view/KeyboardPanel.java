@@ -22,11 +22,16 @@ public class KeyboardPanel extends JPanel {
   public static final int KEY_HEIGHT = 300;
   ArrayList<ArrayList<Integer>> currentNotes;
 
+
   public KeyboardPanel(ArrayList<ArrayList<Integer>> currentNotes) {
     this.currentNotes = currentNotes;
     setMaximumSize(new Dimension(EditorPanel.BORDER_SHIFT* 2 + (KEY_WIDTH * NUM_WHITEKEYS),
             KEY_HEIGHT));
 
+  }
+
+  public void setCurrentNotes(ArrayList<ArrayList<Integer>> currentNotes) {
+    this.currentNotes = currentNotes;
   }
 
   @Override

@@ -56,8 +56,9 @@ public class MusicEditorView extends JFrame {
     JPanel container = new JPanel();
     container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
     // Two panels
-    JPanel keyboardPanel = new KeyboardPanel(this.getNotesAtBeat(notes, currentBeat));
-    JPanel editorPanel = new EditorPanel(sortedNotes, maxBeats);
+    KeyboardPanel keyboardPanel = new KeyboardPanel(this.getNotesAtBeat(notes, currentBeat));
+    EditorPanel editorPanel = new EditorPanel(sortedNotes, maxBeats);
+
 
     // Enable scrolling
     JScrollPane editorScrPanel = new JScrollPane(editorPanel);
@@ -67,6 +68,34 @@ public class MusicEditorView extends JFrame {
 
     container.add(editorScrPanel);
     container.add(keyboardPanel);
+    container.setFocusable(true);
+    container.requestFocusInWindow();
+    container.addKeyListener(new KeyListener() {
+      @Override
+      public void keyTyped(KeyEvent e) {
+
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+        System.out.println(e);
+        if (e.getKeyCode() == 37 && currentBeat > 0) {
+          currentBeat--;
+          editorPanel.setCurrentBeat(currentBeat);
+          keyboardPanel.setCurrentNotes(getNotesAtBeat(notes, currentBeat));
+        } else if (e.getKeyCode() == 39 && currentBeat < maxBeats) {
+          currentBeat++;
+          editorPanel.setCurrentBeat(currentBeat);
+          keyboardPanel.setCurrentNotes(getNotesAtBeat(notes, currentBeat));
+        }
+        repaint();
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e) {
+
+      }
+    });
 
     getContentPane().add(container);
     setVisible(true);
