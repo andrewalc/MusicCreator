@@ -44,7 +44,7 @@ public class KeyboardPanel extends JPanel {
 
   @Override
   public Dimension getPreferredSize() {
-    return new Dimension(EditorPanel.BORDER_SHIFT + NUM_WHITEKEYS * KEY_WIDTH +
+    return new Dimension(EditorPanel.BORDER_SHIFT + (NUM_WHITEKEYS * KEY_WIDTH) +
             EditorPanel.BORDER_SHIFT, KEY_HEIGHT);
   }
 

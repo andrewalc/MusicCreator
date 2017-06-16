@@ -12,6 +12,13 @@ import javax.swing.*;
 
 import cs3500.music.model.IMusicEditorModel;
 
+import static java.awt.GridBagConstraints.CENTER;
+import static java.awt.GridBagConstraints.HORIZONTAL;
+import static java.awt.GridBagConstraints.LAST_LINE_END;
+import static java.awt.GridBagConstraints.PAGE_END;
+import static java.awt.GridBagConstraints.PAGE_START;
+import static java.awt.GridBagConstraints.VERTICAL;
+
 /**
  * Created by Andrew Alcala on 6/12/2017.
  */
@@ -54,7 +61,9 @@ public class MusicEditorView extends JFrame implements IMusicEditorView {
 
     // running stuff
     JPanel container = new JPanel();
-    container.setLayout(new BorderLayout(0, 0));
+    container.setLayout(new GridBagLayout());
+    GridBagConstraints c = new GridBagConstraints();
+
     // Two panels
     KeyboardPanel keyboardPanel = new KeyboardPanel(this.getNotesAtBeat(notes, currentBeat));
     EditorPanel editorPanel = new EditorPanel(sortedNotes, maxBeats);
@@ -64,12 +73,20 @@ public class MusicEditorView extends JFrame implements IMusicEditorView {
     JScrollPane editorScrPanel = new JScrollPane(editorPanel);
     editorScrPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     editorScrPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-    editorScrPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() - KeyboardPanel
-            .KEY_HEIGHT - 60));
-    System.out.println(keyboardPanel.getHeight());
-
-    container.add(editorScrPanel, BorderLayout.NORTH);
-    container.add(keyboardPanel, BorderLayout.SOUTH);
+    editorScrPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+    c.anchor = PAGE_START;
+    c.fill = HORIZONTAL;
+    c.gridx = 0;
+    c.gridy = 0;
+    c.ipadx = (int) editorScrPanel.getPreferredSize().getWidth();
+    c.ipady = (int) (getHeight() + 100 - (keyboardPanel.getPreferredSize().getHeight()));
+    container.add(editorScrPanel, c);
+    c.anchor = LAST_LINE_END;
+    c.gridx = 0;
+    c.gridy = 1;
+    c.ipady = (int) (keyboardPanel.getPreferredSize().getHeight());
+    c.insets = new Insets(20, 0, 100, 0);  //top padding
+    container.add(keyboardPanel, c);
     container.setFocusable(true);
     container.requestFocusInWindow();
     container.addKeyListener(new KeyListener() {
