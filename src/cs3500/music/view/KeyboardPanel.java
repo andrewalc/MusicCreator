@@ -1,14 +1,9 @@
 package cs3500.music.view;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.security.Key;
 import java.util.ArrayList;
 
 import javax.swing.*;
-
-import cs3500.music.model.IMusicEditorModel;
 
 /**
  * Created by Andrew Alcala on 6/13/2017.

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.swing.*;
 
-import cs3500.music.model.Tones;
+import cs3500.music.tests.Tones;
 
 
 public class EditorPanel extends JPanel {
@@ -15,8 +15,8 @@ public class EditorPanel extends JPanel {
   public static final int TOP_SCREEN_SHIFT = 100;
   public static final int BORDER_SHIFT = 70;
   public static final int PITCH_MIDI_GAP = 80;
-  private int rowHeight = 11;
-  public static final int FONT_SIZE = 20;
+  private int rowHeight;
+  private int fontSize;
 
   private static final int BEAT_UNIT_LENGTH = 20;
   private static final int MEASURE_WIDTH = BEAT_UNIT_LENGTH * 4;
@@ -38,12 +38,20 @@ public class EditorPanel extends JPanel {
 
   private int getLowestPitch() {
     ArrayList<Integer> pitches = new ArrayList<Integer>(this.notes.keySet());
-    return pitches.get(0);
+    if (pitches.size() > 0) {
+      return pitches.get(0);
+    } else {
+      throw new IllegalArgumentException("There are no pitches in the editor.");
+    }
   }
 
   private int getHighestPitch() {
     ArrayList<Integer> pitches = new ArrayList<Integer>(this.notes.keySet());
-    return pitches.get(pitches.size() - 1);
+    if (pitches.size() > 0) {
+      return pitches.get(pitches.size() - 1);
+    } else {
+      throw new IllegalArgumentException("There are no pitches in the editor.");
+    }
   }
 
   public void setCurrentBeat(int currentBeat) {
@@ -70,7 +78,13 @@ public class EditorPanel extends JPanel {
       }
     }
     System.out.println(pitchStrings.size());
-
+    if (pitchStrings.size() > 25) {
+      this.fontSize = 13;
+      this.rowHeight = 13;
+    } else {
+      this.fontSize = 20;
+      this.rowHeight = 20;
+    }
 
   }
 
@@ -102,25 +116,25 @@ public class EditorPanel extends JPanel {
     g2d.setStroke(new BasicStroke(3));
     g2d.drawLine(BORDER_SHIFT + PITCH_MIDI_GAP + (this.currentBeat * BEAT_UNIT_LENGTH),
             TOP_SCREEN_SHIFT -
-                    FONT_SIZE,
+                    fontSize,
             BORDER_SHIFT + PITCH_MIDI_GAP + (this.currentBeat * BEAT_UNIT_LENGTH),
-            TOP_SCREEN_SHIFT + (rowHeight * this.pitchStrings.size()) - FONT_SIZE);
+            TOP_SCREEN_SHIFT + (rowHeight * this.pitchStrings.size()) - fontSize);
     g.setColor(Color.BLACK);
   }
 
 
   private void paintMeasureNumbers(Graphics g) {
     g.setColor(Color.BLACK);
-    g.setFont(new Font("ComicSans", Font.BOLD, FONT_SIZE));
+    g.setFont(new Font("ComicSans", Font.BOLD, fontSize));
     for(int i = 0; i <= numOfMeasures; i++){
       g.drawString(""+i*4, BORDER_SHIFT + PITCH_MIDI_GAP + (i*MEASURE_WIDTH), TOP_SCREEN_SHIFT -
-              FONT_SIZE*2);
+              fontSize * 2);
     }
   }
 
   public void paintRows(Graphics g) {
     g.setColor(Color.BLACK);
-    g.setFont(new Font("ComicSans", Font.BOLD, FONT_SIZE));
+    g.setFont(new Font("ComicSans", Font.BOLD, fontSize));
     Graphics2D g2d = (Graphics2D) g.create();
     g2d.setStroke(new BasicStroke(3));
 
@@ -140,12 +154,12 @@ public class EditorPanel extends JPanel {
             g2d.setColor(Color.GREEN);
 
             g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + (startingBeat *
-                            BEAT_UNIT_LENGTH), spacing - FONT_SIZE, ((endBeat - startingBeat) +
+                            BEAT_UNIT_LENGTH), spacing - fontSize, ((endBeat - startingBeat) +
                             1) * BEAT_UNIT_LENGTH,
                     rowHeight);
             g2d.setColor(Color.BLACK);
             g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + startingBeat *
-                            BEAT_UNIT_LENGTH, spacing - FONT_SIZE, BEAT_UNIT_LENGTH,
+                            BEAT_UNIT_LENGTH, spacing - fontSize, BEAT_UNIT_LENGTH,
                     rowHeight);
             g2d.setColor(Color.GREEN);
 
@@ -160,14 +174,14 @@ public class EditorPanel extends JPanel {
       while (count < numOfMeasures) {
         g2d.setColor(Color.BLACK);
         g2d.drawLine(BORDER_SHIFT + PITCH_MIDI_GAP + measureSpacing, spacing -
-                        FONT_SIZE,
-                BORDER_SHIFT + PITCH_MIDI_GAP + measureSpacing, spacing - FONT_SIZE +
+                        fontSize,
+                BORDER_SHIFT + PITCH_MIDI_GAP + measureSpacing, spacing - fontSize +
                         rowHeight);
         measureSpacing += MEASURE_WIDTH;
         count++;
       }
       // draw the measure box for this row
-      g2d.drawRect(BORDER_SHIFT + PITCH_MIDI_GAP, spacing - FONT_SIZE, rowWidth, rowHeight);
+      g2d.drawRect(BORDER_SHIFT + PITCH_MIDI_GAP, spacing - fontSize, rowWidth, rowHeight);
       spacing += rowHeight;
     }
 

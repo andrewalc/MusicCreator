@@ -1,7 +1,6 @@
 package cs3500.music.view;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -10,14 +9,9 @@ import java.util.TreeMap;
 
 import javax.swing.*;
 
-import cs3500.music.model.IMusicEditorModel;
-
-import static java.awt.GridBagConstraints.CENTER;
 import static java.awt.GridBagConstraints.HORIZONTAL;
 import static java.awt.GridBagConstraints.LAST_LINE_END;
-import static java.awt.GridBagConstraints.PAGE_END;
 import static java.awt.GridBagConstraints.PAGE_START;
-import static java.awt.GridBagConstraints.VERTICAL;
 
 /**
  * Created by Andrew Alcala on 6/12/2017.

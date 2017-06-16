@@ -1,20 +1,10 @@
 package cs3500.music.view;
 
-import java.awt.*;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiSystem;
-import javax.swing.*;
-
-import cs3500.music.model.IMusicEditorModel;
-import cs3500.music.model.MusicEditorModel;
-import cs3500.music.model.Note;
-import cs3500.music.model.Piece;
-import cs3500.music.model.Tones;
+import cs3500.music.tests.IMusicEditorModel;
+import cs3500.music.tests.MusicEditorModel;
 import cs3500.music.util.MusicReader;
 
 /**
@@ -41,7 +31,7 @@ class MusicEditor {
 
 
     try {
-      MusicReader.parseFile(new FileReader("odyssey.txt"), model1);
+      MusicReader.parseFile(new FileReader("roundabout.txt"), model1);
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }

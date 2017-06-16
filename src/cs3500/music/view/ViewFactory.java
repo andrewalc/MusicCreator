@@ -2,7 +2,7 @@ package cs3500.music.view;
 
 import javax.sound.midi.MidiUnavailableException;
 
-import cs3500.music.model.IMusicEditorModel;
+import cs3500.music.tests.IMusicEditorModel;
 
 /**
  * Created by Andrew Alcala on 6/15/2017.

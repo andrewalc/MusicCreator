@@ -1,13 +1,10 @@
 package cs3500.music.view;
 
-import com.sun.media.sound.SimpleInstrument;
-import com.sun.media.sound.SimpleSoundbank;
-
 import java.util.ArrayList;
 
 import javax.sound.midi.*;
 
-import cs3500.music.model.IMusicEditorModel;
+import cs3500.music.tests.IMusicEditorModel;
 
 /**
  * A skeleton for MIDI playback

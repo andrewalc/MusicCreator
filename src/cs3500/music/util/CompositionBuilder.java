@@ -2,7 +2,7 @@ package cs3500.music.util;
 
 /**
  * A builder of compositions.  Since we do not know in advance what
- * the name of the main type is for a model, we parameterize this builder interface
+ * the name of the main type is for a tests, we parameterize this builder interface
  * by an unknown type.
  *
  * @param <T> The type of the constructed composition
