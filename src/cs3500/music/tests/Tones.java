@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public enum Tones {
   C("C", 0), C_SHARP("C#", 1), D("D", 2), D_SHARP("D#", 3), E("E", 4), F("F", 5), F_SHARP("F#",
-          6), G("G", 7),G_SHARP("G#", 8), A("A", 9), A_SHARP("A#", 10), B("B", 11);
+          6), G("G", 7), G_SHARP("G#", 8), A("A", 9), A_SHARP("A#", 10), B("B", 11);
   private final String tone;
   private final int toneVal;
 
@@ -36,9 +36,32 @@ public enum Tones {
 
   /**
    * Method that returns the tone's tone value, C starting at 0 and B ending at 11.
+   *
    * @return This tone's tone value.
    */
-  public int getToneVal() { return this.toneVal; }
+  public int getToneVal() {
+    return this.toneVal;
+  }
+
+
+  /**
+   * Will return the tone associated with the given tone value. All tones are paired to values
+   * ranging from 0-11, where C begins with 0 and B ends with 11. Thus, inputs for tone value
+   * should only be from 0 - 11.
+   *
+   * @param toneVal Integer to fetch an associated tone value with.
+   * @return The tone that corresponds to the given tone value.
+   * @throws IllegalArgumentException If the int given is not within the tone range (0 - 11).
+   */
+  public static Tones getToneAtToneVal(int toneVal) throws IllegalArgumentException {
+    if (toneVal >= 0 && toneVal < 12) {
+      ArrayList<Tones> tones = new ArrayList<Tones>(Arrays.asList(Tones.values()));
+      return tones.get(toneVal);
+    } else {
+      throw new IllegalArgumentException("Invalid tone value. Tones range from 0 - 11 (C to B)");
+    }
+
+  }
 
   /**
    * Method that returns a tone that is one pitch higher than this tone.
@@ -75,11 +98,6 @@ public enum Tones {
             (values.indexOf(this) + (((shift % numTones) + numTones) % numTones))
                     % numTones;
     return values.get(potentialIndex);
-  }
-
-  public static Tones getToneAtToneVal(int toneVal) {
-    ArrayList<Tones> tones = new ArrayList<Tones>(Arrays.asList(Tones.values()));
-    return tones.get(toneVal);
   }
 
   /**

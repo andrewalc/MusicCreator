@@ -33,7 +33,70 @@ public class TestTones {
     assertEquals(Tones.D_SHARP.toString(), "D#");
   }
 
+  // testing getToneVal
 
+  @Test
+  public void testGetToneValC() {
+    assertEquals(Tones.C.getToneVal(), 0);
+  }
+
+  @Test
+  public void testGetToneValCSharp() {
+    assertEquals(Tones.C_SHARP.getToneVal(), 1);
+  }
+
+  @Test
+  public void testGetToneValD() {
+    assertEquals(Tones.D.getToneVal(), 2);
+  }
+
+  @Test
+  public void testGetToneValG() {
+    assertEquals(Tones.G.getToneVal(), 7);
+  }
+
+  @Test
+  public void testGetToneValA() {
+    assertEquals(Tones.A.getToneVal(), 9);
+  }
+
+  @Test
+  public void testGetToneValASharp() {
+    assertEquals(Tones.A_SHARP.getToneVal(), 10);
+  }
+
+  @Test
+  public void testGetToneValB() {
+    assertEquals(Tones.B.getToneVal(), 11);
+  }
+
+  // testing getToneAtToneVal
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testToneAtToneValInvalidUnder0() {
+    Tones.getToneAtToneVal(-1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testToneAtToneValInvalidOver11() {
+    Tones.getToneAtToneVal(12);
+  }
+
+  @Test
+  public void testToneAtToneVals() {
+    assertEquals(Tones.getToneAtToneVal(0), Tones.C);
+    assertEquals(Tones.getToneAtToneVal(1), Tones.C_SHARP);
+    assertEquals(Tones.getToneAtToneVal(2), Tones.D);
+    assertEquals(Tones.getToneAtToneVal(3), Tones.D_SHARP);
+    assertEquals(Tones.getToneAtToneVal(4), Tones.E);
+    assertEquals(Tones.getToneAtToneVal(5), Tones.F);
+    assertEquals(Tones.getToneAtToneVal(6), Tones.F_SHARP);
+    assertEquals(Tones.getToneAtToneVal(7), Tones.G);
+    assertEquals(Tones.getToneAtToneVal(8), Tones.G_SHARP);
+    assertEquals(Tones.getToneAtToneVal(9), Tones.A);
+    assertEquals(Tones.getToneAtToneVal(10), Tones.A_SHARP);
+    assertEquals(Tones.getToneAtToneVal(11), Tones.B);
+  }
   // testing getNextTone
 
   @Test

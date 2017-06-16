@@ -31,7 +31,7 @@ class MusicEditor {
 
 
     try {
-      MusicReader.parseFile(new FileReader("roundabout.txt"), model1);
+      MusicReader.parseFile(new FileReader("zoot-lw.txt"), model1);
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }
