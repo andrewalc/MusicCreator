@@ -13,14 +13,10 @@ import cs3500.music.model.IMusicEditorModel;
  * A skeleton for MIDI playback
  */
 public class MidiView implements IMusicEditorView {
-  private final Synthesizer synth;
-  private final Receiver receiver;
+
   private final IMusicEditorModel model;
 
   public MidiView(IMusicEditorModel model) throws MidiUnavailableException {
-    this.synth = MidiSystem.getSynthesizer();
-    this.receiver = synth.getReceiver();
-    this.synth.open();
     this.model = model;
   }
 
@@ -57,43 +53,46 @@ public class MidiView implements IMusicEditorView {
    */
 
   public void playNote() throws InvalidMidiDataException {
-    int currentTime = 0;
-    int tempo = model.getTempo();
+    try {
+      int currentTime = 0;
+      int tempo = model.getTempo();
+      Sequencer sequencer = MidiSystem.getSequencer();
 
-    for (int beat = 0; beat < model.getMaxBeats(); beat++) {
-      ArrayList<ArrayList<Integer>> currentNotes = model.getNotesAtBeat(beat);
-      for (ArrayList<Integer> note : currentNotes) {
-        int startingBeat = note.get(0);
-        int endBeat = note.get(1);
-        int instrument = note.get(2);
-        int pitch = note.get(3);
-        int volume = note.get(4);
-        if (startingBeat == beat) {
-          System.out.println(note);
+      sequencer.open();
+      Sequence sequence = new Sequence(Sequence.PPQ, 1);
+      Track seqTrack = sequence.createTrack();
 
-          MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, 0, pitch, volume);
-          MidiMessage change = new ShortMessage(ShortMessage.PROGRAM_CHANGE, 0, instrument, 0);
-          MidiMessage stop = new ShortMessage(ShortMessage.NOTE_OFF, 0, pitch, volume);
-          this.receiver.send(change, currentTime);
-          this.receiver.send(start, currentTime);
-          this.receiver.send(stop, this.synth.getMicrosecondPosition() + (tempo * (endBeat -
-                  startingBeat + 1)));
-          System.out.println("finished");
 
+      for (int beat = 0; beat < model.getMaxBeats(); beat++) {
+
+        ArrayList<ArrayList<Integer>> currentNotes = model.getNotesAtBeat(beat);
+        for (ArrayList<Integer> note : currentNotes) {
+          int startingBeat = note.get(0);
+          int endBeat = note.get(1);
+          int instrument = note.get(2);
+          int pitch = note.get(3);
+          int volume = note.get(4);
+          int channel = 0;
+          if (startingBeat == beat) {
+
+            // Percussion is on channel 9
+            MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, channel, pitch, volume);
+
+            MidiMessage change = new ShortMessage(ShortMessage.PROGRAM_CHANGE, channel,
+                    instrument, 0);
+            MidiMessage stop = new ShortMessage(ShortMessage.NOTE_OFF, channel, pitch, volume);
+            seqTrack.add(new MidiEvent(change, startingBeat));
+            seqTrack.add(new MidiEvent(start, startingBeat));
+            seqTrack.add(new MidiEvent(stop, endBeat));
+          }
         }
+
+        currentTime += tempo;
       }
 
-      currentTime += tempo;
-
-      try {
-
-        Thread.sleep(tempo / 1000);
-
-      } catch (InterruptedException e) {
-        System.out.println(e.getMessage());
-      }
-
-    }
+      sequencer.setSequence(sequence);
+      sequencer.start();
+      sequencer.setTempoInMPQ(tempo);
 
     /* 
     The receiver does not "block", i.e. this method
@@ -105,7 +104,10 @@ public class MidiView implements IMusicEditorView {
     Thread.sleep. A better solution will be forthcoming
     in the subsequent assignments.
     */
-    this.receiver.close(); // Only call this once you're done playing *all* notes
+      // Only call this once you're done playing *all* notes
+    } catch (MidiUnavailableException e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   @Override

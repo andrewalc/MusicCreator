@@ -18,7 +18,7 @@ public class EditorPanel extends JPanel {
   private int rowHeight = 11;
   public static final int FONT_SIZE = 20;
 
-  private static final int BEAT_UNIT_LENGTH = 40;
+  private static final int BEAT_UNIT_LENGTH = 20;
   private static final int MEASURE_WIDTH = BEAT_UNIT_LENGTH * 4;
   private int rowWidth;
   private int numOfMeasures;

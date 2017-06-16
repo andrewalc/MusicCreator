@@ -39,8 +39,9 @@ class MusicEditor {
 //    model1.addNote(7, 106, 1, 25,  64);
 //    model1.setTempo(100000);
 
+
     try {
-      MusicReader.parseFile(new FileReader("df-ttfaf.txt"), model1);
+      MusicReader.parseFile(new FileReader("odyssey.txt"), model1);
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }

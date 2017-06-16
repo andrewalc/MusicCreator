@@ -97,9 +97,7 @@ public class MusicEditorView extends JFrame implements IMusicEditorView {
 
       }
     });
-
     getContentPane().add(container);
-
   }
 
   public ArrayList<ArrayList<Integer>> getNotesAtBeat(Map<Integer, ArrayList<ArrayList<Integer>>>
