@@ -97,7 +97,7 @@ public class TestTones {
     assertEquals(Tones.getToneAtToneVal(10), Tones.A_SHARP);
     assertEquals(Tones.getToneAtToneVal(11), Tones.B);
   }
-  // testing getNextTone
+  //  testing getNextTone
 
   @Test
   public void testGetNextToneC() {
