@@ -11,16 +11,72 @@ import cs3500.music.model.IMusicEditorModel;
  */
 public class MidiView implements IMusicEditorView {
 
-  private final IMusicEditorModel model;
+  private IMusicEditorModel model;
+
+  private Sequencer sequencer;
 
   /**
    * Constructor for a midi view. Require the input of the Music Editor Model to play the music of.
    *
    * @param model a Music Editor Model to play notes off of.
    */
-  public MidiView(IMusicEditorModel model) {
+  private MidiView(IMusicEditorModel model) {
     this.model = model;
+
+    try {
+      this.sequencer = MidiSystem.getSequencer();
+    } catch (MidiUnavailableException e) {
+      System.out.println(e.getMessage());
+    }
+
   }
+
+  /**
+   * Builder class for a MidiView.
+   */
+  public static final class MidiViewBuilder {
+    MidiView view;
+
+    /**
+     * Constructor for a MidiViewBuilder, requires a IMusicEditorModel to build a view of.
+     * Initially built with a standard MidiSystem sequencer.
+     *
+     * @param model Model to build a view of.
+     */
+    public MidiViewBuilder(IMusicEditorModel model) {
+      this.view = new MidiView(model);
+    }
+
+    /**
+     * Builds the constructed MIDI view.
+     *
+     * @return A Midi view this builder created.
+     */
+    public MidiView build() {
+      return view;
+    }
+
+    /**
+     * Sets a new sequencer to override the default MidiSequencer.
+     *
+     * @param sequencer New sequencer to set.
+     * @return The MIDIViewBuilder
+     */
+    public MidiViewBuilder setSequencer(Sequencer sequencer) {
+      this.view.setSequencer(sequencer);
+      return this;
+    }
+  }
+
+  /**
+   * Method to set this view's sequencer to another sequencer.
+   *
+   * @param sequencer New Sequencer to set to.
+   */
+  public void setSequencer(Sequencer sequencer) {
+    this.sequencer = sequencer;
+  }
+
 
   /**
    * Relevant classes and methods from the javax.sound.midi library:
@@ -62,8 +118,7 @@ public class MidiView implements IMusicEditorView {
   public void playNotes() throws InvalidMidiDataException {
     try {
       int tempo = model.getTempo();
-      // Set up an empty sequence with an empty track
-      Sequencer sequencer = MidiSystem.getSequencer();
+      // Set up a sequence
       sequencer.open();
       Sequence sequence = new Sequence(Sequence.PPQ, 1);
       Track seqTrack = sequence.createTrack();

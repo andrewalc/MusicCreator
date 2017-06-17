@@ -37,7 +37,7 @@ public final class MusicEditorModel implements IMusicEditorModel {
     IMusicEditorModel model;
 
     /**
-     * Begin the builder with a new MusicEditorModel
+     * Begin the builder with a new MusicEditorModel.
      */
     public MusicEditorBuilder() {
       model = new MusicEditorModel();

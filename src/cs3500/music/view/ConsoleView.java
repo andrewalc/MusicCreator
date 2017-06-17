@@ -5,17 +5,21 @@ package cs3500.music.view;
  */
 public class ConsoleView implements IMusicEditorView {
 
-  String view = "";
+  private String consoleOutput = "";
 
   /**
    * Constructor for console view. Should be given a MusicEditorModel's toString method.
    */
-  ConsoleView(String view) {
-    this.view = view;
+  ConsoleView(String consoleOutput) {
+    this.consoleOutput = consoleOutput;
+  }
+
+  public String getConsoleOutput() {
+    return consoleOutput;
   }
 
   @Override
   public void initialize() {
-    System.out.print(view);
+    System.out.print(consoleOutput);
   }
 }

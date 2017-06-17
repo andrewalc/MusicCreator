@@ -26,7 +26,8 @@ public class ViewFactory {
       return new VisualView(model.getAllNotes(), model.getMaxBeats());
     }
     if (viewType.equals("midi")) {
-        return new MidiView(model);
+      MidiView.MidiViewBuilder builder = new MidiView.MidiViewBuilder(model);
+      return builder.build();
     }
     throw new IllegalArgumentException("Invalid view type. Must one of: \"console\" , \"visual\"," +
             " or \"midi\"");
