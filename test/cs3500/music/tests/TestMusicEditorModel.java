@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
+import cs3500.music.model.IMusicEditorModel;
+import cs3500.music.model.MusicEditorModel;
+import cs3500.music.model.Tones;
 import cs3500.music.view.IntegerComparator;
 
 import static org.junit.Assert.assertEquals;
@@ -161,7 +164,7 @@ public class TestMusicEditorModel {
   public void testRemoveNote1() {
     initData();
     assertEquals(model1.getNumberOfNotes(), 7);
-    model1.removeNote(Tones.D, 1, 6, 4, 1, 10);
+    model1.removeNote(Tones.D, 1, 6, 4, 1, 64);
     assertEquals(model1.getNumberOfNotes(), 6);
   }
 
@@ -170,7 +173,7 @@ public class TestMusicEditorModel {
     initData();
     assertEquals(model1.getNumberOfNotes(), 7);
     assertEquals(model1.getLowestPitch(), 24);
-    model1.removeNote(Tones.C, 1, 0, 4, 1, 10);
+    model1.removeNote(Tones.C, 1, 0, 4, 1, 64);
     assertEquals(model1.getNumberOfNotes(), 6);
     assertEquals(model1.getLowestPitch(), 25);
 
@@ -181,10 +184,10 @@ public class TestMusicEditorModel {
     initData();
     assertEquals(model1.getNumberOfNotes(), 7);
     assertEquals(model1.getHighestPitch(), 37);
-    model1.removeNote(Tones.C_SHARP, 2, 10, 1, 1, 10);
+    model1.removeNote(Tones.C_SHARP, 2, 10, 1, 1, 64);
     assertEquals(model1.getNumberOfNotes(), 6);
     assertEquals(model1.getHighestPitch(), 37);
-    model1.removeNote(Tones.C_SHARP, 2, 3, 2, 1, 10);
+    model1.removeNote(Tones.C_SHARP, 2, 3, 2, 1, 64);
     assertEquals(model1.getNumberOfNotes(), 5);
     assertEquals(model1.getHighestPitch(), 27);
 
@@ -215,7 +218,7 @@ public class TestMusicEditorModel {
     initData();
     assertEquals(model1.getNumberOfNotes(), 7);
     assertEquals(model1.getHighestPitch(), 37);
-    model1.modifyNote(Tones.C_SHARP, 2, 10, 1, 1, 10, Tones.A_SHARP, 8, 0, 2, 1, 10);
+    model1.modifyNote(Tones.C_SHARP, 2, 10, 1, 1, 64, Tones.A_SHARP, 8, 0, 2, 1, 10);
     assertEquals(model1.getNumberOfNotes(), 7);
     assertEquals(model1.getHighestPitch(), 118);
   }
@@ -225,10 +228,10 @@ public class TestMusicEditorModel {
     initData();
     assertEquals(model1.getNumberOfNotes(), 7);
     assertEquals(model1.getLowestPitch(), 24);
-    model1.modifyNote(Tones.C, 1, 0, 4, 1, 10, Tones.D, 2, 7, 10, 1, 10);
+    model1.modifyNote(Tones.C, 1, 0, 4, 1, 64, Tones.D, 2, 7, 10, 1, 10);
     assertEquals(model1.getNumberOfNotes(), 7);
     assertEquals(model1.getLowestPitch(), 25);
-    model1.modifyNote(Tones.C_SHARP, 1, 0, 4, 1, 10, Tones.C_SHARP, 5, 5, 3, 1, 10);
+    model1.modifyNote(Tones.C_SHARP, 1, 0, 4, 1, 64, Tones.C_SHARP, 5, 5, 3, 1, 10);
     assertEquals(model1.getNumberOfNotes(), 7);
     assertEquals(model1.getLowestPitch(), 26);
 
@@ -251,7 +254,7 @@ public class TestMusicEditorModel {
   @Test
   public void testGetNotesAtBeatNoBeats() {
     initData();
-    model1.removeNote(Tones.C_SHARP, 2, 3, 2, 1, 10);
+    model1.removeNote(Tones.C_SHARP, 2, 3, 2, 1, 64);
     assertEquals(model1.getNotesAtBeat(5), new ArrayList<ArrayList<Integer>>());
 
   }
@@ -622,6 +625,18 @@ public class TestMusicEditorModel {
     initData();
     model1.setTempo(0);
     assertEquals(model1.getTempo(), 0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetHighestPitchThrow() {
+    initData();
+    model0.getHighestPitch();
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetLowestPitchThrow() {
+    initData();
+    model0.getHighestPitch();
   }
 }
 

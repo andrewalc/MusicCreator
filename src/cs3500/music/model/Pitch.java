@@ -1,4 +1,4 @@
-package cs3500.music.tests;
+package cs3500.music.model;
 
 /**
  * Class representing a musical pitch, the combination of tone and octave.
@@ -113,6 +113,13 @@ public class Pitch {
     return new Pitch(potentialTone, potentialOctave);
   }
 
+  /**
+   * Converts a given MIDI representation of a pitch to a Pitch object with the appropriate Tone
+   * and octave. The MIDI representation of C1 begins at 24, and each next pitch is one upward.
+   *
+   * @param pitch The integer representation of a pitch.
+   * @return A new Pitch object equal to the MIDI integer pitch given.
+   */
   public static Pitch convertIntPitchToPitch(int pitch) {
     int numTones = Tones.values().length;
     return new Pitch(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1);
@@ -147,7 +154,18 @@ public class Pitch {
   }
 
   /**
+   * Converts this Pitch to the standard MIDI integer representation of a pitch. C1 begins at 24
+   * and each next pitch is one up.
+   *
+   * @return This pitch as a MIDI pitch integer.
+   */
+  public int convertPitchToIntPitch() {
+    return this.hashCode();
+  }
+
+  /**
    * Hashcode method for pitches.
+   * Is also the unique MIDI representation of this pitch.
    *
    * @return The hashcode int of this pitch.
    */

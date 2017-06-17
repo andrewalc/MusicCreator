@@ -3,6 +3,9 @@ package cs3500.music.tests;
 
 import org.junit.Test;
 
+import cs3500.music.model.Pitch;
+import cs3500.music.model.Tones;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 

@@ -3,6 +3,14 @@ package cs3500.music.tests;
 import org.junit.Test;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import cs3500.music.model.Note;
+import cs3500.music.model.Pitch;
+import cs3500.music.model.Tones;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -272,7 +280,64 @@ public class TestNote {
     assertEquals(test.noteSymbolString(9), "  X  ");
     assertEquals(test.noteSymbolString(10), "  |  ");
     assertEquals(test.noteSymbolString(11), "     ");
-
-
   }
+
+  // testing convertArrayListIntegerToNote
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testConvertArrayListIntegerToNoteBadStartingBeat() {
+    Note.convertArrayListIntegerToNote(new ArrayList<Integer>(Arrays.asList(-11, 2, 5, 32, 10)));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testConvertArrayListIntegerToNoteBadEndBeat() {
+    Note.convertArrayListIntegerToNote(new ArrayList<Integer>(Arrays.asList(454, 5, 5, 32, 10)));
+  }
+
+  @Test
+  public void testConvertArrayListIntegerToNote1() {
+    Note note = Note.convertArrayListIntegerToNote(new ArrayList<Integer>(Arrays.asList(1, 5, 12,
+            24,
+            10)));
+    assertEquals(note, new Note(Tones.C, 1, 1, 5, 12, 10));
+  }
+
+  @Test
+  public void testConvertArrayListIntegerToNote2() {
+    Note note = Note.convertArrayListIntegerToNote(new ArrayList<Integer>(Arrays.asList(6, 7, 34,
+            25,
+            22)));
+    assertEquals(note, new Note(Tones.C_SHARP, 1, 6, 2, 34, 22));
+  }
+
+  @Test
+  public void testConvertArrayListIntegerToNote3() {
+    Note note = Note.convertArrayListIntegerToNote(new ArrayList<Integer>(Arrays.asList(123, 130,
+            122, 60, 64)));
+    assertEquals(note, new Note(Tones.C, 4, 123, 8, 122, 64));
+  }
+
+  // testing convertNoteToArrayListInteger
+
+  @Test
+  public void testConverNoteToArrayListInteger1() {
+    Note note = new Note(Tones.C, 1, 3, 4, 5, 10);
+    assertEquals(note.convertNoteToArrayListInteger(), new ArrayList<Integer>(Arrays.asList(3, 6,
+            5, 24, 10)));
+  }
+
+  @Test
+  public void testConverNoteToArrayListInteger2() {
+    Note note = new Note(Tones.C, 4, 10, 1, 23, 44);
+    assertEquals(note.convertNoteToArrayListInteger(), new ArrayList<Integer>(Arrays.asList(10, 10,
+            23, 60, 44)));
+  }
+
+  @Test
+  public void testConverNoteToArrayListInteger3() {
+    Note note = new Note(Tones.D_SHARP, 2, 4, 3, 22, 1);
+    assertEquals(note.convertNoteToArrayListInteger(), new ArrayList<Integer>(Arrays.asList(4, 6,
+            22, 39, 1)));
+  }
+
 }

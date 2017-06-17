@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
+import cs3500.music.model.Note;
+import cs3500.music.model.Piece;
+import cs3500.music.model.Pitch;
+import cs3500.music.model.Tones;
+
 import static org.junit.Assert.assertEquals;
 
 public class TestPiece {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.sound.midi.*;
 
-import cs3500.music.tests.IMusicEditorModel;
+import cs3500.music.model.IMusicEditorModel;
 
 /**
  * A skeleton for MIDI playback
@@ -45,8 +45,7 @@ public class MidiView implements IMusicEditorView {
    * </ul>
    *
    * @see <a href="https://en.wikipedia.org/wiki/General_MIDI"> https://en.wikipedia
-   * .org/wiki/General_MIDI
-   * </a>
+   * .org/wiki/General_MIDI </a>
    */
 
   public void playNote() throws InvalidMidiDataException {

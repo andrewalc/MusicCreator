@@ -5,9 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-/**
- * Created by Andrew Alcala on 6/13/2017.
- */
+
 public class KeyboardPanel extends JPanel {
 
   // @TODO dont need to us public static everywhere

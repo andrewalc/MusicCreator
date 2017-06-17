@@ -8,6 +8,7 @@ package cs3500.music.tests;
         import java.util.Map;
         import java.util.TreeMap;
 
+        import cs3500.music.model.MusicEditorModel;
         import cs3500.music.view.IntegerComparator;
 
         import static org.junit.Assert.assertEquals;

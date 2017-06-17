@@ -1,4 +1,4 @@
-package cs3500.music.tests;
+package cs3500.music.model;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -31,16 +31,18 @@ public class Piece {
    * @param copy A given piece to copy into a new Piece.
    */
   public Piece(Piece copy) {
-      TreeMap<Pitch, ArrayList<Note>> newAllNotes = new TreeMap<Pitch, ArrayList<Note>>(new
-              PitchComparator());
-      newAllNotes.putAll(copy.allNotes);
-      this.allNotes = newAllNotes;
-      this.updateMaxBeats();
+    TreeMap<Pitch, ArrayList<Note>> newAllNotes = new TreeMap<Pitch, ArrayList<Note>>(new
+            PitchComparator());
+    newAllNotes.putAll(copy.allNotes);
+    this.allNotes = newAllNotes;
+    this.updateMaxBeats();
   }
 
   /**
    * Constructor that takes in a TreeMap of pitches to ArrayList of notes and inserts those notes
    * into a new Piece.
+   *
+   * @param allNotes The TreeMap of pitches to Arraylist of Notes to give this new piece.
    */
   public Piece(TreeMap<Pitch, ArrayList<Note>> allNotes) {
     TreeMap<Pitch, ArrayList<Note>> newAllNotes = new TreeMap<Pitch, ArrayList<Note>>(new
@@ -70,7 +72,7 @@ public class Piece {
    * @param note The note you wish to add to the piece of music.
    * @throws NullPointerException If the given note is null.
    */
-  protected void addNote(Note note) throws NullPointerException {
+  public void addNote(Note note) throws NullPointerException {
     if (note == null) {
       throw new NullPointerException("Given note is null");
     }
@@ -89,14 +91,14 @@ public class Piece {
   /**
    * Removes a given not from this piece of music. The given note must mirror the parameters of
    * the note you wish to remove which includes having the same tone, octave, starting beat,
-   * and beats. Throws an exception if the given note is not found. Updates the maxBeat count
-   * accordingly.
+   * beats, instrument, and volume. Throws an exception if the given note is not found. Updates
+   * the maxBeat count accordingly.
    *
    * @param note A note mirror the parameters of the note you wish to remove from the piece.
    * @throws NullPointerException   If the given note is null.
    * @throws NoSuchElementException If the requested note is not found within the piece.
    */
-  protected void removeNote(Note note) throws NullPointerException, NoSuchElementException {
+  public void removeNote(Note note) throws NullPointerException, NoSuchElementException {
     if (note == null) {
       throw new NullPointerException("Given note is null");
     }
@@ -131,7 +133,7 @@ public class Piece {
    * @throws NoSuchElementException   if the given note is not found in the piece.
    * @throws NullPointerException     If the given note is null.
    */
-  protected void modifyNote(Note note, Tones tone, int octave, int startingBeat, int beats, int
+  public void modifyNote(Note note, Tones tone, int octave, int startingBeat, int beats, int
           instrument, int volume) throws
           NullPointerException, IllegalArgumentException {
     if (note == null || tone == null) {
@@ -169,6 +171,19 @@ public class Piece {
     this.maxBeats = potentialMaxBeats;
   }
 
+
+  /**
+   * Checks to see if any pitch buckets in the piece's tree map are empty, and if so, removes the
+   * empty buckets from the tree map.
+   */
+  protected void updateEmptyMapBuckets() {
+    for (Pitch pitch : this.allNotes.keySet()) {
+      if (allNotes.get(pitch).size() == 0) {
+        allNotes.remove(pitch);
+      }
+    }
+  }
+
   /**
    * Gets the lowest pitch that is ever played by a note in this piece of music.
    *
@@ -200,10 +215,20 @@ public class Piece {
   }
 
 
+  /**
+   * Returns this piece's tempo.
+   *
+   * @return integer of this pieces's tempo.
+   */
   public int getTempo() {
     return tempo;
   }
 
+  /**
+   * Setter for this piece's tempo.
+   *
+   * @param tempo the tempo to set this piece to.
+   */
   public void setTempo(int tempo) {
     this.tempo = tempo;
   }
@@ -394,13 +419,5 @@ public class Piece {
   @Override
   public int hashCode() {
     return (31 * this.allNotes.hashCode()) + this.toString().hashCode();
-  }
-
-  public void updateEmptyMapBuckets() {
-    for (Pitch pitch : this.allNotes.keySet()) {
-      if (allNotes.get(pitch).size() == 0) {
-        allNotes.remove(pitch);
-      }
-    }
   }
 }

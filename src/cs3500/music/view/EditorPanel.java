@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.swing.*;
 
-import cs3500.music.tests.Tones;
+import cs3500.music.model.Tones;
 
 
 public class EditorPanel extends JPanel {

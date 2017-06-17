@@ -1,10 +1,11 @@
-package cs3500.music.tests;
+package cs3500.music.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Enumeration representing all tones C through B ranging from octave 1 to octave 10.
+ * Enumeration representing all tones C through B ranging from octave 1 to octave 10. Each tone
+ * is assignment a numerical index value ranging from 0 - 11.
  */
 public enum Tones {
   C("C", 0), C_SHARP("C#", 1), D("D", 2), D_SHARP("D#", 3), E("E", 4), F("F", 5), F_SHARP("F#",

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import cs3500.music.model.Tones;
+
 
 public class TestTones {
 

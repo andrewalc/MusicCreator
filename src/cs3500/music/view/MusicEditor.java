@@ -3,8 +3,8 @@ package cs3500.music.view;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-import cs3500.music.tests.IMusicEditorModel;
-import cs3500.music.tests.MusicEditorModel;
+import cs3500.music.model.IMusicEditorModel;
+import cs3500.music.model.MusicEditorModel;
 import cs3500.music.util.MusicReader;
 
 /**
@@ -14,42 +14,24 @@ import cs3500.music.util.MusicReader;
 
 class MusicEditor {
 
-
-
-
   public static void main(String[] args) {
-    MusicEditorModel.MusicEditorBuilder model1 = new MusicEditorModel.MusicEditorBuilder();
 
-//    model1.addNote(0,3,1,55, 64);
-//    model1.addNote(0,3,1, 68, 64);
-//    model1.addNote(6, 9, 1, 67, 64);
-//    model1.addNote( 7, 11, 1, 65, 64);
-//    model1.addNote(6, 9, 1, 55, 64);
-//    model1.addNote(25, 78, 3, 67, 64);
-//    model1.addNote(7, 106, 1, 25,  64);
-//    model1.setTempo(100000);
+    if (args.length != 2) {
+      throw new IllegalArgumentException("Requires two arguments: [File name] and " +
+              "[View type] \n Ex. \"mary-little-lamb.txt\" + \"visual\" ");
+    }
+    String fileName = args[0];
+    String viewType = args[1];
 
-
+    MusicEditorModel.MusicEditorBuilder modelBuilder = new MusicEditorModel.MusicEditorBuilder();
     try {
-<<<<<<< HEAD
-      MusicReader.parseFile(new FileReader("df-ttfaf.txt"), model1);
-=======
-      MusicReader.parseFile(new FileReader("zoot-lw.txt"), model1);
->>>>>>> b283bb0139c75ff9de38b89f49c1bcf8bd4a9ecc
+      MusicReader.parseFile(new FileReader(fileName), modelBuilder);
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }
-
-
-    IMusicEditorModel modelFinal = model1.build();
-
-    ViewFactory factory = new ViewFactory(modelFinal);
-    IMusicEditorView view2 = factory.getView("visual");
-    view2.initialize();
-    IMusicEditorView view1 = factory.getView("midi");
-    view1.initialize();
-
-
-
+    IMusicEditorModel model = modelBuilder.build();
+    ViewFactory factory = new ViewFactory(model);
+    IMusicEditorView view = factory.getView(viewType);
+    view.initialize();
   }
 }
