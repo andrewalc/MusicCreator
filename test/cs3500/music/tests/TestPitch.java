@@ -9,6 +9,9 @@ import cs3500.music.model.Tones;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * Test class for Pitch
+ */
 public class TestPitch {
 
   // testing constructor

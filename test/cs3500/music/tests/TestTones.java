@@ -7,6 +7,9 @@ import org.junit.Test;
 import cs3500.music.model.Tones;
 
 
+/**
+ * Test class for Tones.
+ */
 public class TestTones {
 
   //testing toString method

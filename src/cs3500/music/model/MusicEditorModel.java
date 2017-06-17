@@ -25,7 +25,7 @@ public final class MusicEditorModel implements IMusicEditorModel {
   /**
    * Basic contructor for a music editor model. Begins with a new, empty piece.
    */
-  public MusicEditorModel() {
+  private MusicEditorModel() {
     this.newPiece();
   }
 

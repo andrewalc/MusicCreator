@@ -16,29 +16,26 @@ import cs3500.music.view.IntegerComparator;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for MusicEditorModels
+ */
 public class TestMusicEditorModel {
-  MusicEditorModel model0 = new MusicEditorModel();
-  MusicEditorModel model1 = new MusicEditorModel();
+  MusicEditorModel.MusicEditorBuilder builder = new MusicEditorModel.MusicEditorBuilder();
+  MusicEditorModel.MusicEditorBuilder builder2 = new MusicEditorModel.MusicEditorBuilder();
+
+  IMusicEditorModel model0 = builder.build();
+  IMusicEditorModel model1 = builder2.build();
   Map<Integer, ArrayList<ArrayList<Integer>>> p0 = new TreeMap<>(new IntegerComparator());
   Map<Integer, ArrayList<ArrayList<Integer>>> p1 = new TreeMap<>(new IntegerComparator());
 
 
   // Pre-created notes for easy access
-  //Note cc1For0And4 = new Note(Tones.C, 1, 0, 4, 1, 10);
   ArrayList<Integer> c1For0And4 = new ArrayList<>(Arrays.asList(0, 3, 1, 24, 64));
-  // Note cSdharp1For0And4 = new Note(Tones.C_SHARP, 1, 0, 4, 1, 10);
   ArrayList<Integer> cSharp1For0And4 = new ArrayList<>(Arrays.asList(0, 3, 1, 25, 64));
-  // Note dd1For6And4 = new Note(Tones.D, 1, 6, 4, 1, 10);
   ArrayList<Integer> d1For6And4 = new ArrayList<>(Arrays.asList(6, 9, 1, 26, 64));
-  // Note dd1For7And5 = new Note(Tones.D, 1, 7, 5, 1, 10);
   ArrayList<Integer> d1For7And5 = new ArrayList<>(Arrays.asList(7, 11, 1, 26, 64));
-
-  // Note ddSharp1For6And4 = new Note(Tones.D_SHARP, 1, 6, 4, 1, 10);
   ArrayList<Integer> dSharp1For6And4 = new ArrayList<>(Arrays.asList(6, 9, 1, 27, 64));
-
-  //  Note cScharp2For3And2 = new Note(Tones.C_SHARP, 2, 3, 2, 1, 10);
   ArrayList<Integer> cSharp2For3And2 = new ArrayList<>(Arrays.asList(3, 4, 1, 37, 64));
-  //  Note cScharp2For10And1 = new Note(Tones.C_SHARP, 2, 10, 1, 1, 10);
   ArrayList<Integer> cSharp2For10And1 = new ArrayList<>(Arrays.asList(10, 10, 1, 37, 64));
 
   void initData() {
@@ -59,6 +56,19 @@ public class TestMusicEditorModel {
       }
     }
     model1.loadPiece(p1);
+  }
+
+  @Test
+  public void testModelBuilder() {
+    MusicEditorModel.MusicEditorBuilder test = new MusicEditorModel.MusicEditorBuilder();
+    test.setTempo(100);
+    test.addNote(2, 3, 45, 24, 10);
+    IMusicEditorModel model = test.build();
+    assertEquals(model.getNumberOfNotes(), 1);
+    assertEquals(model.getHighestPitch(), 24);
+    assertEquals(model.getMaxBeats(), 4);
+    assertEquals(model.getTempo(), 100);
+
   }
 
   // test loadPiece

@@ -13,6 +13,9 @@ import cs3500.music.model.Tones;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for Piece
+ */
 public class TestPiece {
   Piece p0; // assigned as an empty piece
   Piece p1; // a piece with notes added beforehand

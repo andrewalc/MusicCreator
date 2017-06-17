@@ -11,6 +11,9 @@ import cs3500.music.model.Tones;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Test class for PitchComparator
+ */
 public class TestPitchComparator {
 
   PitchComparator comparator = new PitchComparator();

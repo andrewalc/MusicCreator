@@ -3,7 +3,6 @@ package cs3500.music.tests;
 import org.junit.Test;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,6 +13,9 @@ import cs3500.music.model.Tones;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * Test class for Notes
+ */
 public class TestNote {
 
   // testing Note Constructor
