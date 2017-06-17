@@ -47,10 +47,15 @@ public class Note {
     if (beats <= 0) {
       throw new IllegalArgumentException("The note must have a positive number of beats");
     }
+    if (volume < 0) {
+      throw new IllegalArgumentException("The note's volume must be at least 0.");
+    }
+    if (instrument < 0 || instrument > 128) {
+      throw new IllegalArgumentException("The note's instrument number must be between 0 and 127");
+    }
     this.pitch = new Pitch(tone, octave);
     this.startingBeat = startingBeat;
     this.beats = beats;
-    //@TODO ADD CONSTRAINTS
     this.instrument = instrument;
     this.volume = volume;
   }
@@ -134,8 +139,7 @@ public class Note {
   /**
    * Returns the int representing the note's instrument
    *
-   * @return The notes instrument
-   * @TODO ADD CONSTRAINTS
+   * @return The note's instrument value
    */
   public int getInstrument() {
     return instrument;

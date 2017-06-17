@@ -31,7 +31,11 @@ class MusicEditor {
 
 
     try {
+<<<<<<< HEAD
       MusicReader.parseFile(new FileReader("df-ttfaf.txt"), model1);
+=======
+      MusicReader.parseFile(new FileReader("zoot-lw.txt"), model1);
+>>>>>>> b283bb0139c75ff9de38b89f49c1bcf8bd4a9ecc
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }

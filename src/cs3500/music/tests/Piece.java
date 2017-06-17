@@ -53,30 +53,6 @@ public class Piece {
 
 
   /**
-   * Getter for maxBeats.
-   *
-   * @return The current maxB
-   */
-  public int getMaxBeats() {
-    return maxBeats;
-  }
-
-  /**
-   * Returns the total number of notes contained in this piece.
-   *
-   * @return Integer of how many notes there are in this piece.
-   */
-  public int getNumberOfNotes() {
-    int noteCount = 0;
-    for (ArrayList<Note> pitchList : this.allNotes.values()) {
-      for (Note note : pitchList) {
-        noteCount++;
-      }
-    }
-    return noteCount;
-  }
-
-  /**
    * Method that returns a copy of the TreeMap of all notes in this piece of music.
    *
    * @return A copy of the piece's TreeMap of notes.
@@ -230,6 +206,30 @@ public class Piece {
 
   public void setTempo(int tempo) {
     this.tempo = tempo;
+  }
+
+  /**
+   * Getter for maxBeats.
+   *
+   * @return The current maxB
+   */
+  public int getMaxBeats() {
+    return maxBeats;
+  }
+
+  /**
+   * Returns the total number of notes contained in this piece.
+   *
+   * @return Integer of how many notes there are in this piece.
+   */
+  public int getNumberOfNotes() {
+    int noteCount = 0;
+    for (ArrayList<Note> pitchList : this.allNotes.values()) {
+      for (Note note : pitchList) {
+        noteCount++;
+      }
+    }
+    return noteCount;
   }
 
 

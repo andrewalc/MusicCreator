@@ -49,6 +49,21 @@ public class TestNote {
     Note test = new Note(Tones.E, 4, 12, -23456, 1, 10);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testNoteCreationBadVolume() {
+    Note test = new Note(Tones.E, 4, 12, -23456, 1, -1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNoteCreationBadInstrumentUnder() {
+    Note test = new Note(Tones.E, 4, 12, -23456, -1, 0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNoteCreationBadInstrumentOver() {
+    Note test = new Note(Tones.E, 4, 12, -23456, 128, 0);
+  }
+
   @Test
   public void testNoteCreation1() {
     Note test = new Note(Tones.E, 2, 0, 4, 1, 5);
