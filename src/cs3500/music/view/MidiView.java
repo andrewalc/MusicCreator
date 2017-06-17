@@ -60,7 +60,7 @@ public class MidiView implements IMusicEditorView {
 
 
       for (int beat = 0; beat < model.getMaxBeats(); beat++) {
-
+        System.out.println(beat);
         ArrayList<ArrayList<Integer>> currentNotes = model.getNotesAtBeat(beat);
         for (ArrayList<Integer> note : currentNotes) {
           int startingBeat = note.get(0);
@@ -90,17 +90,6 @@ public class MidiView implements IMusicEditorView {
       sequencer.start();
       sequencer.setTempoInMPQ(tempo);
 
-    /* 
-    The receiver does not "block", i.e. this method
-    immediately moves to the next line and closes the 
-    receiver without waiting for the synthesizer to 
-    finish playing. 
-    
-    You can make the program artificially "wait" using
-    Thread.sleep. A better solution will be forthcoming
-    in the subsequent assignments.
-    */
-      // Only call this once you're done playing *all* notes
     } catch (MidiUnavailableException e) {
       System.out.println(e.getMessage());
     }
