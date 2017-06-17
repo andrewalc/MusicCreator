@@ -111,7 +111,6 @@ public interface IMusicEditorModel {
 
   int getMaxBeats();
 
-
   int getTempo();
 
   void setTempo(int tempo);

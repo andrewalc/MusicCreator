@@ -80,7 +80,7 @@ public class Piece {
       allNotes.get(pitch).add(note);
     } else {
       // If the key is not found, put a new empty ArrayList<Note> using the pitch as it's key.
-      allNotes.put(pitch, new ArrayList<Note>());
+      allNotes.put(pitch, new ArrayList<>());
       allNotes.get(pitch).add(note);
     }
     this.updateMaxBeats();
