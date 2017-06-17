@@ -1,6 +1,8 @@
 package cs3500.music.tests;
 
 
+import java.util.ArrayList;
+
 /**
  * A class representing a standard musical note. It contains a pitch, starting beat, and the
  * number of beats it lasts for. Note provides a connection between Pitch and timing for musical
@@ -79,6 +81,17 @@ public class Note {
     } else {
       return STR_NOTE_EMPTY;
     }
+  }
+
+  public static Note convertArrayListIntegerToNote(ArrayList<Integer> note) {
+    int startingBeat = note.get(0);
+    int endBeat = note.get(1);
+    int instrument = note.get(2);
+    int pitch = note.get(3);
+    int volume = note.get(4);
+    int numTones = Tones.values().length;
+    return new Note(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1,
+            startingBeat, (endBeat - startingBeat) + 1, instrument, volume);
   }
 
   /**

@@ -113,6 +113,11 @@ public class Pitch {
     return new Pitch(potentialTone, potentialOctave);
   }
 
+  public static Pitch convertIntPitchToPitch(int pitch) {
+    int numTones = Tones.values().length;
+    return new Pitch(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1);
+  }
+
 
   /**
    * toString method for a Pitch. Formatted as Tone information first followed immediately by the

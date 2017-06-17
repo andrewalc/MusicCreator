@@ -70,13 +70,14 @@ public final class MusicEditorModel implements IMusicEditorModel {
             PitchComparator());
 
     for (Integer pitch : piece.keySet()) {
-      allNotes.put(convertIntPitchToPitch(pitch), new ArrayList<Note>());
+      allNotes.put(Pitch.convertIntPitchToPitch(pitch), new ArrayList<Note>());
     }
     for (ArrayList<ArrayList<Integer>> pitchBucket : piece.values()) {
       for (ArrayList<Integer> note : pitchBucket) {
-        ArrayList<Note> correspondingPitchBucket = allNotes.get(convertIntPitchToPitch(note.get
+        ArrayList<Note> correspondingPitchBucket = allNotes.get(Pitch.convertIntPitchToPitch(note
+                .get
                 (3)));
-        correspondingPitchBucket.add(convertArrayListIntegerToNote(note));
+        correspondingPitchBucket.add(Note.convertArrayListIntegerToNote(note));
       }
     }
     this.piece = new Piece(allNotes);
@@ -157,7 +158,7 @@ public final class MusicEditorModel implements IMusicEditorModel {
 
     for (ArrayList<ArrayList<Integer>> pitchBucket : other.values()) {
       for (ArrayList<Integer> note : pitchBucket) {
-        Note convertedNote = convertArrayListIntegerToNote(note);
+        Note convertedNote = Note.convertArrayListIntegerToNote(note);
         this.addNote(convertedNote.getPitch().getTone(),
                 convertedNote.getPitch().getOctave(),
                 convertedNote.getStartingBeat(), convertedNote.getBeats(),
@@ -166,21 +167,6 @@ public final class MusicEditorModel implements IMusicEditorModel {
     }
   }
 
-  private Note convertArrayListIntegerToNote(ArrayList<Integer> note) {
-    int startingBeat = note.get(0);
-    int endBeat = note.get(1);
-    int instrument = note.get(2);
-    int pitch = note.get(3);
-    int volume = note.get(4);
-    int numTones = Tones.values().length;
-    return new Note(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1,
-            startingBeat, (endBeat - startingBeat) + 1, instrument, volume);
-  }
-
-  private Pitch convertIntPitchToPitch(int pitch) {
-    int numTones = Tones.values().length;
-    return new Pitch(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1);
-  }
 
   private int convertPitchToIntPitch(Pitch pitch) {
     return ((pitch.getOctave() + 1) * 12) + pitch.getTone().getToneVal();
