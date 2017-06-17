@@ -7,13 +7,18 @@ import javax.sound.midi.*;
 import cs3500.music.model.IMusicEditorModel;
 
 /**
- * A skeleton for MIDI playback
+ * A Music Editor View for playing midis.
  */
 public class MidiView implements IMusicEditorView {
 
   private final IMusicEditorModel model;
 
-  public MidiView(IMusicEditorModel model) throws MidiUnavailableException {
+  /**
+   * Constructor for a midi view. Require the input of the Music Editor Model to play the music of.
+   *
+   * @param model a Music Editor Model to play notes off of.
+   */
+  public MidiView(IMusicEditorModel model) {
     this.model = model;
   }
 
@@ -48,20 +53,25 @@ public class MidiView implements IMusicEditorView {
    * .org/wiki/General_MIDI </a>
    */
 
-  public void playNote() throws InvalidMidiDataException {
-    try {
-      int currentTime = 0;
-      int tempo = model.getTempo();
-      Sequencer sequencer = MidiSystem.getSequencer();
 
+  /**
+   * Plays all of the notes in the model in sequence.
+   *
+   * @throws InvalidMidiDataException If sequence is given an unsupported division type.
+   */
+  public void playNotes() throws InvalidMidiDataException {
+    try {
+      int tempo = model.getTempo();
+      // Set up an empty sequence with an empty track
+      Sequencer sequencer = MidiSystem.getSequencer();
       sequencer.open();
       Sequence sequence = new Sequence(Sequence.PPQ, 1);
       Track seqTrack = sequence.createTrack();
 
 
       for (int beat = 0; beat < model.getMaxBeats(); beat++) {
-        System.out.println(beat);
         ArrayList<ArrayList<Integer>> currentNotes = model.getNotesAtBeat(beat);
+        // Play all notes at the current beat.
         for (ArrayList<Integer> note : currentNotes) {
           int startingBeat = note.get(0);
           int endBeat = note.get(1);
@@ -70,10 +80,8 @@ public class MidiView implements IMusicEditorView {
           int volume = note.get(4);
           int channel = 0;
           if (startingBeat == beat) {
-
             // Percussion is on channel 9
             MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, channel, pitch, volume);
-
             MidiMessage change = new ShortMessage(ShortMessage.PROGRAM_CHANGE, channel,
                     instrument, 0);
             MidiMessage stop = new ShortMessage(ShortMessage.NOTE_OFF, channel, pitch, volume);
@@ -82,10 +90,10 @@ public class MidiView implements IMusicEditorView {
             seqTrack.add(new MidiEvent(stop, endBeat));
           }
         }
-
-        currentTime += tempo;
       }
+      System.out.println("Notes parsed successfully.");
 
+      // Play the music!
       sequencer.setSequence(sequence);
       sequencer.start();
       sequencer.setTempoInMPQ(tempo);
@@ -98,7 +106,7 @@ public class MidiView implements IMusicEditorView {
   @Override
   public void initialize() {
     try {
-      playNote();
+      playNotes();
     } catch (InvalidMidiDataException e) {
       System.out.println(e.getMessage());
     }

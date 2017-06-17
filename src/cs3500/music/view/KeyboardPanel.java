@@ -6,27 +6,41 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 
+/**
+ * JPanel representing a keyboard of octaves 1-10 as a set of white and black keys. Should a note
+ * be in play at the current beat, the respective pitch that note is in will be rendered orange
+ * on the keyboard.
+ * All notes are in the Arraylist Integer format of:
+ * (int startingBeat, int endBeat, int instrument, int pitch, int volume)
+ */
 public class KeyboardPanel extends JPanel {
 
   // @TODO dont need to us public static everywhere
-  public static final int NUM_WHITEKEYS = 70;
-  public static final int NUM_BLACKKEYS = 50;
+  public static final int NUM_WHKEYS = 70;
+  public static final int WHKEY_WIDTH = 20;
+  public static final int WHKEY_HEIGHT = 300;
   public static final int BLKEY_WIDTH = 10;
   public static final int BLKEY_HEIGHT = 150;
-  public static final int KEY_WIDTH = 20;
-  public static final int KEY_HEIGHT = 300;
-  ArrayList<ArrayList<Integer>> currentNotes;
 
+  ArrayList<ArrayList<Integer>> liveNotes;
 
-  public KeyboardPanel(ArrayList<ArrayList<Integer>> currentNotes) {
-    this.currentNotes = currentNotes;
-    setMaximumSize(new Dimension(EditorPanel.BORDER_SHIFT * 2 + (KEY_WIDTH * NUM_WHITEKEYS),
-            KEY_HEIGHT));
-
+  /**
+   * Constructor for a KeyboardPanel. Requires a list of notes (in the Arraylist Integer format)
+   * representing all notes being played at the current beat.
+   *
+   * @param liveNotes A list of notes representing all notes currently being played.
+   */
+  public KeyboardPanel(ArrayList<ArrayList<Integer>> liveNotes) {
+    this.liveNotes = liveNotes;
   }
 
-  public void setCurrentNotes(ArrayList<ArrayList<Integer>> currentNotes) {
-    this.currentNotes = currentNotes;
+  /**
+   * Sets the arraylist of currently playing notes to the given Arraylist of notes.
+   *
+   * @param liveNotes The list of all notes currently playing.
+   */
+  public void setNotes(ArrayList<ArrayList<Integer>> liveNotes) {
+    this.liveNotes = liveNotes;
   }
 
   @Override
@@ -37,38 +51,61 @@ public class KeyboardPanel extends JPanel {
 
   @Override
   public Dimension getPreferredSize() {
-    return new Dimension(EditorPanel.BORDER_SHIFT + (NUM_WHITEKEYS * KEY_WIDTH) +
-            EditorPanel.BORDER_SHIFT, KEY_HEIGHT);
+    return new Dimension(EditorPanel.BORDER_SHIFT + (NUM_WHKEYS * WHKEY_WIDTH) +
+            EditorPanel.BORDER_SHIFT, WHKEY_HEIGHT);
   }
 
+  /**
+   * Draws the visual keyboard with all keys in octaves 1-10.
+   *
+   * @param g Graphics g
+   */
   private void paintPianoKeys(Graphics g) {
-    ArrayList<Integer> currentPitches = new ArrayList<Integer>();
-    for (ArrayList<Integer> note : currentNotes) {
-      int pitch = note.get(3);
-      currentPitches.add(pitch);
-    }
-
-    // generates 10 octaves of white keys
     g.setColor(Color.BLACK);
 
+    // Look at all notes and develop a list of pitches currently being played.
+    ArrayList<Integer> rangeOfPitches = new ArrayList<Integer>();
+    for (ArrayList<Integer> note : liveNotes) {
+      int pitch = note.get(3);
+      rangeOfPitches.add(pitch);
+    }
+    drawWhiteKeys(g, rangeOfPitches);
+    drawBlackKeys(g, rangeOfPitches);
+  }
+
+
+  /**
+   * Draws all white keys on this panel's keyboard.
+   *
+   * @param g              Graphics g.
+   * @param rangeOfPitches List of MIDI pitches currently being played.
+   */
+  private void drawWhiteKeys(Graphics g, ArrayList<Integer> rangeOfPitches) {
+    // keyNumber represents the MIDI pitch of the key currently being drawn. Should be incremented
+    // by 2 each iteration, except when there is no next black key. In that case, keyNumber
+    // increments by 1.
     int keyNumber = 24;
+    // Counter for sets of keys developed. If it hits 3 or 7, then there is no attached black key
+    // so the keyNumber will be incremented by 1 instead. Once it hits 7, reset to 1.
     int switchCounter = 1;
 
-    for (int i = 0; i < NUM_WHITEKEYS; i++) {
-      for (Integer pitch : currentPitches) {
+    // Generate 10 octaves of white keys.
+    for (int i = 0; i < NUM_WHKEYS; i++) {
+      for (Integer pitch : rangeOfPitches) {
+        // If this keyNumber is a pitch that is being played, render the key orange.
         if (keyNumber == pitch) {
-
           g.setColor(Color.orange);
-          g.fillRect((i * KEY_WIDTH) + EditorPanel.BORDER_SHIFT,
-                  0, KEY_WIDTH, KEY_HEIGHT);
+          g.fillRect((i * WHKEY_WIDTH) + EditorPanel.BORDER_SHIFT,
+                  0, WHKEY_WIDTH, WHKEY_HEIGHT);
         }
       }
+      // Render the black outline of a key.
       g.setColor(Color.black);
-      g.drawRect((i * KEY_WIDTH) + EditorPanel.BORDER_SHIFT,
-              0, KEY_WIDTH, KEY_HEIGHT);
+      g.drawRect((i * WHKEY_WIDTH) + EditorPanel.BORDER_SHIFT,
+              0, WHKEY_WIDTH, WHKEY_HEIGHT);
 
-
-      if (switchCounter == 3 || switchCounter == 7) { // may be 3/6 or 2/7
+      // Manage keyNumber incrementation behavior using the switch counter.
+      if (switchCounter == 3 || switchCounter == 7) {
         keyNumber += 1;
         if (switchCounter == 7) {
           switchCounter = 1;
@@ -80,38 +117,52 @@ public class KeyboardPanel extends JPanel {
         switchCounter += 1;
       }
     }
+  }
 
-
-    g.setColor(Color.BLACK);
-
-    // generates black keys
+  /**
+   * Draws all black keys on this panel's keyboard.
+   *
+   * @param g              Graphics g.
+   * @param rangeOfPitches List of MIDI pitches currently being played.
+   */
+  private void drawBlackKeys(Graphics g, ArrayList<Integer> rangeOfPitches) {
+    // blackKeyNumber represents the MIDI pitch of the key currently being drawn. Should be
+    // incremented by 2 each iteration, except when there is no next black key. In that case,
+    // keyNumber increments by 1.
     int blackKeyNumber = 25;
+    // Counter for sets of keys developed. If it hits 3 or 7, then there is no black key
+    // so the keyNumber will be incremented by 1 instead. Once it hits 7, reset to 1.
     int blackSwitchCounter = 1;
-    for (int i = 1; i <= NUM_WHITEKEYS; i++) {
-      if (blackSwitchCounter != 3 && blackSwitchCounter != 7) {
 
+    // Generates 10 octaves of black keys.
+    for (int i = 1; i <= NUM_WHKEYS; i++) {
+      if (blackSwitchCounter != 3 && blackSwitchCounter != 7) {
+        // Draw a black key
         g.setColor(Color.BLACK);
-        g.fillRect(i * KEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
+        g.fillRect(i * WHKEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
                 0,
                 BLKEY_WIDTH,
                 BLKEY_HEIGHT);
-        for (Integer pitch : currentPitches) {
+        for (Integer pitch : rangeOfPitches) {
+          // if this key is being played draw an orange key.
           if (blackKeyNumber == pitch) {
             g.setColor(Color.orange);
-            g.fillRect(i * KEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
+            g.fillRect(i * WHKEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
                     0,
                     BLKEY_WIDTH,
                     BLKEY_HEIGHT);
           }
         }
+        // Draw a black outline of the black key.
         g.setColor(Color.black);
-        g.drawRect(i * KEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
+        g.drawRect(i * WHKEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
                 0,
                 BLKEY_WIDTH,
                 BLKEY_HEIGHT);
       }
 
-      if (blackSwitchCounter == 3 || blackSwitchCounter == 7) { // may be 3/6 or 2/7
+      // Manage blackKeyNumber incrementation behavior using the switch counter.
+      if (blackSwitchCounter == 3 || blackSwitchCounter == 7) {
         blackKeyNumber += 1;
         if (blackSwitchCounter == 7) {
           blackSwitchCounter = 1;

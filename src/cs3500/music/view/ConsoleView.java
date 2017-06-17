@@ -1,12 +1,15 @@
 package cs3500.music.view;
 
 /**
- * Created by Andrew Alcala on 6/15/2017.
+ * A Console view implementation. Should receive a model's toString method and relay it to console.
  */
 public class ConsoleView implements IMusicEditorView {
 
   String view = "";
 
+  /**
+   * Constructor for console view. Should be given a MusicEditorModel's toString method.
+   */
   ConsoleView(String view) {
     this.view = view;
   }

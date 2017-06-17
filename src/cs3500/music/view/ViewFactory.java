@@ -23,14 +23,10 @@ public class ViewFactory {
       return new ConsoleView(model.toString());
     }
     if (viewType.equals("visual")) {
-      return new MusicEditorView(model.getAllNotes(), model.getMaxBeats());
+      return new VisualView(model.getAllNotes(), model.getMaxBeats());
     }
     if (viewType.equals("midi")) {
-      try {
         return new MidiView(model);
-      } catch (MidiUnavailableException e) {
-        System.out.println(e.getMessage());
-      }
     }
     throw new IllegalArgumentException("Invalid view type. Must one of: \"console\" , \"visual\"," +
             " or \"midi\"");
