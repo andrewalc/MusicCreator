@@ -251,6 +251,4 @@ public class TestPitch {
     p2 = p2.getPrevPitch();
     assertEquals(p1.hashCode(), p2.hashCode());
   }
-
-
 }

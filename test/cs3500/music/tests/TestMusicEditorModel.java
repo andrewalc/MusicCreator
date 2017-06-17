@@ -578,4 +578,50 @@ public class TestMusicEditorModel {
                     "25                                                                      \n");
   }
 
+
+  @Test
+  public void testGetMaxBeat1() {
+    initData();
+    assertEquals(model1.getMaxBeats(), 12);
+  }
+
+  @Test
+  public void testGetMaxBeat2() {
+    initData();
+    assertEquals(model0.getMaxBeats(), 0);
+  }
+
+  @Test
+  public void testGetTempoGood1() {
+    initData();
+    assertEquals(model0.getTempo(), 0);
+  }
+
+  @Test
+  public void testGetTempoGood2() {
+    initData();
+    assertEquals(model1.getTempo(), 0);
+  }
+
+  @Test
+  public void testSetTempoGood1() {
+    initData();
+    model1.setTempo(5);
+    assertEquals(model1.getTempo(), 5);
+  }
+
+  @Test
+  public void testSetTempoGood2() {
+    initData();
+    model0.setTempo(10);
+    assertEquals(model0.getTempo(), 10);
+  }
+
+  @Test
+  public void testSetTempoGood3() {
+    initData();
+    model1.setTempo(0);
+    assertEquals(model1.getTempo(), 0);
+  }
 }
+

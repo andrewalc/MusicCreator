@@ -887,7 +887,91 @@ public class TestPiece {
                     " 9       X    |  \n" +
                     "10               \n");
     assertEquals(p0.getNumberOfNotes(), 4);
-
-
   }
+
+  @Test
+  public void testMaxBeats1() {
+    initData();
+    assertEquals(p1.getMaxBeats(), 12);
+  }
+
+  @Test
+  public void testMaxBeats2() {
+    initData();
+    assertEquals(p0.getMaxBeats(), 0);
+  }
+
+  @Test
+  public void testGetNumNotes11() {
+    initData();
+
+    assertEquals(p1.getNumberOfNotes(), 7);
+  }
+
+  @Test
+  public void testGetNumNotes2() {
+    initData();
+
+    assertEquals(p0.getNumberOfNotes(), 0);
+  }
+
+  @Test
+  public void testGetLowestPitch1() {
+    initData();
+
+    assertEquals(p1.getLowestPitch().toString(), "C1");
+  }
+
+  @Test(expected = NoSuchElementException.class)
+  public void testGetLowestPitch2() {
+    initData();
+
+    p0.getLowestPitch();
+  }
+
+  @Test
+  public void testGetHighestPitch1() {
+    initData();
+
+    assertEquals(p1.getHighestPitch().toString(), "C#2");
+  }
+
+  @Test(expected = NoSuchElementException.class)
+  public void testGetHighestPitch2() {
+    initData();
+
+    p0.getHighestPitch();
+  }
+
+  @Test
+  public void testGetTempoGood1() {
+    initData();
+
+    assertEquals(p1.getTempo(), 0);
+  }
+
+  @Test
+  public void testGetTempoGood2() {
+    initData();
+
+    assertEquals(p0.getTempo(), 0);
+  }
+
+  @Test
+  public void testSetTempoGood1() {
+    initData();
+    p1.setTempo(5);
+
+    assertEquals(p1.getTempo(), 5);
+  }
+
+  @Test
+  public void testSetTempoGood2() {
+    initData();
+    p0.setTempo(15);
+
+    assertEquals(p0.getTempo(), 15);
+  }
+
+
 }
