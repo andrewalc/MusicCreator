@@ -1,105 +1,86 @@
---------------------------
-Java MusicEditorModel
---------------------------
-Written by Andrew Alcala: alcala.a@husky.neu.edu
+(Interface) IMusicEditorModel:
 
----------------
-Class Structure
----------------
-Tones.java: Enumeration
+An interface representing a Music editor model. In this model, music notes suitable for MIDI are represented as an ArrayList of Integer of size 5. The ArrayList of Integer is formatted as
+follows, (int startingBeat, int endBeat, int instrument, int pitch, int volume). Starting beat is the int where a beat begins, endBeat is an int beat that represents what beat a note stops
+playing at. int instrument represents the MIDI integer instrument this note will play as. int pitch is the official MIDI int pitch value this note will play as. Finally int volume represents the MIDI volume value a note will play as. Notes should be stored into a Map of Integer to ArrayList ArrayList of Integer, where the Integer keys are MIDI note pitches, and their values are ArrayLists that contain all notes that share that buckets key pitch. To make adding, removing, and modifying notes easier, the Tones enumeration should be used in
+those respective methods to describe the tone of a note, ranging from C to B.
 
-At the entire packages core is the Tones enumeration representing notes C through B. 
-I used an enumeration as these notes are constant throughout music and using them to identify notes through a simple enumeration seemed like a logical way to implement notes. 
-The enumeration allows for methods that assist with higher level objects that use the enum, especially the Pitch class. 
-Since the enum is final, methods get next tone and getprevtone are easy to cycle through as they infinitely cycle in music and can do the same in the editor.
+(Class) MusicEditorModel:
 
-Pitch.java: Class
+Implements the IMusicEditorModel, and all of its methods. This is the public model the user will see and take their actions editing a piece through. Outside of all these actions the model can take from its implemented Interface, MusicEditorModel has a builder, which creates a new instance of the model itself. This is very important later on for the creation and running of our main class, which takes in String commands and initializes the proper view that was
 
-Pitch's purpose is to serve as the union of a Tone and an octave. Music calls for notes to have octaves, different levels of the same tone, and exist together. 
-The pitch class allows for the union of both and provides methods that relay information about the sound itself, returning what octave the pitch is what tone it is 
-and also being able to tell what the next Pitch or previous Pitch and return it. The pitches class is also great for the sorting of all notes in the Piece class, as the TreeMap 
-runs on a Map<Pitch, ArrayList<Note>>. By being able to identifying what pitches there are in a piece, sorting sounds in a music piece becomes alot easier. Pitch is more specific 
-than a Tone, but more specific than a Note, allowing it to be useful in various situations.
+(Class) Note:
 
-PitchComparator.java: Class
+A note is the most basic unit in a piece of music, and is constructed with a Pitch, starting beat, duration, instrument type, and volume. Pitch is the essential identifier for a Note, as it describes a Note's location on the musical scale. A Note's starting beat identifies where in the Piece (timewise) the Note takes place. The duration is (unsurprisingly) how long the note is held (measured in beats), and the instrument and volume of a note indicate the actual "sound" of the note when it is played through a midi player. Through the Model's methods, a Note can be added, removed, or modified in any of its fields. Notes can also overlap and create harmonies (which is especially useful with a song with multiple instruments being played at once at the same Note and Pitch).
 
-PitchComparator was made to give the Piece class's TreeMap<Pitch, ArrayList<Note>> a way to sort its key values and organize them from lowest musical 
-pitch to highest musical pitch. This helped greatly in making the getLowestPitch and getHighestPitch methods in Piece since the firstKey would correspond to 
-the lowest and the lastKey would correspond to the highest. It made logical sense to sort this way, so this comparator is overall a great for peace of mind.
-
-Note.java: Class
-
-Note is the ultimate object representation of sound of music. Its constructor requires a Tone, ocatave int, starting beat int(representing what beat this note will begin playing at), 
-and a beats int (representing how many beats the note will sustain for). This class was made spefically with the idea of a music piece, and ultimately the editor in mind. It 
-requires the startingbeat and beats parameters solely to identify its place on a music sheet, when it will exactly play on what beat and for how long. This class takes timing 
-into account, while Pitch does not. The class' method consist of mostly getters and setters. Equals and hashcode were overriden accordingly (as in Pitch and Piece) as Note will 
-be compared a lot in the Piece and Editor class. The class also contains the final static strings for note head, note sustain, and note empty, as these specific strings are seen 
-in other classes as well. 
-
-Piece.java: Class
+(Class) Piece:
 
 Piece is the representation of a simple piece of music. Its purpose is to contain all of its notes, and be able to relay information about key properties of the piece,
- including key notes and beats. A piece holds all of its notes in a TreeMap<Pitch, ArrayList<Note>. I designed the piece this way because to me it made sense to sort all 
- notes by their pitch. By using Pitch as a key, putting new notes into the piece would be as simple as getting the notes tone and octave. Using the pitchCompartor it would 
- even be sorted on its own. I used ArrayList<Note> as the value for the map so I can contain multiple notes under the key of a unique pitch. Should I need to access notes of 
- a given pitch, I simply need to get the list. Since all notes contain their own timing information, I do not need another sublevel to hold beats in specfic spots. A simple 
- check if the current beat is within the range of a notes beat range is enough to know when a Note should play. 
-Piece contains the functionality to add remove and modify it's notes and is the connection between the editor and note management. With every modification to note structure 
-in a piece, the piece will self-update its values, specifically maxBeats and the TreeMap itself. Should a note modification extend or shrink the length of a piece through 
-adding removing or modifying, updateMaxBeats will check itself to find out the new maximum beat. Should an ArrayList<Note> corresponding to a pitch no longer have any notes 
-in it due to removing a note, that key mapping will remove itself. Piece can find out what is the highest or lowest note present out of all notes and find out how many notes 
+ including key notes and beats. A piece holds all of its notes in a TreeMap<Pitch, ArrayList<Note>. Using the pitchCompartor it would even be sorted on its own. We used ArrayList<Note> as the value for the map so that we can contain multiple notes under the key of a unique pitch. Should we need to access notes of a given pitch, we simply need to get the list. Since all notes contain their own timing information, we do not need another sublevel to hold beats in specfic spots. A simple check if the current beat is within the range of a notes beat range is enough to know when a Note should play.
+Piece contains the functionality to add remove and modify it's notes and is the connection between the editor and note management. With every modification to note structure
+in a piece, the piece will self-update its values, specifically maxBeats and the TreeMap itself. Should a note modification extend or shrink the length of a piece through
+adding removing or modifying, updateMaxBeats will check itself to find out the new maximum beat. Should an ArrayList<Note> corresponding to a pitch no longer have any notes
+in it due to removing a note, that key mapping will remove itself. Piece can find out what is the highest or lowest note present out of all notes and find out how many notes
 there are in total. The class checks itself all through the TreeMap, and does so easily. Finally, the toString method relays all the information about a piece of music visually,
- showing the range of pitches from lowest to highest, the range of beats from 0 to the last note, and most importantly shows where Notes start, sustain, and end. 
+ showing the range of pitches from lowest to highest, the range of beats from 0 to the last note, and most importantly shows where Notes start, sustain, and end.
 
 
-MusicEditorModel.java: Interface and implemented in a Class
+(Class) Pitch:
 
-The music editor model is the main hub of the editing mechnaics. The purpose of this class is to give users
-an easy access to the editing tools necessary to create music through Notes. Creating a new instance of a MusicEditor allows for immediate editing of a blank Piece, a piece of music.
- Users can begin a new piece, load a piece, or export a piece using those respective methods. Adding, removing, and modifying notes are all avaliable and only require the user to enter
-  Note objects representing what they want to add or remove, and provide new parametes should they wish to modify an existing note. The editor also allows for merging pieces of music, 
-  either merging directly on top or and the end of another piece. Finally a toString method outputs a visually of the piece in its current state.
+When a Note is constructed, it is given a Tone and an Octave. These two fields are sent to the constructor for a Pitch, which is an object that holds this information about a Note. The tone gives the Note its musical identity, and represents what sound on the scale is played (e.g. C, C#, D, D#), and the octave  indicates in what scale the note is being played. A Pitch...
 
-------------
-What to do
-------------
-To begin editing music, create a main class and create a new MusicEditorModel() which will begin you with a blank piece.
+(Class) PitchComparator:
 
-MusicEditorModel model = new MusicEditorModel();
+PitchComparator is a class that contains a comparison method, used for sorting a Piece's TreeMap. It sorts all of the items in the TreeMap by their Pitches, from lowest to highest. This class is especially useful when we are trying to find a Piece's highest and lowest used Pitch.
 
-----------------
-How to add a note:
------------------
-First create a new Note.
+(Enum) Tones:
 
-Note note1 = Note(Tones tone, int octave, int startingBeat, int beats);
+Tones is an enumeration that holds all of the possible letter "notes" on a musical scales (ranges from C to B, including all sharp (#) notes). Using an enumeration for this type of data is extremely useful, especially in scenarios when we need to check if a Note is valid. Rather than having to check for individual Strings and parsing through them with long switch statements, we can simply check through our enumeration of Tones to see if there is a match. A tone has a String name and an integer value, both of which are used for identifying and indexing a Tone.
 
-Tones is an enum, here is the full list of possible tones. 
+(Interface) Composition Builder:
 
-  Tones.C, Tones.C_SHARP, Tones.D, Tones.D_SHARP, Tones.E, Tones.F, Tones.F_SHARP, Tones.G, Tones.G_SHARP, Tones.A, Tones.A_SHARP, Tones.B
+This interface represents a parameterized, generic builder. It contains three methods: build, addTempo, and addNote. "addTempo" sets the tempo of a generic piece of music to the given amount, "addNote" adds a note to the generic piece of music, and finally, "build" puts together and returns the piece of music as the type that it is set as.
 
-Once your note is made, enter it into the addNote method in your model.
+(Class) Music Reader:
 
-model.addNote(note1);
+This class contains the "parseFile" method, which reads through a text file of music, 'parses' it, and converts it into our implementation of a Piece.
 
-The note has been added!
+(Class) Console View:
 
-Check out the visualization by printing model.toString()
+A class that represents a view of a Piece within the console of whatever program is running it.
 
-----------------
-Removing and Modifying
-----------------
-The removeNote method require you to give a note the is exactly the same as the one you want to remove in the piece.
-The modifyNote method requires an exact note of the note you with to modify, and then new note parameters to change your requested note to.
+(Class) EditorPanel:
 
------------------
-Exporting and Loading Music
------------------
-You can export your piece at any time by calling exportPiece()
-In the same way you can import pieces by calling loadPiece and giving it a Piece to load.
+This class is responsible for drawing the scales on which a given song's notes can be placed, drawn, and represented. It also draws a movable red line to indicate the current beat that is being displayed on the Piano portion of the visualization. The Panel does scale to size depending on the number of octaves being used in the song, as well as the length of the song (in beats).
 
------------------
-Combining Pieces
------------------
-The editor allows you to combine two pieces together using combinePieceOnTop and combinePieceAtEnd to combine the piece currently in the editor with an external piece that you give it.
-combinePieceOntop will directly overlay the loaded piece with the given piece, combinePieceAtEnd will combine the two from the loaded pieces end to the external pieces' beginning.
+(Interface) IMusicEditorView:
+
+This interface holds the method initialize, which is the key method for getting the view of a MusicEditor of a certain type. Any visualization type the implements this Interface (and thus this method) can be called on to represent a MusicModel.
+
+(Class) IntegerComparator:
+
+A simple Integer Comparator to organize a list of integers in ascending order. (Used for a TreeMap)
+
+(Class) KeyboardPanel:
+
+This class represents the panel on which the piano visualization is drawn. Draws keys on a piano one at a time, and checks the state of the current beat before drawing. For each note active on this "current beat", the corresponding key on the keyboard is lit up as orange. As the user moves the "red line" in the editor panel visualization, the current beat is also changed, and thus the piano representation is redrawn to show the new current keys being hit at the time.
+
+(Class) MidiView:
+
+This class implements the IMusicEditorView interface, and represents one of the three possible views available in this iteration of the Music Player. Running this view activates a Midi player, which then plays the given song (in sound). While there is no "visual" aspect to this view, the view does take into consideration: the instruments being used at each beat, the tempo of the song, harmonies between multiple notes at the same time, and volume of each note being hit.
+
+([Main] Class) MusicEditor:
+
+The main class of the program. Runs a given "piece" in text form with the given visualization command (also in String). Calling this method runs a factory, which parses the given view types, and calls the builder for that view so that it may be enacted.
+
+(Class) MusicEditorView:
+
+This is the class that is responsible for drawing the window that the visual representation of a MusicModel is placed on. This class has the method "getNotesAtBeat" and "getKeyPress", which (respectively) gets all of the active notes at a given beat, and takes in and processes key commands.
+
+(Class) NoteTxt:
+
+A class whose main function is to assist in translating from txt music to the Model's implementation of a Note.
+
+(Class) ViewFactory:
+
+The factory that is activated by the calling of the main class/method. Depending on the given String command, this class' method "getView" will return a builder of the requested view. For the command "console", it will build a console representation; for the command "visual", it will build the JPanel pop-up visualization; for the command "midi", it will build a Midi player and play the song.

@@ -43,7 +43,7 @@ public class TestMidiView {
   public void testMockViewOutputMary() {
     initData("mary-little-lamb.txt");
     mockView.initialize();
-    assertEquals(out.toString(), "MockSequencer was opened.\n" +
+    assertEquals(out.toString(), "sMockSequencer was opened.\n" +
             "checking sequence \n" +
             "Note On msg found\n" +
             "Note On msg found\n" +
