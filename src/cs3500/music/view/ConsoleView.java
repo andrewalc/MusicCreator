@@ -14,6 +14,11 @@ public class ConsoleView implements IMusicEditorView {
     this.consoleOutput = consoleOutput;
   }
 
+  /**
+   * Returns the string that will be outputted by initialize() to console when it is called.
+   *
+   * @return Console string to be outputted.
+   */
   public String getConsoleOutput() {
     return consoleOutput;
   }
