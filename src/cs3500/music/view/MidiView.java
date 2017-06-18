@@ -146,7 +146,6 @@ public class MidiView implements IMusicEditorView {
           }
         }
       }
-      System.out.println("Notes parsed successfully.");
 
       // Play the music!
       sequencer.setSequence(sequence);

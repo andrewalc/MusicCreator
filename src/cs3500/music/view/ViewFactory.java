@@ -15,7 +15,7 @@ public class ViewFactory {
     this.model = model;
   }
 
-  IMusicEditorView getView(String viewType) {
+  public IMusicEditorView getView(String viewType) {
     if (viewType == null) {
       return null;
     }
