@@ -1,10 +1,15 @@
 package cs3500.music.view;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import cs3500.music.model.Tones;
 

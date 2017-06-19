@@ -8,7 +8,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
-import cs3500.music.util.*;
+import cs3500.music.util.CompositionBuilder;
+
 
 /**
  * Class for the music editor tests implementation.

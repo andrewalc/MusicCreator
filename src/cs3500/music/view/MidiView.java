@@ -2,8 +2,18 @@ package cs3500.music.view;
 
 import java.util.ArrayList;
 
-import javax.sound.midi.*;
 
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiEvent;
+import javax.sound.midi.MidiMessage;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
+import javax.sound.midi.ShortMessage;
+import javax.sound.midi.Track;
+
+import cs3500.music.controller.KeyboardListener;
 import cs3500.music.model.IMusicEditorModel;
 
 /**
@@ -157,6 +167,10 @@ public class MidiView implements IMusicEditorView {
     }
   }
 
+  protected Sequencer getSequencer() {
+    return sequencer;
+  }
+
   @Override
   public void initialize() {
     try {
@@ -164,5 +178,30 @@ public class MidiView implements IMusicEditorView {
     } catch (InvalidMidiDataException e) {
       System.out.println(e.getMessage());
     }
+  }
+
+  @Override
+  public void addKeyListener(KeyboardListener keyboardListener) {
+    
+  }
+
+  @Override
+  public void startMusic() {
+
+  }
+
+  @Override
+  public void pauseMusic() {
+
+  }
+
+  @Override
+  public void goToBeginning() {
+
+  }
+
+  @Override
+  public void goToEnd() {
+
   }
 }

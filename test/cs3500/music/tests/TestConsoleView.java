@@ -5,14 +5,11 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-import javax.swing.text.View;
 
 import cs3500.music.model.IMusicEditorModel;
 import cs3500.music.model.MusicEditorModel;
 import cs3500.music.util.MusicReader;
 import cs3500.music.view.ConsoleView;
-import cs3500.music.view.IMusicEditorView;
-import cs3500.music.view.MidiView;
 import cs3500.music.view.ViewFactory;
 
 import static org.junit.Assert.assertEquals;

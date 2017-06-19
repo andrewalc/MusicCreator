@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * Test class for Notes
+ * Test class for Notes.
  */
 public class TestNote {
 

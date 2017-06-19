@@ -8,7 +8,6 @@ import java.util.List;
 import javax.sound.midi.ControllerEventListener;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaEventListener;
-import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiEvent;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Receiver;
@@ -190,6 +189,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setSequence(InputStream stream) throws IOException, InvalidMidiDataException {
+    // no need to overload.
 
   }
 
@@ -200,6 +200,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void stop() {
+    // no need to overload.
 
   }
 
@@ -210,11 +211,13 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void startRecording() {
+    // no need to overload.
 
   }
 
   @Override
   public void stopRecording() {
+    // no need to overload.
 
   }
 
@@ -225,11 +228,13 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void recordEnable(Track track, int channel) {
+    // no need to overload.
 
   }
 
   @Override
   public void recordDisable(Track track) {
+    // no need to overload.
 
   }
 
@@ -240,6 +245,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setTempoInBPM(float bpm) {
+    // no need to overload.
 
   }
 
@@ -250,6 +256,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setTempoFactor(float factor) {
+    // no need to overload.
 
   }
 
@@ -270,6 +277,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setTickPosition(long tick) {
+    // no need to overload.
 
   }
 
@@ -285,6 +293,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void close() {
+    // no need to overload.
 
   }
 
@@ -330,11 +339,13 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setMicrosecondPosition(long microseconds) {
+    // no need to overload.
 
   }
 
   @Override
   public void setMasterSyncMode(SyncMode sync) {
+    // no need to overload.
 
   }
 
@@ -350,6 +361,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setSlaveSyncMode(SyncMode sync) {
+    // no need to overload.
 
   }
 
@@ -365,6 +377,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setTrackMute(int track, boolean mute) {
+    // no need to overload.
 
   }
 
@@ -375,6 +388,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setTrackSolo(int track, boolean solo) {
+    // no need to overload.
 
   }
 
@@ -390,6 +404,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void removeMetaEventListener(MetaEventListener listener) {
+    // no need to overload.
 
   }
 
@@ -405,6 +420,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setLoopStartPoint(long tick) {
+    // no need to overload.
 
   }
 
@@ -415,6 +431,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setLoopEndPoint(long tick) {
+    // no need to overload.
 
   }
 
@@ -425,6 +442,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setLoopCount(int count) {
+    // no need to overload.
 
   }
 

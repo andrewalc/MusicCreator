@@ -10,8 +10,6 @@ public class MusicReader {
   /**
    * A factory for producing new music compositions, given a source of music and a
    * builder for constructing compositions.
-   * <p>
-   * <p>
    * The input file format consists of two types of lines:
    * <ul>
    * <li>Tempo lines: the keyword "tempo" followed by a number,
@@ -20,7 +18,6 @@ public class MusicReader {
    * the start and end times of the note, the instrument,
    * the pitch, and the volume</li>
    * </ul>
-   * </p>
    *
    * @param readable The source of data for the music composition
    * @param piece    A builder for helping to construct a new composition

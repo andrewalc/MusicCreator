@@ -1,13 +1,24 @@
 package cs3500.music.view;
 
-import java.awt.*;
+import java.awt.Insets;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.swing.*;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.WindowConstants;
+
+import cs3500.music.controller.KeyboardListener;
 
 import static java.awt.GridBagConstraints.HORIZONTAL;
 import static java.awt.GridBagConstraints.LAST_LINE_END;
@@ -22,7 +33,6 @@ import static java.awt.GridBagConstraints.PAGE_START;
  * line will be drawn at the current beat, that is the beat that is currently being played.
  * Pressing the left and right arrow keys will advance the current beat and the red line by one
  * beat forward (right) or backward (left).
- * <p>
  * At the bottom of the window, a keyboard representing octaves 1-10 will be displayed as a set
  * of white and black keys. Should a note be in play at the current beat, the respective pitch
  * that note is in will be rendered orange on the keyboard.
@@ -31,8 +41,13 @@ import static java.awt.GridBagConstraints.PAGE_START;
  */
 public class VisualView extends JFrame implements IMusicEditorView {
 
+
   private int currentBeat;
   private int maxBeats;
+  private EditorPanel editorPanel;
+  private KeyboardPanel keyboardPanel;
+  private JPanel container;
+  private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
 
   /**
    * Constructor for a VisualView of a Music Editor. Require input of note information in the
@@ -48,6 +63,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   public VisualView(Map<Integer, ArrayList<ArrayList<Integer>>> notes, int maxBeats) {
     super("MIDI Music Editor");
     // JFrame Settings
+    this.notes = notes;
     this.currentBeat = 0;
     this.maxBeats = maxBeats;
     setSize(1600, 900);
@@ -63,13 +79,13 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
 
     // Create a container to combine both JPanels, set the layout.
-    JPanel container = new JPanel();
+    container = new JPanel();
     container.setLayout(new GridBagLayout());
     GridBagConstraints c = new GridBagConstraints();
 
     // Two panels
-    KeyboardPanel keyboardPanel = new KeyboardPanel(this.getNotesAtBeat(notes, currentBeat));
-    EditorPanel editorPanel = new EditorPanel(sortedNotes, maxBeats);
+    keyboardPanel = new KeyboardPanel(this.getNotesAtBeat(notes, currentBeat));
+    editorPanel = new EditorPanel(sortedNotes, maxBeats);
 
 
     // Enable scroll bars.
@@ -100,6 +116,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
     container.addKeyListener(new KeyListener() {
       @Override
       public void keyTyped(KeyEvent e) {
+        // no need to fill in.
       }
 
       @Override
@@ -119,12 +136,30 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
       @Override
       public void keyReleased(KeyEvent e) {
+        // no need to fill in.
       }
     });
 
     // Add the combined Panels to the JFrame
     getContentPane().add(container);
   }
+
+  /**
+   * Getter for current beat.
+   *
+   * @return the current beat.
+   */
+  public int getCurrentBeat() {
+    return currentBeat;
+  }
+
+  public void setCurrentBeat(int currentBeat) {
+    this.currentBeat = currentBeat;
+    editorPanel.setCurrentBeat(this.currentBeat);
+    keyboardPanel.setNotes(getNotesAtBeat(notes, currentBeat));
+    repaint();
+  }
+
 
   /**
    * Returns all notes that are playing at the given beat in the given Map. Notes must be
@@ -159,5 +194,30 @@ public class VisualView extends JFrame implements IMusicEditorView {
   @Override
   public void initialize() {
     this.setVisible(true);
+  }
+
+  @Override
+  public void addKeyListener(KeyboardListener keyboardListener) {
+    container.addKeyListener(keyboardListener);
+  }
+
+  @Override
+  public void startMusic() {
+
+  }
+
+  @Override
+  public void pauseMusic() {
+
+  }
+
+  @Override
+  public void goToBeginning() {
+
+  }
+
+  @Override
+  public void goToEnd() {
+
   }
 }

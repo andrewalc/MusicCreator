@@ -17,7 +17,7 @@ import cs3500.music.view.IntegerComparator;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test class for MusicEditorModels
+ * Test class for MusicEditorModels.
  */
 public class TestMusicEditorModel {
   MusicEditorModel.MusicEditorBuilder builder = new MusicEditorModel.MusicEditorBuilder();

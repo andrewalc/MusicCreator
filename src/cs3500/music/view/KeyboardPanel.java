@@ -1,9 +1,11 @@
 package cs3500.music.view;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 
 /**

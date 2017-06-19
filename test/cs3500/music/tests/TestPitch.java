@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * Test class for Pitch
+ * Test class for Pitch.
  */
 public class TestPitch {
 

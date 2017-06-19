@@ -1,11 +1,9 @@
 package cs3500.music.view;
 
-import javax.sound.midi.MidiUnavailableException;
-
 import cs3500.music.model.IMusicEditorModel;
 
 /**
- * Created by Andrew Alcala on 6/15/2017.
+ * Factory for a view. Accepts "console", "visual", or "midi".
  */
 public class ViewFactory {
 
@@ -15,9 +13,19 @@ public class ViewFactory {
     this.model = model;
   }
 
+  /**
+   * Retrieves the requested view given a string viewType.
+   *
+   * @param viewType String representing the type of view to create.
+   * @return Requested view type.
+   */
   public IMusicEditorView getView(String viewType) {
     if (viewType == null) {
       return null;
+    }
+    if (viewType.equals("composite")) {
+      return new CompositeView(new MidiView.MidiViewBuilder(model).build(), new VisualView(model
+              .getAllNotes(), model.getMaxBeats()));
     }
     if (viewType.equals("console")) {
       return new ConsoleView(model.toString());
