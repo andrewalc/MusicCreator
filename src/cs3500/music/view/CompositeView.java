@@ -1,5 +1,7 @@
 package cs3500.music.view;
 
+import cs3500.music.controller.KeyboardListener;
+
 /**
  * A Composite Music Editor View, combining both the visual and midi views into one synchronized
  * view.
@@ -21,10 +23,86 @@ public class CompositeView implements IMusicEditorView {
   public void initialize() {
     midiView.initialize();
     visualView.initialize();
-    while (midiView.getSequencer().isRunning()) {
-      System.out.println("Running");
-      this.currentBeat = (int) this.midiView.getSequencer().getTickPosition();
-      visualView.setCurrentBeat(this.currentBeat);
+
+
+  }
+
+  @Override
+  public void addKeyListener(KeyboardListener keyboardListener) {
+    visualView.addKeyListener(keyboardListener);
+  }
+
+  @Override
+  public void forwardOneBeat() {
+    midiView.forwardOneBeat();
+    updateCurrentBeat();
+  }
+
+  @Override
+  public void backOneBeat() {
+    midiView.backOneBeat();
+    updateCurrentBeat();
+  }
+
+  @Override
+  public void startMusic() {
+    midiView.startMusic();
+  }
+
+  @Override
+  public void pauseMusic() {
+    midiView.pauseMusic();
+  }
+
+  @Override
+  public void goToBeginning() {
+    midiView.goToBeginning();
+    updateCurrentBeat();
+  }
+
+  @Override
+  public void goToEnd() {
+    midiView.goToEnd();
+    updateCurrentBeat();
+  }
+
+  @Override
+  public int getMaxBeat() {
+    return visualView.getMaxBeat();
+  }
+
+  @Override
+  public void setCurrentBeat(int currentBeat) {
+    midiView.setCurrentBeat(currentBeat);
+    visualView.setCurrentBeat(currentBeat);
+  }
+
+  @Override
+  public int getCurrentBeat() {
+    if (midiView.getCurrentBeat() == visualView.getCurrentBeat()) {
+      return midiView.getCurrentBeat();
+    } else {
+      throw new IllegalArgumentException("ERROR: current beats are out of sync!");
     }
   }
+
+  @Override
+  public void updateCurrentBeat() {
+    System.out.println(visualView.getCurrentBeat() + " " + midiView.getCurrentBeat());
+    visualView.setCurrentBeat(midiView.getCurrentBeat());
+    midiView.updateTempo();
+
+  }
+
+
+  @Override
+  public boolean isActive() {
+    return visualView.isActive() || midiView.isActive();
+  }
+
+  @Override
+  public boolean isPlayingMusic() {
+    return midiView.isPlayingMusic();
+  }
+
 }

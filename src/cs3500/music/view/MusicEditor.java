@@ -3,6 +3,7 @@ package cs3500.music.view;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+import cs3500.music.controller.MusicEditorController;
 import cs3500.music.model.IMusicEditorModel;
 import cs3500.music.model.MusicEditorModel;
 import cs3500.music.util.MusicReader;
@@ -30,7 +31,7 @@ class MusicEditor {
     // Build a Music editor model with notes from the file given.
     MusicEditorModel.MusicEditorBuilder modelBuilder = new MusicEditorModel.MusicEditorBuilder();
     try {
-      MusicReader.parseFile(new FileReader("mary-little-lamb.txt"), modelBuilder);
+      MusicReader.parseFile(new FileReader("mystery-1.txt"), modelBuilder);
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }
@@ -39,6 +40,7 @@ class MusicEditor {
     // Generate a view for the built model base on viewtype input.
     ViewFactory factory = new ViewFactory(model);
     IMusicEditorView view = factory.getView("composite");
-    view.initialize();
+    MusicEditorController controller = new MusicEditorController(model, view);
+    controller.beginControl();
   }
 }

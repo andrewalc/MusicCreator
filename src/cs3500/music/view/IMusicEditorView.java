@@ -4,6 +4,8 @@ import cs3500.music.controller.KeyboardListener;
 
 /**
  * An interface representting a Music Editor View for a Music Editor Model.
+ * EDIT: Originally only had initialize. Includes many more methods needed to perform the actions
+ * necessary.
  */
 public interface IMusicEditorView {
 
@@ -15,6 +17,10 @@ public interface IMusicEditorView {
 
   void addKeyListener(KeyboardListener keyboardListener);
 
+  void forwardOneBeat();
+
+  void backOneBeat();
+
   void startMusic();
 
   void pauseMusic();
@@ -22,4 +28,18 @@ public interface IMusicEditorView {
   void goToBeginning();
 
   void goToEnd();
+
+  int getMaxBeat();
+
+  void setCurrentBeat(int currentBeat);
+
+  int getCurrentBeat();
+
+  void updateCurrentBeat();
+
+  boolean isActive();
+
+  boolean isPlayingMusic();
+
+
 }

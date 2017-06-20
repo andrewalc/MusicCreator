@@ -4,6 +4,8 @@ import cs3500.music.controller.KeyboardListener;
 
 /**
  * A Console view implementation. Should receive a model's toString method and relay it to console.
+ * EDIT: Updated to support new interface methods needed for functionality, although most of
+ * these will not see use in the console view.
  */
 public class ConsoleView implements IMusicEditorView {
 
@@ -38,6 +40,16 @@ public class ConsoleView implements IMusicEditorView {
   }
 
   @Override
+  public void forwardOneBeat() {
+
+  }
+
+  @Override
+  public void backOneBeat() {
+
+  }
+
+  @Override
   public void startMusic() {
 
   }
@@ -55,5 +67,36 @@ public class ConsoleView implements IMusicEditorView {
   @Override
   public void goToEnd() {
 
+  }
+
+  @Override
+  public int getMaxBeat() {
+    return 0;
+  }
+
+  @Override
+  public void setCurrentBeat(int currentBeat) {
+
+  }
+
+  @Override
+  public int getCurrentBeat() {
+    return 0;
+  }
+
+  @Override
+  public void updateCurrentBeat() {
+
+  }
+
+
+  @Override
+  public boolean isActive() {
+    return true;
+  }
+
+  @Override
+  public boolean isPlayingMusic() {
+    return false;
   }
 }

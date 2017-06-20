@@ -43,6 +43,7 @@ public class KeyboardPanel extends JPanel {
    */
   public void setNotes(ArrayList<ArrayList<Integer>> liveNotes) {
     this.liveNotes = liveNotes;
+    repaint();
   }
 
   @Override

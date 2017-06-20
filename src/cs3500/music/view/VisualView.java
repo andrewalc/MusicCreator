@@ -38,6 +38,7 @@ import static java.awt.GridBagConstraints.PAGE_START;
  * that note is in will be rendered orange on the keyboard.
  * All notes are in the Arraylist Integer format of:
  * (int startingBeat, int endBeat, int instrument, int pitch, int volume)
+ * EDIT: Updated to support new interface methods needed for functionality.
  */
 public class VisualView extends JFrame implements IMusicEditorView {
 
@@ -67,7 +68,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
     this.currentBeat = 0;
     this.maxBeats = maxBeats;
     setSize(1600, 900);
-    setResizable(true);
+    setResizable(false);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setBackground(Color.WHITE);
 
@@ -112,33 +113,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
     container.add(keyboardPanel, c);
     container.setFocusable(true);
     container.requestFocusInWindow();
-    // Add a keylistener to move the current beat when right or left is pressed.
-    container.addKeyListener(new KeyListener() {
-      @Override
-      public void keyTyped(KeyEvent e) {
-        // no need to fill in.
-      }
-
-      @Override
-      public void keyPressed(KeyEvent e) {
-        // If the user presses left.
-        if (e.getKeyCode() == 37 && currentBeat > 0) {
-          currentBeat--;
-        }
-        // If the user presses right.
-        else if (e.getKeyCode() == 39 && currentBeat < maxBeats) {
-          currentBeat++;
-        }
-        editorPanel.setCurrentBeat(currentBeat);
-        keyboardPanel.setNotes(getNotesAtBeat(notes, currentBeat));
-        repaint();
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e) {
-        // no need to fill in.
-      }
-    });
 
     // Add the combined Panels to the JFrame
     getContentPane().add(container);
@@ -149,10 +123,18 @@ public class VisualView extends JFrame implements IMusicEditorView {
    *
    * @return the current beat.
    */
+  @Override
   public int getCurrentBeat() {
     return currentBeat;
   }
 
+  @Override
+  public void updateCurrentBeat() {
+
+  }
+
+
+  @Override
   public void setCurrentBeat(int currentBeat) {
     this.currentBeat = currentBeat;
     editorPanel.setCurrentBeat(this.currentBeat);
@@ -202,6 +184,21 @@ public class VisualView extends JFrame implements IMusicEditorView {
   }
 
   @Override
+  public void forwardOneBeat() {
+    if (currentBeat + 1 <= maxBeats) {
+      setCurrentBeat(currentBeat + 1);
+    }
+
+  }
+
+  @Override
+  public void backOneBeat() {
+    if (currentBeat - 1 >= 0) {
+      setCurrentBeat(currentBeat - 1);
+    }
+  }
+
+  @Override
   public void startMusic() {
 
   }
@@ -220,4 +217,20 @@ public class VisualView extends JFrame implements IMusicEditorView {
   public void goToEnd() {
 
   }
+
+  @Override
+  public int getMaxBeat() {
+    return this.maxBeats;
+  }
+
+  @Override
+  public boolean isActive() {
+    return this.isVisible();
+  }
+
+  @Override
+  public boolean isPlayingMusic() {
+    return false;
+  }
+
 }

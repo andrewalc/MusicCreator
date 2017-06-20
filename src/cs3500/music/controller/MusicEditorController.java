@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cs3500.music.model.IMusicEditorModel;
-import cs3500.music.view.CompositeView;
 import cs3500.music.view.IMusicEditorView;
 
 /**
@@ -18,6 +17,7 @@ public class MusicEditorController {
   public MusicEditorController(IMusicEditorModel model, IMusicEditorView view) {
     this.model = model;
     this.view = view;
+    this.configureKeyBoardListener();
   }
 
   /**
@@ -42,18 +42,43 @@ public class MusicEditorController {
   private void configureKeyBoardListener() {
     Map<Integer, Runnable> keyPresses = new HashMap<Integer, Runnable>();
 
-    keyPresses.put(KeyEvent.VK_P, () -> { //the contents of MakeCaps below
-              view.startMusic();
-            }
-
-    );
+    keyPresses.put(KeyEvent.VK_SPACE, () -> { //the contents of MakeCaps below
+      if (view.isPlayingMusic()) {
+        view.pauseMusic();
+      } else {
+        view.startMusic();
+      }
+    });
+    keyPresses.put(KeyEvent.VK_RIGHT, () -> { //the contents of MakeCaps below
+      view.forwardOneBeat();
+    });
+    keyPresses.put(KeyEvent.VK_LEFT, () -> { //the contents of MakeCaps below
+      view.backOneBeat();
+    });
+    keyPresses.put(KeyEvent.VK_HOME, () -> { //the contents of MakeCaps below
+      view.goToBeginning();
+    });
+    keyPresses.put(KeyEvent.VK_END, () -> { //the contents of MakeCaps below
+      view.goToEnd();
+    });
 
 
     KeyboardListener kbd = new KeyboardListener();
     kbd.setKeyPressedMap(keyPresses);
-
     view.addKeyListener(kbd);
 
+  }
+
+  public void beginControl() {
+    view.initialize();
+
+    while (view.isActive()) {
+      view.updateCurrentBeat();
+
+
+      System.out.print("");
+
+    }
   }
 
 }
