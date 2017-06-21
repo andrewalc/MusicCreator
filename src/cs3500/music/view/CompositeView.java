@@ -39,13 +39,24 @@ public class CompositeView implements IMusicEditorView {
   @Override
   public void forwardOneBeat() {
     System.out.println("forward");
-    midiView.forwardOneBeat();
+    if (midiView.isPlayingMusic()) {
+      midiView.forwardOneBeat();
+
+    } else {
+      visualView.forwardOneBeat();
+    }
+
     updateCurrentBeat();
   }
 
   @Override
   public void backOneBeat() {
-    midiView.backOneBeat();
+    if (midiView.isPlayingMusic()) {
+      midiView.backOneBeat();
+
+    } else {
+      visualView.backOneBeat();
+    }
     updateCurrentBeat();
   }
 
@@ -61,13 +72,23 @@ public class CompositeView implements IMusicEditorView {
 
   @Override
   public void goToBeginning() {
-    midiView.goToBeginning();
+    if (midiView.isPlayingMusic()) {
+      midiView.goToBeginning();
+
+    } else {
+      visualView.goToBeginning();
+    }
     updateCurrentBeat();
   }
 
   @Override
   public void goToEnd() {
-    midiView.goToEnd();
+    if (midiView.isPlayingMusic()) {
+      midiView.goToEnd();
+
+    } else {
+      visualView.goToEnd();
+    }
     updateCurrentBeat();
   }
 
@@ -93,7 +114,11 @@ public class CompositeView implements IMusicEditorView {
 
   @Override
   public void updateCurrentBeat() {
-    visualView.setCurrentBeat(midiView.getCurrentBeat());
+    if (midiView.isPlayingMusic()) {
+      visualView.setCurrentBeat(midiView.getCurrentBeat());
+    } else {
+      midiView.setCurrentBeat(visualView.getCurrentBeat());
+    }
     midiView.updateTempo();
 
   }

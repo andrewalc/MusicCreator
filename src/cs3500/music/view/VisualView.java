@@ -30,6 +30,9 @@ import static java.awt.GridBagConstraints.PAGE_START;
  * All notes are in the Arraylist Integer format of:
  * (int startingBeat, int endBeat, int instrument, int pitch, int volume)
  * EDIT: Updated to support new interface methods needed for functionality.
+ * IMPORTANT= The definition of maxbeats in visual view is +1 the actual maxbeats of a midiview,
+ * this is to allow new notes to be added to the beat immediately following the last midi beat.
+ * Without +1, a note will be added but the midi's length does not change.
  */
 public class VisualView extends JFrame implements IMusicEditorView {
 
@@ -167,7 +170,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   private ArrayList<ArrayList<Integer>> getNotesAtBeat(Map<Integer, ArrayList<ArrayList<Integer>>>
                                                                notes, int beat) throws
           IllegalArgumentException {
-    if (beat < 0 || beat > maxBeats) {
+    if (beat < 0 || beat > maxBeats + 1) { //THE +1 HERE IS IMPORTANT
       throw new IllegalArgumentException("beat must be within the beat bounds of the music piece.");
     }
     ArrayList<ArrayList<Integer>> notesAtBeat = new ArrayList<ArrayList<Integer>>();
@@ -195,7 +198,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
   @Override
   public void forwardOneBeat() {
-    if (currentBeat + 1 <= maxBeats) {
+    if (currentBeat <= maxBeats) {
       setCurrentBeat(currentBeat + 1);
     }
 
@@ -220,12 +223,13 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
   @Override
   public void goToBeginning() {
-
+    this.setCurrentBeat(0);
   }
 
   @Override
   public void goToEnd() {
 
+    this.setCurrentBeat(this.getMaxBeat() + 1);
   }
 
   @Override
