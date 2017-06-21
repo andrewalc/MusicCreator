@@ -250,9 +250,9 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
   @Override
   public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
-    System.out.println(currentBeat + " " + maxBeats);
     this.notes = allNotes;
-    this.maxBeats = this.getMaxBeatFromNotes();
+    this.maxBeats = getMaxBeatFromNotes();
+
     // Copy the Map of notes.
     TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes = new TreeMap<>(new
             IntegerComparator());

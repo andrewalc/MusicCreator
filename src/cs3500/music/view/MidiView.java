@@ -324,7 +324,6 @@ public class MidiView implements IMusicEditorView {
 
   @Override
   public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
-
   }
 
   @Override

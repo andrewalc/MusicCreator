@@ -64,6 +64,8 @@ public class MusicEditorController {
     });
     keyPresses.put(KeyEvent.VK_RIGHT, () -> { //the contents of MakeCaps below
       view.forwardOneBeat();
+      System.out.println(view.getCurrentBeat() + " " + view.getMaxBeat());
+
     });
     keyPresses.put(KeyEvent.VK_LEFT, () -> { //the contents of MakeCaps below
       view.backOneBeat();
@@ -93,10 +95,15 @@ public class MusicEditorController {
       try {
         int pitch = view.getKeyboardKeyPressed();
         int numTones = Tones.values().length;
+        int beatDuration = 1;
         model.addNote(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1,
-                view.getCurrentBeat(), 1, 0, 100);
-        view.forwardOneBeat();
+                view.getCurrentBeat(), beatDuration, 0, 100);
         updateView();
+        if (view.getCurrentBeat() + beatDuration > view.getMaxBeat()) {
+          view.rebuildMusic(model.getAllNotes());
+        }
+        updateView();
+        view.forwardOneBeat();
 
         // we added a note, so a change was made and will require rebuilding audio.
         changeMade = true;
