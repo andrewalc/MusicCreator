@@ -64,7 +64,6 @@ public class MusicEditorController {
     });
     keyPresses.put(KeyEvent.VK_RIGHT, () -> { //the contents of MakeCaps below
       view.forwardOneBeat();
-      System.out.println(view.getCurrentBeat() + " " + view.getMaxBeat());
 
     });
     keyPresses.put(KeyEvent.VK_LEFT, () -> { //the contents of MakeCaps below

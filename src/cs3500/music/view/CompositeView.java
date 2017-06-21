@@ -38,7 +38,6 @@ public class CompositeView implements IMusicEditorView {
 
   @Override
   public void forwardOneBeat() {
-    System.out.println("forward");
     if (midiView.isPlayingMusic()) {
       midiView.forwardOneBeat();
 

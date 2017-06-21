@@ -43,7 +43,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   private KeyboardPanel keyboardPanel;
   private JPanel container;
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
-  private int START_SCROLLING_AT_BEAT = 16;
+  public static final int START_SCROLLING_AT_BEAT = 16;
 
 
   /**
@@ -75,14 +75,18 @@ public class VisualView extends JFrame implements IMusicEditorView {
     sortedNotes.putAll(notes);
 
 
-    // Create a container to combine both JPanels, set the layout.
-    container = new JPanel();
-    container.setLayout(new GridBagLayout());
-    GridBagConstraints c = new GridBagConstraints();
+
 
     // Two panels
     keyboardPanel = new KeyboardPanel(this.getNotesAtBeat(notes, currentBeat));
     editorPanel = new EditorPanel(sortedNotes, maxBeats);
+
+    // Create a container to combine both JPanels, set the layout.
+    container = new JPanel();
+    container.setLayout(new FlowLayout());
+
+    container.setMinimumSize(editorPanel.getPreferredSize());
+    GridBagConstraints c = new GridBagConstraints();
 
 
     // Enable scroll bars.
@@ -92,25 +96,27 @@ public class VisualView extends JFrame implements IMusicEditorView {
 //    editorPanelScrolling.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
 
     // Add the editorPanel to the container in the correct location with constraints.
-    c.anchor = PAGE_START;
-    c.fill = HORIZONTAL;
-    c.gridx = 0;
-    c.gridy = 0;
-    c.ipadx = (int) editorPanel.getPreferredSize().getWidth();
-    c.ipady = (int) (getHeight() + 100 - (keyboardPanel.getPreferredSize().getHeight()));
-    container.add(editorPanel, c);
+//    c.anchor = PAGE_START;
+//    c.fill = HORIZONTAL;
+//    c.gridx = 0;
+//    c.gridy = 0;
+//    c.ipadx = 0;//(int) editorPanel.getMinimumSize().getWidth();
+//    c.ipady = 0;
+    editorPanel.setVisible(true);
+    container.add(editorPanel);
 
     // Add the keyboardPanel to the container in the correct location.
-    c.anchor = LAST_LINE_END;
-    c.gridx = 0;
-    c.gridy = 1;
-    c.ipady = (int) (keyboardPanel.getPreferredSize().getHeight());
-    c.insets = new Insets(20, 0, 100, 0);  //top padding
-    container.add(keyboardPanel, c);
+//    c.anchor = LAST_LINE_END;
+//    c.gridx = 0;
+//    c.gridy = 1;
+//    c.ipady = (int) (keyboardPanel.getPreferredSize().getHeight());
+//    c.insets = new Insets(20, 0, 100, 0);  //top padding
+    container.add(keyboardPanel);
     container.setFocusable(true);
     container.requestFocusInWindow();
     // Add the combined Panels to the JFrame
     getContentPane().add(container);
+    container.setBackground(Color.red);
   }
 
   @Override
@@ -155,7 +161,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
                       .BEAT_UNIT_LENGTH),
               editorPanel.getY());
     } else {
-      editorPanel.setLocation(32, 0);
+      editorPanel.setLocation(0, 0);
     }
 
     this.currentBeat = currentBeat;

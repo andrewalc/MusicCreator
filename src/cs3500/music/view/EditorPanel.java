@@ -15,6 +15,11 @@ import javax.swing.JPanel;
 import cs3500.music.model.Tones;
 
 
+/**
+ * Class for the editor panel. All painting methods account for scrolling and have and if
+ * statement dealing with the proper shift should the startingbeat be over the defined
+ * START_SCROLLING_AT_BEAT threshold in the VisualView.
+ */
 public class EditorPanel extends JPanel {
 
 
@@ -48,6 +53,7 @@ public class EditorPanel extends JPanel {
     this.notes = notes;
     generatePitchStrings();
     setFontAndRowHeight();
+    setBackground(Color.cyan);
 
 
   }
@@ -131,8 +137,8 @@ public class EditorPanel extends JPanel {
 
   @Override
   public Dimension getPreferredSize() {
-    return new Dimension(BORDER_SHIFT + PITCH_MIDI_GAP + rowWidth + BORDER_SHIFT,
-            TOP_SCREEN_SHIFT + (rowHeight * pitchStrings.size()));
+    return new Dimension((BORDER_SHIFT + PITCH_MIDI_GAP + rowWidth + BORDER_SHIFT),
+            TOP_SCREEN_SHIFT + (rowHeight * 36));
   }
 
   /**
@@ -153,9 +159,9 @@ public class EditorPanel extends JPanel {
       paintMeasureNumbers(g);
       paintRows(g);
       paintPlayLine(g);
-      paintCovers(g);
-      paintRowPitches(g);
       paintMeasureNumbers(g);
+      //paintCovers(g);
+      paintRowPitches(g);
 
 
     }
@@ -170,19 +176,19 @@ public class EditorPanel extends JPanel {
     // Go through all pitches we need to render as rows.
     for (String currentPitch : this.pitchStrings) {
 
-      // generate the Pitch headers
-      g.drawString(currentPitch, BORDER_SHIFT, spacing);
-      spacing += rowHeight;
+      if (currentBeat > VisualView.START_SCROLLING_AT_BEAT) {
+        // generate the Pitch headers
+        g.drawString(currentPitch, BORDER_SHIFT + ((currentBeat - VisualView
+                .START_SCROLLING_AT_BEAT) * BEAT_UNIT_LENGTH), spacing);
+        spacing += rowHeight;
+      } else {
+        // generate the Pitch headers
+        g.drawString(currentPitch, BORDER_SHIFT, spacing);
+        spacing += rowHeight;
+      }
     }
   }
 
-  private void paintCovers(Graphics g) {
-    g.setColor(Color.gray);
-    g.fillRect(BORDER_SHIFT, fontSize, PITCH_MIDI_GAP - 3,
-            this.getHeight());
-    g.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + (BEAT_UNIT_LENGTH * 68) + 3, fontSize, 100,
-            this.getHeight());
-  }
 
   /**
    * Draws the red play line at the current beat of the editor.
@@ -199,6 +205,9 @@ public class EditorPanel extends JPanel {
             BORDER_SHIFT + PITCH_MIDI_GAP + (this.currentBeat * BEAT_UNIT_LENGTH),
             TOP_SCREEN_SHIFT + (rowHeight * this.pitchStrings.size()) - fontSize);
     g.setColor(Color.BLACK);
+    System.out.println("x: " + (BORDER_SHIFT + PITCH_MIDI_GAP + (this.currentBeat *
+            BEAT_UNIT_LENGTH))
+            + " y: " + (TOP_SCREEN_SHIFT - fontSize));
   }
 
 
@@ -295,4 +304,28 @@ public class EditorPanel extends JPanel {
     repaint();
 
   }
+
+
+  private void paintCovers(Graphics g) {
+    int lineStroke = 1;
+    int initialPositionFurthest = PITCH_MIDI_GAP + (BEAT_UNIT_LENGTH * 69) - 8;
+    if (currentBeat > VisualView.START_SCROLLING_AT_BEAT) {
+      g.setColor(Color.RED);
+      g.fillRect(((currentBeat - VisualView.START_SCROLLING_AT_BEAT) * BEAT_UNIT_LENGTH),
+              fontSize,
+              BORDER_SHIFT + PITCH_MIDI_GAP - lineStroke,
+              this.getHeight());
+      g.fillRect(((currentBeat - VisualView.START_SCROLLING_AT_BEAT) * BEAT_UNIT_LENGTH) +
+                      initialPositionFurthest, fontSize, 500,
+              this.getHeight());
+    } else {
+      g.setColor(Color.WHITE);
+      g.fillRect(0, fontSize, BORDER_SHIFT + PITCH_MIDI_GAP - lineStroke,
+              this.getHeight());
+      g.fillRect(initialPositionFurthest, fontSize, 500,
+              this.getHeight());
+    }
+
+  }
+
 }
