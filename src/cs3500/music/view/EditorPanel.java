@@ -137,8 +137,9 @@ public class EditorPanel extends JPanel {
 
   @Override
   public Dimension getPreferredSize() {
-    return new Dimension((BORDER_SHIFT + PITCH_MIDI_GAP + rowWidth + BORDER_SHIFT),
-            TOP_SCREEN_SHIFT + (rowHeight * 36));
+    System.out.println(Integer.MAX_VALUE / BEAT_UNIT_LENGTH);
+    return new Dimension(Integer.MAX_VALUE,
+            TOP_SCREEN_SHIFT + (rowHeight * 23));
   }
 
   /**

@@ -83,9 +83,9 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
     // Create a container to combine both JPanels, set the layout.
     container = new JPanel();
-    container.setLayout(new FlowLayout());
+    container.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 450));
 
-    container.setMinimumSize(editorPanel.getPreferredSize());
+    //container.setMinimumSize(editorPanel.getPreferredSize());
     GridBagConstraints c = new GridBagConstraints();
 
 
@@ -111,7 +111,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
 //    c.gridy = 1;
 //    c.ipady = (int) (keyboardPanel.getPreferredSize().getHeight());
 //    c.insets = new Insets(20, 0, 100, 0);  //top padding
-    container.add(keyboardPanel);
+    container.add(keyboardPanel, FlowLayout.LEFT);
     container.setFocusable(true);
     container.requestFocusInWindow();
     // Add the combined Panels to the JFrame
