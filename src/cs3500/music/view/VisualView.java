@@ -43,6 +43,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   private KeyboardPanel keyboardPanel;
   private JPanel container;
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
+  private int START_SCROLLING_AT_BEAT = 16;
 
 
   /**
@@ -85,19 +86,19 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
 
     // Enable scroll bars.
-    JScrollPane editorPanelScrolling = new JScrollPane(editorPanel);
-    editorPanelScrolling.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-    editorPanelScrolling.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-    editorPanelScrolling.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+//    JScrollPane editorPanelScrolling = new JScrollPane(editorPanel);
+//    editorPanelScrolling.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//    editorPanelScrolling.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+//    editorPanelScrolling.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
 
     // Add the editorPanel to the container in the correct location with constraints.
     c.anchor = PAGE_START;
     c.fill = HORIZONTAL;
     c.gridx = 0;
     c.gridy = 0;
-    c.ipadx = (int) editorPanelScrolling.getPreferredSize().getWidth();
+    c.ipadx = (int) editorPanel.getPreferredSize().getWidth();
     c.ipady = (int) (getHeight() + 100 - (keyboardPanel.getPreferredSize().getHeight()));
-    container.add(editorPanelScrolling, c);
+    container.add(editorPanel, c);
 
     // Add the keyboardPanel to the container in the correct location.
     c.anchor = LAST_LINE_END;
@@ -110,7 +111,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
     container.requestFocusInWindow();
     // Add the combined Panels to the JFrame
     getContentPane().add(container);
-
   }
 
   @Override
@@ -150,6 +150,14 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
   @Override
   public void setCurrentBeat(int currentBeat) {
+    if (currentBeat > START_SCROLLING_AT_BEAT) {
+      editorPanel.setLocation((-1 * (currentBeat - START_SCROLLING_AT_BEAT) * EditorPanel
+                      .BEAT_UNIT_LENGTH),
+              editorPanel.getY());
+    } else {
+      editorPanel.setLocation(32, 0);
+    }
+
     this.currentBeat = currentBeat;
     editorPanel.setCurrentBeat(this.currentBeat);
     keyboardPanel.setNotes(getNotesAtBeat(notes, currentBeat));
@@ -202,7 +210,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
     if (currentBeat + 1 <= maxBeats) {
       setCurrentBeat(currentBeat + 1);
     }
-
   }
 
   @Override
@@ -255,6 +262,8 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
   @Override
   public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+
+
     this.notes = allNotes;
     this.maxBeats = getMaxBeatFromNotes() + 1; // IMPORTANT TO PRETEND IT IS 1 BEAT LONGER SEE TOP.
 

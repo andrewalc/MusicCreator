@@ -21,8 +21,8 @@ public class EditorPanel extends JPanel {
   public static final int TOP_SCREEN_SHIFT = 100;
   public static final int BORDER_SHIFT = 70;
   public static final int PITCH_MIDI_GAP = 80;
-  private static final int BEAT_UNIT_LENGTH = 20;
-  private static final int MEASURE_WIDTH = BEAT_UNIT_LENGTH * 4;
+  public static final int BEAT_UNIT_LENGTH = 20;
+  public static final int MEASURE_WIDTH = BEAT_UNIT_LENGTH * 4;
   private int rowHeight;
   private int fontSize;
   private int rowWidth;
