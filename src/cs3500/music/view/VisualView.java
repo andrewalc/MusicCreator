@@ -60,7 +60,8 @@ public class VisualView extends JFrame implements IMusicEditorView {
     // JFrame Settings
     this.notes = notes;
     this.currentBeat = 0;
-    this.maxBeats = this.getMaxBeatFromNotes();
+    // IMPORTANT TO PRETEND IT IS 1 BEAT LONGER SEE TOP JAVA DOC.
+    this.maxBeats = this.getMaxBeatFromNotes() + 1;
     setSize(1600, 900);
     setResizable(false);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -170,7 +171,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   private ArrayList<ArrayList<Integer>> getNotesAtBeat(Map<Integer, ArrayList<ArrayList<Integer>>>
                                                                notes, int beat) throws
           IllegalArgumentException {
-    if (beat < 0 || beat > maxBeats + 1) { //THE +1 HERE IS IMPORTANT
+    if (beat < 0 || beat > maxBeats) {
       throw new IllegalArgumentException("beat must be within the beat bounds of the music piece.");
     }
     ArrayList<ArrayList<Integer>> notesAtBeat = new ArrayList<ArrayList<Integer>>();
@@ -198,7 +199,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
   @Override
   public void forwardOneBeat() {
-    if (currentBeat <= maxBeats) {
+    if (currentBeat + 1 <= maxBeats) {
       setCurrentBeat(currentBeat + 1);
     }
 
@@ -229,7 +230,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   @Override
   public void goToEnd() {
 
-    this.setCurrentBeat(this.getMaxBeat() + 1);
+    this.setCurrentBeat(this.getMaxBeat());
   }
 
   @Override
@@ -255,7 +256,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   @Override
   public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
     this.notes = allNotes;
-    this.maxBeats = getMaxBeatFromNotes();
+    this.maxBeats = getMaxBeatFromNotes() + 1; // IMPORTANT TO PRETEND IT IS 1 BEAT LONGER SEE TOP.
 
     // Copy the Map of notes.
     TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes = new TreeMap<>(new

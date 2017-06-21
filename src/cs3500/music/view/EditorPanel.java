@@ -43,7 +43,7 @@ public class EditorPanel extends JPanel {
   public EditorPanel(Map<Integer, ArrayList<ArrayList<Integer>>> notes, int maxBeats) {
     this.currentBeat = 0;
     this.maxBeats = maxBeats;
-    this.rowWidth = (this.maxBeats * BEAT_UNIT_LENGTH) + BEAT_UNIT_LENGTH;
+    this.rowWidth = (this.maxBeats * BEAT_UNIT_LENGTH);
     this.numOfMeasures = rowWidth / MEASURE_WIDTH;
     this.notes = notes;
     generatePitchStrings();
@@ -288,7 +288,7 @@ public class EditorPanel extends JPanel {
           maxBeats) {
     this.notes = sortedNotes;
     this.maxBeats = maxBeats;
-    this.rowWidth = (this.maxBeats * BEAT_UNIT_LENGTH) + BEAT_UNIT_LENGTH;
+    this.rowWidth = (this.maxBeats * BEAT_UNIT_LENGTH);
     this.numOfMeasures = rowWidth / MEASURE_WIDTH;
     generatePitchStrings();
     setFontAndRowHeight();
