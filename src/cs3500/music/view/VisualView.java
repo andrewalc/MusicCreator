@@ -146,7 +146,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
   @Override
   public void setCurrentBeat(int currentBeat) {
-    System.out.println(currentBeat + " " + maxBeats);
     this.currentBeat = currentBeat;
     editorPanel.setCurrentBeat(this.currentBeat);
     keyboardPanel.setNotes(getNotesAtBeat(notes, currentBeat));
@@ -253,7 +252,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
     System.out.println(currentBeat + " " + maxBeats);
     this.notes = allNotes;
-    int keepcurrentBeat = this.currentBeat;
+    this.maxBeats = this.getMaxBeatFromNotes();
     // Copy the Map of notes.
     TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes = new TreeMap<>(new
             IntegerComparator());

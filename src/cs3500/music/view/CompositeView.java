@@ -93,7 +93,6 @@ public class CompositeView implements IMusicEditorView {
 
   @Override
   public void updateCurrentBeat() {
-    System.out.println("updating");
     visualView.setCurrentBeat(midiView.getCurrentBeat());
     midiView.updateTempo();
 

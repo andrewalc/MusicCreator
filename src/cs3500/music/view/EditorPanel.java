@@ -46,7 +46,25 @@ public class EditorPanel extends JPanel {
     this.rowWidth = (this.maxBeats * BEAT_UNIT_LENGTH) + BEAT_UNIT_LENGTH;
     this.numOfMeasures = rowWidth / MEASURE_WIDTH;
     this.notes = notes;
+    generatePitchStrings();
+    setFontAndRowHeight();
 
+
+  }
+
+  private void setFontAndRowHeight() {
+    // Row height and font scaling for bigger sets of notes.
+    if (pitchStrings.size() > 25) {
+      this.fontSize = 13;
+      this.rowHeight = 13;
+    } else {
+      this.fontSize = 20;
+      this.rowHeight = 20;
+    }
+  }
+
+  private void generatePitchStrings() {
+    pitchStrings = new ArrayList<>();
     // Generate list of pitch strings
     if (this.getNumberOfNotes() > 1) {
       int currPitch = this.getHighestPitch();
@@ -59,15 +77,6 @@ public class EditorPanel extends JPanel {
           currPitch -= 1;
         }
       }
-    }
-
-    // Row height and font scaling for bigger sets of notes.
-    if (pitchStrings.size() > 25) {
-      this.fontSize = 13;
-      this.rowHeight = 13;
-    } else {
-      this.fontSize = 20;
-      this.rowHeight = 20;
     }
   }
 
@@ -279,6 +288,10 @@ public class EditorPanel extends JPanel {
           maxBeats) {
     this.notes = sortedNotes;
     this.maxBeats = maxBeats;
+    this.rowWidth = (this.maxBeats * BEAT_UNIT_LENGTH) + BEAT_UNIT_LENGTH;
+    this.numOfMeasures = rowWidth / MEASURE_WIDTH;
+    generatePitchStrings();
+    setFontAndRowHeight();
     repaint();
 
   }

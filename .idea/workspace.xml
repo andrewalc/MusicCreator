@@ -8,20 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="106c4025-9472-47f2-8388-2e1e2426393c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/EditorPanel.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/EditorPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/MusicEditor.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/MusicEditor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/ViewFactory.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/ViewFactory.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/controller/MusicEditorController.java" afterPath="$PROJECT_DIR$/src/cs3500/music/controller/MusicEditorController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/controller/PianoMouseListener.java" afterPath="$PROJECT_DIR$/src/cs3500/music/controller/PianoMouseListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/CompositeView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/CompositeView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/ConsoleView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/ConsoleView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/IMusicEditorView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/IMusicEditorView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/KeyboardPanel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/KeyboardPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/MidiView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/MidiView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/ViewFactory.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/ViewFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/VisualView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/VisualView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/cs3500/music/tests/TestMidiView.java" afterPath="$PROJECT_DIR$/test/cs3500/music/tests/TestMidiView.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,17 +36,17 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="VisualView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="VisualView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/VisualView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="148" column="53" lean-forward="false" selection-start-line="148" selection-start-column="53" selection-end-line="148" selection-end-column="53" />
+            <state relative-caret-position="190">
+              <caret line="169" column="35" lean-forward="false" selection-start-line="169" selection-start-column="35" selection-end-line="169" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4629#4630#0" expanded="true" />
                 <element signature="e#4654#4655#0" expanded="true" />
+                <element signature="e#7911#7912#0" expanded="true" />
                 <element signature="e#7965#7966#0" expanded="true" />
-                <element signature="e#8019#8020#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,12 +65,13 @@
       <file leaf-file-name="CompositeView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/CompositeView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="96" column="22" lean-forward="false" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
+            <state relative-caret-position="178">
+              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2478#2479#0" expanded="true" />
-                <element signature="e#2529#2530#0" expanded="true" />
+                <element signature="e#1162#1163#0" expanded="true" />
+                <element signature="e#2442#2443#0" expanded="true" />
+                <element signature="e#2493#2494#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -89,18 +80,20 @@
       <file leaf-file-name="EditorPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3065">
-              <caret line="49" column="37" lean-forward="true" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
-              <folding />
+            <state relative-caret-position="-1490">
+              <caret line="169" column="56" lean-forward="true" selection-start-line="169" selection-start-column="56" selection-end-line="169" selection-end-column="56" />
+              <folding>
+                <element signature="e#833#841#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KeyboardListener.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="KeyboardListener.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/controller/KeyboardListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="27" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="338">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -108,11 +101,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="RealTimeSequencer.class" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/jre/lib/rt.jar!/com/sun/media/sound/RealTimeSequencer.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="178">
+              <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="MidiView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/MidiView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="249" column="11" lean-forward="true" selection-start-line="249" selection-start-column="11" selection-end-line="249" selection-end-column="11" />
+            <state relative-caret-position="222">
+              <caret line="244" column="50" lean-forward="false" selection-start-line="244" selection-start-column="50" selection-end-line="244" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -123,11 +126,13 @@
       <file leaf-file-name="MusicEditorController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs3500/music/controller/MusicEditorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="65" column="21" lean-forward="false" selection-start-line="65" selection-start-column="21" selection-end-line="65" selection-end-column="21" />
+            <state relative-caret-position="187">
+              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2925#2944#0" expanded="true" />
+                <element signature="e#666#667#0" expanded="true" />
+                <element signature="e#715#716#0" expanded="true" />
+                <element signature="e#2928#2947#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,18 +144,6 @@
             <state relative-caret-position="293">
               <caret line="33" column="60" lean-forward="false" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="60" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PianoMouseListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/controller/PianoMouseListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -178,24 +171,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sy</find>
-      <find>sysy</find>
-      <find>sys</find>
-      <find>systenm</find>
-      <find>systen</find>
-      <find>syste</find>
-      <find>system</find>
-      <find>system.</find>
-      <find>system.o</find>
-      <find>system.ou</find>
-      <find>system.out</find>
-      <find>system.out.</find>
-      <find>system.out.p</find>
-      <find>system.out.pri</find>
-      <find>system.out.prin</find>
-      <find>system.out.print</find>
-      <find>system.out.printl</find>
-      <find>system.out.println</find>
       <find>getNotes</find>
       <find>getMaxBeat</find>
       <find>updateInfo</find>
@@ -206,8 +181,26 @@
       <find>maxBe</find>
       <find>maxBeat</find>
       <find>maxBeats</find>
-      <find>getMax</find>
+      <find>S</find>
+      <find>System</find>
+      <find>System.</find>
+      <find>sys</find>
+      <find>system</find>
+      <find>system.</find>
+      <find>system.o</find>
+      <find>system.ou</find>
+      <find>system.outprin</find>
+      <find>system.outpri</find>
+      <find>system.outpr</find>
+      <find>system.outp</find>
+      <find>system.out</find>
+      <find>system.out.</find>
+      <find>system.out.print</find>
+      <find>system.out.printl</find>
+      <find>system.out.println</find>
+      <find>updateV</find>
       <find>rowWid</find>
+      <find>getMax</find>
     </findStrings>
     <replaceStrings>
       <replace>2</replace>
@@ -295,10 +288,10 @@
         <option value="$PROJECT_DIR$/src/cs3500/music/controller/PianoMouseListener.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/controller/MusicEditorController.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/view/MusicEditor.java" />
-        <option value="$PROJECT_DIR$/src/cs3500/music/view/CompositeView.java" />
-        <option value="$PROJECT_DIR$/src/cs3500/music/view/VisualView.java" />
-        <option value="$PROJECT_DIR$/src/cs3500/music/view/MidiView.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java" />
+        <option value="$PROJECT_DIR$/src/cs3500/music/view/CompositeView.java" />
+        <option value="$PROJECT_DIR$/src/cs3500/music/view/MidiView.java" />
+        <option value="$PROJECT_DIR$/src/cs3500/music/view/VisualView.java" />
       </list>
     </option>
   </component>
@@ -1102,7 +1095,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498004088928</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Adding notes works with music">
+      <created>1498016689417</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1498016689417</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1254,7 +1254,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Keyboard before Container KeyListener" />
     <MESSAGE value="White keys good. Black keys next." />
     <MESSAGE value="Fixed white keys not updating switchCount at all." />
     <MESSAGE value="THE KEYBOARD WORKS" />
@@ -1279,7 +1278,8 @@
     <MESSAGE value="adding keylistener" />
     <MESSAGE value="Composite is stable." />
     <MESSAGE value="Adding notes works visually" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding notes works visually" />
+    <MESSAGE value="Adding notes works with music" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding notes works with music" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1293,13 +1293,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mystery-1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ChampionCynthia.txt" />
     <entry file="file://$PROJECT_DIR$/imabeliever.txt" />
     <entry file="file://$PROJECT_DIR$/ThrowbackGalaxy.txt" />
@@ -1618,17 +1611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/controller/MusicEditorController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="65" column="21" lean-forward="false" selection-start-line="65" selection-start-column="21" selection-end-line="65" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2925#2944#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/IMusicEditorView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -1639,54 +1621,78 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/CompositeView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="96" column="22" lean-forward="false" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
+        <state relative-caret-position="178">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2478#2479#0" expanded="true" />
-            <element signature="e#2529#2530#0" expanded="true" />
+            <element signature="e#1162#1163#0" expanded="true" />
+            <element signature="e#2442#2443#0" expanded="true" />
+            <element signature="e#2493#2494#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/VisualView.java">
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/controller/MusicEditorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="148" column="53" lean-forward="false" selection-start-line="148" selection-start-column="53" selection-end-line="148" selection-end-column="53" />
+        <state relative-caret-position="187">
+          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4629#4630#0" expanded="true" />
-            <element signature="e#4654#4655#0" expanded="true" />
-            <element signature="e#7965#7966#0" expanded="true" />
-            <element signature="e#8019#8020#0" expanded="true" />
+            <element signature="e#666#667#0" expanded="true" />
+            <element signature="e#715#716#0" expanded="true" />
+            <element signature="e#2928#2947#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/controller/KeyboardListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/jre/lib/rt.jar!/com/sun/media/sound/RealTimeSequencer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1490">
+          <caret line="169" column="56" lean-forward="true" selection-start-line="169" selection-start-column="56" selection-end-line="169" selection-end-column="56" />
+          <folding>
+            <element signature="e#833#841#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/MidiView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="249" column="11" lean-forward="true" selection-start-line="249" selection-start-column="11" selection-end-line="249" selection-end-column="11" />
+        <state relative-caret-position="222">
+          <caret line="244" column="50" lean-forward="false" selection-start-line="244" selection-start-column="50" selection-end-line="244" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/VisualView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3065">
-          <caret line="49" column="37" lean-forward="true" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/controller/KeyboardListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state relative-caret-position="190">
+          <caret line="169" column="35" lean-forward="false" selection-start-line="169" selection-start-column="35" selection-end-line="169" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4629#4630#0" expanded="true" />
+            <element signature="e#4654#4655#0" expanded="true" />
+            <element signature="e#7911#7912#0" expanded="true" />
+            <element signature="e#7965#7966#0" expanded="true" />
           </folding>
         </state>
       </provider>
