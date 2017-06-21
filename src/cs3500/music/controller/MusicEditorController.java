@@ -105,6 +105,7 @@ public class MusicEditorController {
         updateView();
         view.forwardOneBeat();
 
+
         // we added a note, so a change was made and will require rebuilding audio.
         changeMade = true;
       } catch (IllegalArgumentException e) {

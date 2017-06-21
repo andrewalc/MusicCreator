@@ -195,7 +195,7 @@ public class MidiView implements IMusicEditorView {
     Track seqTrack = sequence.createTrack();
 
 
-    for (int beat = 0; beat < this.getModelMaxBeats(); beat++) {
+    for (int beat = 0; beat <= this.getModelMaxBeats(); beat++) {
       ArrayList<ArrayList<Integer>> currentNotes = this.getNotesAtBeat(beat);
       // Play all notes at the current beat.
       for (ArrayList<Integer> note : currentNotes) {
