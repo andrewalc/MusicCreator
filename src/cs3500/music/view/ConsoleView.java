@@ -115,7 +115,12 @@ public class ConsoleView implements IMusicEditorView {
   }
 
   @Override
-  public void updateView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+  public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+
+  }
+
+  @Override
+  public void rebuildMusic(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
 
   }
 }

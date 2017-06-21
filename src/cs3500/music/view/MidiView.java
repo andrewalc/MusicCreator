@@ -16,25 +16,27 @@ import javax.sound.midi.Track;
 
 import cs3500.music.controller.KeyboardListener;
 import cs3500.music.controller.PianoMouseListener;
-import cs3500.music.model.IMusicEditorModel;
 
 /**
  * A Music Editor View for playing midis.
  * EDIT: Updated to support new interface methods needed for functionality.
+ * Also removed the use of a model, instead uses the map of notes as input.
  */
 public class MidiView implements IMusicEditorView {
 
-  private IMusicEditorModel model;
+  private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
 
   private Sequencer sequencer;
+
+  private int tempo;
 
   /**
    * Constructor for a midi view. Require the input of the Music Editor Model to play the music of.
    *
-   * @param model a Music Editor Model to play notes off of.
+   * @param allNotes
    */
-  private MidiView(IMusicEditorModel model) {
-    this.model = model;
+  private MidiView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+    this.notes = allNotes;
 
     try {
       this.sequencer = MidiSystem.getSequencer();
@@ -43,6 +45,10 @@ public class MidiView implements IMusicEditorView {
       System.out.println(e.getMessage());
     }
 
+  }
+
+  public void setTempo(int tempo) {
+    this.tempo = tempo;
   }
 
   /**
@@ -55,10 +61,10 @@ public class MidiView implements IMusicEditorView {
      * Constructor for a MidiViewBuilder, requires a IMusicEditorModel to build a view of.
      * Initially built with a standard MidiSystem sequencer.
      *
-     * @param model Model to build a view of.
+     * @param allNotes Map of notes to build a view of.
      */
-    public MidiViewBuilder(IMusicEditorModel model) {
-      this.view = new MidiView(model);
+    public MidiViewBuilder(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+      this.view = new MidiView(allNotes);
     }
 
     /**
@@ -80,6 +86,17 @@ public class MidiView implements IMusicEditorView {
       this.view.setSequencer(sequencer);
       return this;
     }
+
+    /**
+     * Sets a new tempo.
+     *
+     * @param tempo Tempo to set
+     * @return The MIDIViewBuilder
+     */
+    public MidiViewBuilder setTempo(int tempo) {
+      this.view.setTempo(tempo);
+      return this;
+    }
   }
 
   /**
@@ -89,6 +106,48 @@ public class MidiView implements IMusicEditorView {
    */
   public void setSequencer(Sequencer sequencer) {
     this.sequencer = sequencer;
+  }
+
+  private int getModelMaxBeats() {
+    int potentialMaxBeats = 0;
+    for (ArrayList<ArrayList<Integer>> pitchList : this.notes.values()) {
+      for (ArrayList<Integer> note : pitchList) {
+        // if a note's ending beat is larger than the current potential last beat, update potential.
+        int endBeat = note.get(1);
+        if (endBeat > potentialMaxBeats) {
+          potentialMaxBeats = endBeat;
+        }
+      }
+    }
+    return potentialMaxBeats;
+  }
+
+  /**
+   * Returns all notes that are playing at the given beat in the given Map. Notes must be
+   * following the ArrayList of Integer format, represented as (int startingBeat,
+   * int endBeat, int instrument, int pitch, int volume).
+   *
+   * @param beat The beat to fetch notes playing at.
+   * @return An arraylist of notes playing at the given beat.
+   * @throws IllegalArgumentException If the given beat is out of range, must be atleast 0 and not
+   *                                  exceed maxBeats.
+   */
+  private ArrayList<ArrayList<Integer>> getNotesAtBeat(int beat) throws
+          IllegalArgumentException {
+    if (beat < 0 || beat > this.getModelMaxBeats()) {
+      throw new IllegalArgumentException("beat must be within the beat bounds of the music piece.");
+    }
+    ArrayList<ArrayList<Integer>> notesAtBeat = new ArrayList<ArrayList<Integer>>();
+    for (ArrayList<ArrayList<Integer>> pitchBucket : notes.values()) {
+      for (ArrayList<Integer> note : pitchBucket) {
+        int startingBeat = note.get(0);
+        int endBeat = note.get(1);
+        if (beat >= startingBeat && beat < endBeat + 1) {
+          notesAtBeat.add(note);
+        }
+      }
+    }
+    return notesAtBeat;
   }
 
 
@@ -130,13 +189,14 @@ public class MidiView implements IMusicEditorView {
    * @throws InvalidMidiDataException If sequence is given an unsupported division type.
    */
   public void updateNotes() throws InvalidMidiDataException {
+
     // Set up a sequence
     Sequence sequence = new Sequence(Sequence.PPQ, 1);
     Track seqTrack = sequence.createTrack();
 
 
-    for (int beat = 0; beat < model.getMaxBeats(); beat++) {
-      ArrayList<ArrayList<Integer>> currentNotes = model.getNotesAtBeat(beat);
+    for (int beat = 0; beat < this.getModelMaxBeats(); beat++) {
+      ArrayList<ArrayList<Integer>> currentNotes = this.getNotesAtBeat(beat);
       // Play all notes at the current beat.
       for (ArrayList<Integer> note : currentNotes) {
         int startingBeat = note.get(0);
@@ -158,6 +218,7 @@ public class MidiView implements IMusicEditorView {
       }
     }
 
+    System.out.println("Music built successfully.");
     // put the notes in the sequencer.
     sequencer.setSequence(sequence);
 
@@ -181,7 +242,7 @@ public class MidiView implements IMusicEditorView {
   @Override
   public void forwardOneBeat() {
     long potentialTick = sequencer.getTickPosition() + 1;
-    if (potentialTick <= sequencer.getTickLength() + 1) {
+    if (potentialTick <= sequencer.getTickLength()) {
       sequencer.setTickPosition(potentialTick);
     }
   }
@@ -197,11 +258,11 @@ public class MidiView implements IMusicEditorView {
   @Override
   public void startMusic() {
     sequencer.start();
-    sequencer.setTempoInMPQ(model.getTempo());
+    sequencer.setTempoInMPQ(this.tempo);
   }
 
   public void updateTempo() {
-    sequencer.setTempoInMPQ(model.getTempo());
+    sequencer.setTempoInMPQ(this.tempo);
   }
 
   @Override
@@ -216,7 +277,7 @@ public class MidiView implements IMusicEditorView {
 
   @Override
   public void goToEnd() {
-    sequencer.setTickPosition(sequencer.getTickLength() + 1);
+    sequencer.setTickPosition(sequencer.getTickLength());
 
   }
 
@@ -262,7 +323,24 @@ public class MidiView implements IMusicEditorView {
   }
 
   @Override
-  public void updateView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+  public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
 
+  }
+
+  @Override
+  public void rebuildMusic(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+    try {
+      int keepCurrentBeat = this.getCurrentBeat();
+      this.notes = allNotes;
+      sequencer.close();
+      this.sequencer = (MidiSystem.getSequencer());
+      sequencer.open();
+      updateNotes();
+      setCurrentBeat(keepCurrentBeat);
+    } catch (InvalidMidiDataException e) {
+      e.getMessage();
+    } catch (MidiUnavailableException e) {
+      e.printStackTrace();
+    }
   }
 }

@@ -49,5 +49,8 @@ public interface IMusicEditorView {
 
   int getKeyboardKeyPressed();
 
-  void updateView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes);
+  void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes);
+
+  void rebuildMusic(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes);
+
 }

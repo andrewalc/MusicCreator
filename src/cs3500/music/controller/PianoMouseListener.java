@@ -24,7 +24,6 @@ public class PianoMouseListener implements MouseListener {
 
   @Override
   public void mousePressed(MouseEvent e) {
-    System.out.println(e.getID());
     if (mousePressedMap.containsKey(e.getID())) {
       mousePressedMap.get(e.getID()).run();
     }

@@ -24,7 +24,9 @@ public class ViewFactory {
       return null;
     }
     if (viewType.equals("composite")) {
-      return new CompositeView(new MidiView.MidiViewBuilder(model).build(), new VisualView(model
+      MidiView.MidiViewBuilder builder = new MidiView.MidiViewBuilder(model.getAllNotes());
+      builder.setTempo(model.getTempo());
+      return new CompositeView(builder.build(), new VisualView(model
               .getAllNotes()));
     }
     if (viewType.equals("console")) {
@@ -34,7 +36,8 @@ public class ViewFactory {
       return new VisualView(model.getAllNotes());
     }
     if (viewType.equals("midi")) {
-      MidiView.MidiViewBuilder builder = new MidiView.MidiViewBuilder(model);
+      MidiView.MidiViewBuilder builder = new MidiView.MidiViewBuilder(model.getAllNotes());
+      builder.setTempo(model.getTempo());
       return builder.build();
     }
     throw new IllegalArgumentException("Invalid view type. Must one of: \"console\" , \"visual\"," +

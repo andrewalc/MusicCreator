@@ -38,6 +38,7 @@ public class CompositeView implements IMusicEditorView {
 
   @Override
   public void forwardOneBeat() {
+    System.out.println("forward");
     midiView.forwardOneBeat();
     updateCurrentBeat();
   }
@@ -92,6 +93,7 @@ public class CompositeView implements IMusicEditorView {
 
   @Override
   public void updateCurrentBeat() {
+    System.out.println("updating");
     visualView.setCurrentBeat(midiView.getCurrentBeat());
     midiView.updateTempo();
 
@@ -119,9 +121,15 @@ public class CompositeView implements IMusicEditorView {
   }
 
   @Override
-  public void updateView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
-    visualView.updateView(allNotes);
-    midiView.updateView(allNotes);
+  public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+    visualView.updateVisView(allNotes);
+  }
+
+  @Override
+  public void rebuildMusic(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+    System.out.println("Rebuilding music...");
+    midiView.rebuildMusic(allNotes);
+
   }
 
 }

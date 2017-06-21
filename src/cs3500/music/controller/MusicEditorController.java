@@ -2,14 +2,12 @@ package cs3500.music.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import cs3500.music.model.IMusicEditorModel;
 import cs3500.music.model.Tones;
 import cs3500.music.view.IMusicEditorView;
-import cs3500.music.view.ViewFactory;
 
 /**
  * Created by Andrew Alcala on 6/19/2017.
@@ -17,6 +15,7 @@ import cs3500.music.view.ViewFactory;
 public class MusicEditorController {
   IMusicEditorModel model;
   IMusicEditorView view;
+  boolean changeMade = false;
 
   public MusicEditorController(IMusicEditorModel model, IMusicEditorView view) {
     this.model = model;
@@ -26,7 +25,7 @@ public class MusicEditorController {
   }
 
   void updateView() {
-    view.updateView(model.getAllNotes());
+    view.updateVisView(model.getAllNotes());
   }
 
   /**
@@ -55,7 +54,12 @@ public class MusicEditorController {
       if (view.isPlayingMusic()) {
         view.pauseMusic();
       } else {
+        if (changeMade) {
+          view.rebuildMusic(model.getAllNotes());
+          changeMade = false;
+        }
         view.startMusic();
+
       }
     });
     keyPresses.put(KeyEvent.VK_RIGHT, () -> { //the contents of MakeCaps below
@@ -65,6 +69,10 @@ public class MusicEditorController {
       view.backOneBeat();
     });
     keyPresses.put(KeyEvent.VK_HOME, () -> { //the contents of MakeCaps below
+      if (view.isPlayingMusic() && changeMade) {
+        view.rebuildMusic(model.getAllNotes());
+        changeMade = false;
+      }
       view.goToBeginning();
     });
     keyPresses.put(KeyEvent.VK_END, () -> { //the contents of MakeCaps below
@@ -86,9 +94,12 @@ public class MusicEditorController {
         int pitch = view.getKeyboardKeyPressed();
         int numTones = Tones.values().length;
         model.addNote(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1,
-                view.getCurrentBeat(), 1, 0, 10);
+                view.getCurrentBeat(), 1, 0, 100);
         view.forwardOneBeat();
         updateView();
+
+        // we added a note, so a change was made and will require rebuilding audio.
+        changeMade = true;
       } catch (IllegalArgumentException e) {
         e.getMessage();
       }

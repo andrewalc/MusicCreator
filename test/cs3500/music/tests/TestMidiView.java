@@ -34,7 +34,7 @@ public class TestMidiView {
     }
     IMusicEditorModel model = builder.build();
 
-    MidiView.MidiViewBuilder mockViewBuilder = new MidiView.MidiViewBuilder(model);
+    MidiView.MidiViewBuilder mockViewBuilder = new MidiView.MidiViewBuilder(model.getAllNotes());
     mockViewBuilder.setSequencer(mock);
     mockView = mockViewBuilder.build();
   }
@@ -157,7 +157,8 @@ public class TestMidiView {
   public void testMidiViewEmpty() {
     MusicEditorModel.MusicEditorBuilder builder = new MusicEditorModel.MusicEditorBuilder();
     builder.setTempo(245);
-    MidiView.MidiViewBuilder mockViewBuilderTest = new MidiView.MidiViewBuilder(builder.build());
+    MidiView.MidiViewBuilder mockViewBuilderTest = new MidiView.MidiViewBuilder(builder.build()
+            .getAllNotes());
     mockViewBuilderTest.setSequencer(mock);
     MidiView mockViewTest = mockViewBuilderTest.build();
     mockViewTest.initialize();
@@ -174,7 +175,8 @@ public class TestMidiView {
     builder.addNote(1, 4, 5, 24, 12);
     builder.addNote(2, 3, 4, 55, 42);
     builder.setTempo(245);
-    MidiView.MidiViewBuilder mockViewBuilderTest = new MidiView.MidiViewBuilder(builder.build());
+    MidiView.MidiViewBuilder mockViewBuilderTest = new MidiView.MidiViewBuilder(builder.build()
+            .getAllNotes());
     mockViewBuilderTest.setSequencer(mock);
     MidiView mockViewTest = mockViewBuilderTest.build();
     mockViewTest.initialize();
@@ -199,7 +201,8 @@ public class TestMidiView {
     builder.addNote(53, 67, 4, 64, 42);
     builder.addNote(100, 3000, 4, 33, 42);
     builder.setTempo(2342);
-    MidiView.MidiViewBuilder mockViewBuilderTest = new MidiView.MidiViewBuilder(builder.build());
+    MidiView.MidiViewBuilder mockViewBuilderTest = new MidiView.MidiViewBuilder(builder.build()
+            .getAllNotes());
     mockViewBuilderTest.setSequencer(mock);
     MidiView mockViewTest = mockViewBuilderTest.build();
     mockViewTest.initialize();

@@ -42,7 +42,6 @@ public class KeyboardPanel extends JPanel {
     this.liveNotes = liveNotes;
     this.makeBlackPianoKeyHitBoxes();
     this.makeWhitePianoKeyHitBoxes();
-    System.out.println(keyboardHitBoxes.keySet().toString());
   }
 
 
