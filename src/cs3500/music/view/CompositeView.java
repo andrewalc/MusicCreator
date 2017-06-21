@@ -1,6 +1,10 @@
 package cs3500.music.view;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import cs3500.music.controller.KeyboardListener;
+import cs3500.music.controller.PianoMouseListener;
 
 /**
  * A Composite Music Editor View, combining both the visual and midi views into one synchronized
@@ -88,7 +92,6 @@ public class CompositeView implements IMusicEditorView {
 
   @Override
   public void updateCurrentBeat() {
-    System.out.println(visualView.getCurrentBeat() + " " + midiView.getCurrentBeat());
     visualView.setCurrentBeat(midiView.getCurrentBeat());
     midiView.updateTempo();
 
@@ -103,6 +106,22 @@ public class CompositeView implements IMusicEditorView {
   @Override
   public boolean isPlayingMusic() {
     return midiView.isPlayingMusic();
+  }
+
+  @Override
+  public void addMouseListener(PianoMouseListener mouseListener) {
+    visualView.addMouseListener(mouseListener);
+  }
+
+  @Override
+  public int getKeyboardKeyPressed() {
+    return visualView.getKeyboardKeyPressed();
+  }
+
+  @Override
+  public void updateView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+    visualView.updateView(allNotes);
+    midiView.updateView(allNotes);
   }
 
 }

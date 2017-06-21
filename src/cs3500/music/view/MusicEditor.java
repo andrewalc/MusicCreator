@@ -31,7 +31,7 @@ class MusicEditor {
     // Build a Music editor model with notes from the file given.
     MusicEditorModel.MusicEditorBuilder modelBuilder = new MusicEditorModel.MusicEditorBuilder();
     try {
-      MusicReader.parseFile(new FileReader("mystery-1.txt"), modelBuilder);
+      MusicReader.parseFile(new FileReader("mary-little-lamb.txt"), modelBuilder);
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }

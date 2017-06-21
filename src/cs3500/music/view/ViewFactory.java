@@ -25,13 +25,13 @@ public class ViewFactory {
     }
     if (viewType.equals("composite")) {
       return new CompositeView(new MidiView.MidiViewBuilder(model).build(), new VisualView(model
-              .getAllNotes(), model.getMaxBeats()));
+              .getAllNotes()));
     }
     if (viewType.equals("console")) {
       return new ConsoleView(model.toString());
     }
     if (viewType.equals("visual")) {
-      return new VisualView(model.getAllNotes(), model.getMaxBeats());
+      return new VisualView(model.getAllNotes());
     }
     if (viewType.equals("midi")) {
       MidiView.MidiViewBuilder builder = new MidiView.MidiViewBuilder(model);

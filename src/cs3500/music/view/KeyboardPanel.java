@@ -1,9 +1,11 @@
 package cs3500.music.view;
 
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Dimension;
+import org.w3c.dom.css.Rect;
+
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import javax.swing.JPanel;
 
@@ -24,7 +26,10 @@ public class KeyboardPanel extends JPanel {
   public static final int BLKEY_WIDTH = 10;
   public static final int BLKEY_HEIGHT = 150;
 
-  ArrayList<ArrayList<Integer>> liveNotes;
+
+  private LinkedHashMap<Rectangle, Integer> keyboardHitBoxes = new LinkedHashMap<>();
+
+  private ArrayList<ArrayList<Integer>> liveNotes;
 
   /**
    * Constructor for a KeyboardPanel. Requires a list of notes (in the Arraylist Integer format)
@@ -33,8 +38,13 @@ public class KeyboardPanel extends JPanel {
    * @param liveNotes A list of notes representing all notes currently being played.
    */
   public KeyboardPanel(ArrayList<ArrayList<Integer>> liveNotes) {
+
     this.liveNotes = liveNotes;
+    this.makeBlackPianoKeyHitBoxes();
+    this.makeWhitePianoKeyHitBoxes();
+    System.out.println(keyboardHitBoxes.keySet().toString());
   }
+
 
   /**
    * Sets the arraylist of currently playing notes to the given Arraylist of notes.
@@ -74,6 +84,71 @@ public class KeyboardPanel extends JPanel {
     }
     drawWhiteKeys(g, rangeOfPitches);
     drawBlackKeys(g, rangeOfPitches);
+  }
+
+  private void makeBlackPianoKeyHitBoxes() {
+    // blackKeyNumber represents the MIDI pitch of the key currently being drawn. Should be
+    // incremented by 2 each iteration, except when there is no next black key. In that case,
+    // keyNumber increments by 1.
+    int blackKeyNumber = 25;
+    // Counter for sets of keys developed. If it hits 3 or 7, then there is no black key
+    // so the keyNumber will be incremented by 1 instead. Once it hits 7, reset to 1.
+    int blackSwitchCounter = 1;
+
+    // Generates 10 octaves of black keys.
+    for (int i = 1; i <= NUM_WHKEYS; i++) {
+      if (blackSwitchCounter != 3 && blackSwitchCounter != 7) {
+        // Put a hitbox of the key in our hitbox map..
+        keyboardHitBoxes.put(new Rectangle(i * WHKEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel
+                .BORDER_SHIFT,
+                0,
+                BLKEY_WIDTH,
+                BLKEY_HEIGHT), blackKeyNumber);
+      }
+
+      // Manage blackKeyNumber incrementation behavior using the switch counter.
+      if (blackSwitchCounter == 3 || blackSwitchCounter == 7) {
+        blackKeyNumber += 1;
+        if (blackSwitchCounter == 7) {
+          blackSwitchCounter = 1;
+        } else {
+          blackSwitchCounter += 1;
+        }
+      } else {
+        blackKeyNumber += 2;
+        blackSwitchCounter += 1;
+      }
+    }
+  }
+
+  private void makeWhitePianoKeyHitBoxes() {
+    // keyNumber represents the MIDI pitch of the key currently being drawn. Should be incremented
+    // by 2 each iteration, except when there is no next black key. In that case, keyNumber
+    // increments by 1.
+    int keyNumber = 24;
+    // Counter for sets of keys developed. If it hits 3 or 7, then there is no attached black key
+    // so the keyNumber will be incremented by 1 instead. Once it hits 7, reset to 1.
+    int switchCounter = 1;
+
+    // Generate 10 octaves of white keys.
+    for (int i = 0; i < NUM_WHKEYS; i++) {
+
+      // Put a hitbox of the key in our hitbox map..
+      keyboardHitBoxes.put(new Rectangle((i * WHKEY_WIDTH) + EditorPanel.BORDER_SHIFT,
+              0, WHKEY_WIDTH, WHKEY_HEIGHT), keyNumber);
+      // Manage keyNumber incrementation behavior using the switch counter.
+      if (switchCounter == 3 || switchCounter == 7) {
+        keyNumber += 1;
+        if (switchCounter == 7) {
+          switchCounter = 1;
+        } else {
+          switchCounter += 1;
+        }
+      } else {
+        keyNumber += 2;
+        switchCounter += 1;
+      }
+    }
   }
 
 
@@ -179,5 +254,23 @@ public class KeyboardPanel extends JPanel {
     }
   }
 
+  public HashMap<Rectangle, Integer> getKeyboardHitBoxes() {
+    return new HashMap<>(keyboardHitBoxes);
+  }
 
+
+  public int getKeyboardKeyPressed() throws IllegalArgumentException {
+    Point clickLocation = this.getMousePosition();
+    System.out.println(clickLocation);
+    for (Rectangle rectangle : keyboardHitBoxes.keySet()) {
+      if (rectangle.contains(clickLocation)) {
+        return keyboardHitBoxes.get(rectangle);
+      }
+    }
+    throw new IllegalArgumentException("Click location is not ontop of a key");
+  }
+
+  public void updateInfo(ArrayList<ArrayList<Integer>> notesAtBeat) {
+    setNotes(notesAtBeat);
+  }
 }

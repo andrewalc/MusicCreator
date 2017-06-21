@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JPanel;
 
@@ -27,6 +28,7 @@ public class EditorPanel extends JPanel {
   private int rowWidth;
   private int numOfMeasures;
   private int currentBeat;
+  private int maxBeats;
   private ArrayList<String> pitchStrings = new ArrayList<String>();
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
 
@@ -40,7 +42,8 @@ public class EditorPanel extends JPanel {
    */
   public EditorPanel(Map<Integer, ArrayList<ArrayList<Integer>>> notes, int maxBeats) {
     this.currentBeat = 0;
-    this.rowWidth = maxBeats * BEAT_UNIT_LENGTH;
+    this.maxBeats = maxBeats;
+    this.rowWidth = this.maxBeats * BEAT_UNIT_LENGTH;
     this.numOfMeasures = rowWidth / MEASURE_WIDTH;
     this.notes = notes;
 
@@ -141,8 +144,35 @@ public class EditorPanel extends JPanel {
       paintMeasureNumbers(g);
       paintRows(g);
       paintPlayLine(g);
+      paintCovers(g);
+      paintRowPitches(g);
+      paintMeasureNumbers(g);
+
+
     }
 
+  }
+
+  private void paintRowPitches(Graphics g) {
+    g.setColor(Color.black);
+
+    int spacing = TOP_SCREEN_SHIFT;
+
+    // Go through all pitches we need to render as rows.
+    for (String currentPitch : this.pitchStrings) {
+
+      // generate the Pitch headers
+      g.drawString(currentPitch, BORDER_SHIFT, spacing);
+      spacing += rowHeight;
+    }
+  }
+
+  private void paintCovers(Graphics g) {
+    g.setColor(Color.gray);
+    g.fillRect(BORDER_SHIFT, fontSize, PITCH_MIDI_GAP - 3,
+            this.getHeight());
+    g.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + (BEAT_UNIT_LENGTH * 68) + 3, fontSize, 100,
+            this.getHeight());
   }
 
   /**
@@ -199,7 +229,7 @@ public class EditorPanel extends JPanel {
     for (String currentPitch : this.pitchStrings) {
 
       // generate the Pitch headers
-      g.drawString(currentPitch, BORDER_SHIFT, spacing);
+      //g.drawString(currentPitch, BORDER_SHIFT, spacing);
 
       for (Integer pitchKey : notes.keySet()) {
         if (convertIntPitchToStringPitch(pitchKey).equals(currentPitch)) {
@@ -214,8 +244,8 @@ public class EditorPanel extends JPanel {
                             1) * BEAT_UNIT_LENGTH,
                     rowHeight);
             g2d.setColor(Color.BLACK);
-            g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + startingBeat *
-                            BEAT_UNIT_LENGTH, spacing - fontSize, BEAT_UNIT_LENGTH,
+            g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + (startingBeat *
+                            BEAT_UNIT_LENGTH), spacing - fontSize, BEAT_UNIT_LENGTH,
                     rowHeight);
             g2d.setColor(Color.GREEN);
 
@@ -242,6 +272,14 @@ public class EditorPanel extends JPanel {
       // Once the row is done, our y spacing is now another row height down.
       spacing += rowHeight;
     }
+
+  }
+
+  public void updateInfo(TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes, int
+          maxBeats) {
+    this.notes = sortedNotes;
+    this.maxBeats = maxBeats;
+    repaint();
 
   }
 }

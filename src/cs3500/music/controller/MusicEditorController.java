@@ -1,11 +1,15 @@
 package cs3500.music.controller;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import cs3500.music.model.IMusicEditorModel;
+import cs3500.music.model.Tones;
 import cs3500.music.view.IMusicEditorView;
+import cs3500.music.view.ViewFactory;
 
 /**
  * Created by Andrew Alcala on 6/19/2017.
@@ -18,6 +22,11 @@ public class MusicEditorController {
     this.model = model;
     this.view = view;
     this.configureKeyBoardListener();
+    this.configureMouseListener();
+  }
+
+  void updateView() {
+    view.updateView(model.getAllNotes());
   }
 
   /**
@@ -68,6 +77,31 @@ public class MusicEditorController {
     view.addKeyListener(kbd);
 
   }
+
+  private void configureMouseListener() {
+    Map<Integer, Runnable> mousePresses = new HashMap<Integer, Runnable>();
+
+    mousePresses.put(MouseEvent.MOUSE_PRESSED, () -> { //the contents of MakeCaps below
+      try {
+        int pitch = view.getKeyboardKeyPressed();
+        int numTones = Tones.values().length;
+        model.addNote(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1,
+                view.getCurrentBeat(), 1, 0, 10);
+        view.forwardOneBeat();
+        updateView();
+      } catch (IllegalArgumentException e) {
+        e.getMessage();
+      }
+
+    });
+
+
+    PianoMouseListener mouseListener = new PianoMouseListener();
+    mouseListener.setMousePressedMap(mousePresses);
+    view.addMouseListener(mouseListener);
+
+  }
+
 
   public void beginControl() {
     view.initialize();

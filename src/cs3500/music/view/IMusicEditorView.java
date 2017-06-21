@@ -1,6 +1,10 @@
 package cs3500.music.view;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import cs3500.music.controller.KeyboardListener;
+import cs3500.music.controller.PianoMouseListener;
 
 /**
  * An interface representting a Music Editor View for a Music Editor Model.
@@ -41,5 +45,9 @@ public interface IMusicEditorView {
 
   boolean isPlayingMusic();
 
+  void addMouseListener(PianoMouseListener mouseListener);
 
+  int getKeyboardKeyPressed();
+
+  void updateView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes);
 }

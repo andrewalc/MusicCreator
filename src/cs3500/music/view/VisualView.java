@@ -1,24 +1,15 @@
 package cs3500.music.view;
 
-import java.awt.Insets;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.security.Key;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import cs3500.music.controller.KeyboardListener;
+import cs3500.music.controller.PianoMouseListener;
 
 import static java.awt.GridBagConstraints.HORIZONTAL;
 import static java.awt.GridBagConstraints.LAST_LINE_END;
@@ -50,6 +41,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   private JPanel container;
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
 
+
   /**
    * Constructor for a VisualView of a Music Editor. Require input of note information in the
    * form of an a Map of Integer to Arraylist Arraylistof integers, with each Integer key
@@ -57,16 +49,15 @@ public class VisualView extends JFrame implements IMusicEditorView {
    * following the ArrayList of integer pattern of notes being represented as (int startingBeat,
    * int endBeat, int instrument, int pitch, int volume). Also requires an int representing the
    * last beat ever played in the map of music.
+   *  @param notes    A Map of all notes from a piece of music.
    *
-   * @param notes    A Map of all notes from a piece of music.
-   * @param maxBeats Int representing the last beat ever played in the Map of all notes.
    */
-  public VisualView(Map<Integer, ArrayList<ArrayList<Integer>>> notes, int maxBeats) {
+  public VisualView(Map<Integer, ArrayList<ArrayList<Integer>>> notes) {
     super("MIDI Music Editor");
     // JFrame Settings
     this.notes = notes;
     this.currentBeat = 0;
-    this.maxBeats = maxBeats;
+    this.maxBeats = this.getMaxBeatFromNotes();
     setSize(1600, 900);
     setResizable(false);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -113,9 +104,28 @@ public class VisualView extends JFrame implements IMusicEditorView {
     container.add(keyboardPanel, c);
     container.setFocusable(true);
     container.requestFocusInWindow();
-
     // Add the combined Panels to the JFrame
     getContentPane().add(container);
+
+  }
+
+  @Override
+  public int getMaxBeat() {
+    return maxBeats;
+  }
+
+  public int getMaxBeatFromNotes() {
+    int potentialMaxBeats = 0;
+    for (ArrayList<ArrayList<Integer>> pitchList : this.notes.values()) {
+      for (ArrayList<Integer> note : pitchList) {
+        // if a note's ending beat is larger than the current potential last beat, update potential.
+        int endBeat = note.get(1);
+        if (endBeat > potentialMaxBeats) {
+          potentialMaxBeats = endBeat;
+        }
+      }
+    }
+    return potentialMaxBeats;
   }
 
   /**
@@ -219,11 +229,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
   }
 
   @Override
-  public int getMaxBeat() {
-    return this.maxBeats;
-  }
-
-  @Override
   public boolean isActive() {
     return this.isVisible();
   }
@@ -231,6 +236,29 @@ public class VisualView extends JFrame implements IMusicEditorView {
   @Override
   public boolean isPlayingMusic() {
     return false;
+  }
+
+  @Override
+  public void addMouseListener(PianoMouseListener mouseListener) {
+    keyboardPanel.addMouseListener(mouseListener);
+  }
+
+  @Override
+  public int getKeyboardKeyPressed() {
+    return keyboardPanel.getKeyboardKeyPressed();
+  }
+
+  @Override
+  public void updateView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+    this.notes = allNotes;
+    int keepcurrentBeat = this.currentBeat;
+    // Copy the Map of notes.
+    TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes = new TreeMap<>(new
+            IntegerComparator());
+    sortedNotes.putAll(notes);
+    keyboardPanel.updateInfo(this.getNotesAtBeat(notes, currentBeat));
+    editorPanel.updateInfo(sortedNotes, maxBeats);
+    repaint();
   }
 
 }

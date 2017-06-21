@@ -1,6 +1,10 @@
 package cs3500.music.view;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import cs3500.music.controller.KeyboardListener;
+import cs3500.music.controller.PianoMouseListener;
 
 /**
  * A Console view implementation. Should receive a model's toString method and relay it to console.
@@ -98,5 +102,20 @@ public class ConsoleView implements IMusicEditorView {
   @Override
   public boolean isPlayingMusic() {
     return false;
+  }
+
+  @Override
+  public void addMouseListener(PianoMouseListener mouseListener) {
+
+  }
+
+  @Override
+  public int getKeyboardKeyPressed() {
+    return 0;
+  }
+
+  @Override
+  public void updateView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+
   }
 }

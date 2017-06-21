@@ -1,6 +1,7 @@
 package cs3500.music.view;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -14,6 +15,7 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
 import cs3500.music.controller.KeyboardListener;
+import cs3500.music.controller.PianoMouseListener;
 import cs3500.music.model.IMusicEditorModel;
 
 /**
@@ -247,5 +249,20 @@ public class MidiView implements IMusicEditorView {
   @Override
   public boolean isPlayingMusic() {
     return sequencer.isRunning();
+  }
+
+  @Override
+  public void addMouseListener(PianoMouseListener mouseListener) {
+
+  }
+
+  @Override
+  public int getKeyboardKeyPressed() {
+    return 0;
+  }
+
+  @Override
+  public void updateView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+
   }
 }
