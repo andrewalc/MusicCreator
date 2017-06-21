@@ -32,8 +32,6 @@ public class MidiView implements IMusicEditorView {
 
   /**
    * Constructor for a midi view. Require the input of the Music Editor Model to play the music of.
-   *
-   * @param allNotes
    */
   private MidiView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
     this.notes = allNotes;
@@ -184,7 +182,8 @@ public class MidiView implements IMusicEditorView {
 
 
   /**
-   * Puts all of the notes in the model in the sequencer.
+   * Puts all of the notes in the model in the sequencer. Any pitch above G#9 (128) will be
+   * ignored as the midi player cannot go higher.
    *
    * @throws InvalidMidiDataException If sequence is given an unsupported division type.
    */
@@ -205,7 +204,7 @@ public class MidiView implements IMusicEditorView {
         int pitch = note.get(3);
         int volume = note.get(4);
         int channel = 0;
-        if (startingBeat == beat) {
+        if (startingBeat == beat && pitch < 128) {
           // Percussion is on channel 9
           MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, channel, pitch, volume);
           MidiMessage change = new ShortMessage(ShortMessage.PROGRAM_CHANGE, channel,
