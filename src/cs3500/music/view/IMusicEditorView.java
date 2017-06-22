@@ -19,6 +19,14 @@ public interface IMusicEditorView {
    */
   void initialize();
 
+  /**
+   * Adds a KeyboardListener keylistener to the appropriate locations in this view. The keylistener
+   * should be directed towards the JFrame and it's Panels. This keylistener will check for
+   * keypresses, specifically it should be able to able keyevents that should trigger play/pause,
+   * moving a beat forward or backward, and jumping to the beginning or end.
+   *
+   * @param keyboardListener The KeyboardListener
+   */
   void addKeyListener(KeyboardListener keyboardListener);
 
   void forwardOneBeat();
