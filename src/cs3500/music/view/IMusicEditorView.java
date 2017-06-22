@@ -14,8 +14,8 @@ import cs3500.music.controller.PianoMouseListener;
 public interface IMusicEditorView {
 
   /**
-   * Creates the view for this view implementation. The method should begin all operations
-   * necessary to display the view to the user when it is called.
+   * Creates and displays the view for this view implementation. The method should begin all
+   * operations necessary to display the view to the user when it is called.
    */
   void initialize();
 

@@ -7,14 +7,9 @@ import java.util.TreeMap;
 
 
 import javax.swing.*;
-import javax.swing.text.DefaultCaret;
 
 import cs3500.music.controller.KeyboardListener;
 import cs3500.music.controller.PianoMouseListener;
-
-import static java.awt.GridBagConstraints.HORIZONTAL;
-import static java.awt.GridBagConstraints.LAST_LINE_END;
-import static java.awt.GridBagConstraints.PAGE_START;
 
 /**
  * Implementation of an IMusicEditor Visual view. This view will produce a window that contains
@@ -120,7 +115,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
     editorPanelScrolling.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     editorPanelScrolling.setBounds(0, 0, 1595, 550);
     editorPanelScrolling.getVerticalScrollBar().getValue();
-    System.out.println(editorPanelScrolling.getVerticalScrollBar().getMaximum());
 
     container.add(editorPanelScrolling);
 
@@ -191,7 +185,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
     } else {
       editorPanel.setLocation(0, 0);
     }
-    System.out.println(editorPanel.getLocation());
 
     this.currentBeat = currentBeat;
     editorPanel.setCurrentBeat(this.currentBeat);

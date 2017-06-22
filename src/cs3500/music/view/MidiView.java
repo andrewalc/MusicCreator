@@ -235,7 +235,6 @@ public class MidiView implements IMusicEditorView {
 
   @Override
   public void addKeyListener(KeyboardListener keyboardListener) {
-
   }
 
   @Override

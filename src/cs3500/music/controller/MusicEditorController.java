@@ -8,6 +8,7 @@ import java.util.Map;
 import cs3500.music.model.IMusicEditorModel;
 import cs3500.music.model.Tones;
 import cs3500.music.view.IMusicEditorView;
+import cs3500.music.view.MidiView;
 
 /**
  * Created by Andrew Alcala on 6/19/2017.
@@ -123,13 +124,18 @@ public class MusicEditorController {
 
   public void beginControl() {
     view.initialize();
+    System.out.println("Initializing MIDI Editor...");
 
-    while (view.isActive()) {
-      view.updateCurrentBeat();
+    if (view instanceof MidiView) {
+      view.startMusic();
+    } else {
+      while (view.isActive()) {
+        view.updateCurrentBeat();
 
 
-      System.out.print("");
+        System.out.print("");
 
+      }
     }
   }
 

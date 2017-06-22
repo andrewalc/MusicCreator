@@ -10,6 +10,8 @@ import cs3500.music.util.MusicReader;
 
 /**
  * Class used for running the music editor.
+ * EDIT: Added controller, the controller takes in the model and view and begins the Music Editor
+ * by calling beginControl.
  */
 class MusicEditor {
 
@@ -31,7 +33,7 @@ class MusicEditor {
     // Build a Music editor model with notes from the file given.
     MusicEditorModel.MusicEditorBuilder modelBuilder = new MusicEditorModel.MusicEditorBuilder();
     try {
-      MusicReader.parseFile(new FileReader("red.txt"), modelBuilder);
+      MusicReader.parseFile(new FileReader("mary-little-lamb.txt"), modelBuilder);
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }
@@ -40,6 +42,7 @@ class MusicEditor {
     // Generate a view for the built model base on viewtype input.
     ViewFactory factory = new ViewFactory(model);
     IMusicEditorView view = factory.getView("composite");
+    // Start the controller.
     MusicEditorController controller = new MusicEditorController(model, view);
     controller.beginControl();
   }
