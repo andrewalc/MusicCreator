@@ -1,12 +1,17 @@
 package cs3500.music.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+import javax.swing.JScrollPane;
+
 
 import cs3500.music.controller.KeyboardListener;
 import cs3500.music.controller.PianoMouseListener;
@@ -15,7 +20,7 @@ import cs3500.music.controller.PianoMouseListener;
  * Implementation of an IMusicEditor Visual view. This view will produce a window that contains
  * all note information in rows of pitches within the pitch range of the of the highest and
  * lowest note. Note are represented as rectangles beginning at their marked starting pitch and
- * ending on their end beat. The rectangles will be black at the beginnning, representing the
+ * ending on their end beat. The rectangles will be black at the beginning, representing the
  * starting beat, and will continue along a length of a green rectangle of its duration. A red
  * line will be drawn at the current beat, that is the beat that is currently being played.
  * Pressing the left and right arrow keys will advance the current beat and the red line by one
@@ -84,23 +89,9 @@ public class VisualView extends JFrame implements IMusicEditorView {
     container.setBounds(0, 0, 1600, 900);
 
     container.setBackground(BACKGROUND_COLOR);
-    //container.setPreferredSize(new Dimension(1600, 900));
-
-    //container.setMinimumSize(editorPanel.getPreferredSize());
-    GridBagConstraints c = new GridBagConstraints();
 
 
-    //editorPanelScrolling.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
-    // Add the editorPanel to the container in the correct location with constraints.
-//    c.anchor = PAGE_START;
-//    c.fill = HORIZONTAL;
-//    c.gridx = 0;
-//    c.gridy = 0;
-//    c.ipadx = 0;//(int) editorPanel.getMinimumSize().getWidth();
-//    c.ipady = 0;
     editorPanel.setVisible(true);
-    Insets editorPanelInsets = editorPanel.getInsets();
     Dimension editorPanelSize = editorPanel.getPreferredSize();
     editorPanel.setBounds(0, 0, editorPanelSize.width,
             editorPanelSize.height);
@@ -121,20 +112,8 @@ public class VisualView extends JFrame implements IMusicEditorView {
     Dimension keyBoardPanelSize = keyboardPanel.getPreferredSize();
     keyboardPanel.setBounds(0, 570, keyBoardPanelSize.width, keyBoardPanelSize.height);
     container.add(keyboardPanel);
-
-
-
-    // Add the keyboardPanel to the container in the correct location.
-//    c.anchor = LAST_LINE_END;
-//    c.gridx = 0;
-//    c.gridy = 1;
-//    c.ipady = (int) (keyboardPanel.getPreferredSize().getHeight());
-//    c.insets = new Insets(20, 0, 100, 0);  //top padding
-    //container.add(keyboardPanel);
     container.setFocusable(true);
     container.requestFocusInWindow();
-    // Add the combined Panels to the JFrame
-    //container.setLocation(0,0);
     getContentPane().add(container);
     revalidate();
 
@@ -145,6 +124,11 @@ public class VisualView extends JFrame implements IMusicEditorView {
     return maxBeats;
   }
 
+  /**
+   * Retrieves the maximum beat index in the song.
+   *
+   * @return the max beat from this VisualView's "notes"
+   */
   public int getMaxBeatFromNotes() {
     int potentialMaxBeats = 0;
     for (ArrayList<ArrayList<Integer>> pitchList : this.notes.values()) {

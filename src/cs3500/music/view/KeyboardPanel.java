@@ -1,8 +1,11 @@
 package cs3500.music.view;
 
-import org.w3c.dom.css.Rect;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -19,7 +22,6 @@ import javax.swing.JPanel;
  */
 public class KeyboardPanel extends JPanel {
 
-  // @TODO dont need to us public static everywhere
   public static final int NUM_WHKEYS = 70;
   public static final int WHKEY_WIDTH = 20;
   public static final int WHKEY_HEIGHT = 300;
@@ -121,6 +123,9 @@ public class KeyboardPanel extends JPanel {
     }
   }
 
+  /**
+   * Generates all of the hitboxes of the white keys in the Piano panel, and sends them to a Map.
+   */
   private void makeWhitePianoKeyHitBoxes() {
     // keyNumber represents the MIDI pitch of the key currently being drawn. Should be incremented
     // by 2 each iteration, except when there is no next black key. In that case, keyNumber
@@ -258,14 +263,15 @@ public class KeyboardPanel extends JPanel {
     }
   }
 
-  public HashMap<Rectangle, Integer> getKeyboardHitBoxes() {
-    return new HashMap<>(keyboardHitBoxes);
-  }
-
-
+  /**
+   * Looks at the click location of the user's mouse, and returns the pitch value of the piano
+   * key that was clicked on.
+   *
+   * @return the integer Pitch value of the key that was clicked on by the user.
+   * @throws IllegalArgumentException if the click location is out of bounds.
+   */
   public int getKeyboardKeyPressed() throws IllegalArgumentException {
     Point clickLocation = this.getMousePosition();
-    System.out.println(clickLocation);
     for (Rectangle rectangle : keyboardHitBoxes.keySet()) {
       if (rectangle.contains(clickLocation)) {
         return keyboardHitBoxes.get(rectangle);
@@ -274,6 +280,11 @@ public class KeyboardPanel extends JPanel {
     throw new IllegalArgumentException("Click location is not ontop of a key");
   }
 
+  /**
+   * Updates the keyboard panel so that it knows all of the notes at a given beat.
+   *
+   * @param notesAtBeat An arraylist of all of the notes at a given beat.
+   */
   public void updateInfo(ArrayList<ArrayList<Integer>> notesAtBeat) {
     setNotes(notesAtBeat);
   }
