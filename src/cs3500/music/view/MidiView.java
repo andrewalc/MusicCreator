@@ -53,7 +53,7 @@ public class MidiView implements IMusicEditorView {
    * Builder class for a MidiView.
    */
   public static final class MidiViewBuilder {
-    MidiView view;
+    private MidiView view;
 
     /**
      * Constructor for a MidiViewBuilder, requires a IMusicEditorModel to build a view of.
