@@ -1,11 +1,6 @@
 package cs3500.music.view;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -53,7 +48,9 @@ public class EditorPanel extends JPanel {
     this.notes = notes;
     generatePitchStrings();
     setFontAndRowHeight();
-    setBackground(Color.cyan);
+    setBackground(Color.WHITE);
+
+
 
 
   }
@@ -137,9 +134,8 @@ public class EditorPanel extends JPanel {
 
   @Override
   public Dimension getPreferredSize() {
-    System.out.println(Integer.MAX_VALUE / BEAT_UNIT_LENGTH);
     return new Dimension(Integer.MAX_VALUE,
-            TOP_SCREEN_SHIFT + (rowHeight * 23));
+            TOP_SCREEN_SHIFT + (rowHeight * pitchStrings.size()));
   }
 
   /**
@@ -161,7 +157,7 @@ public class EditorPanel extends JPanel {
       paintRows(g);
       paintPlayLine(g);
       paintMeasureNumbers(g);
-      //paintCovers(g);
+      paintCovers(g);
       paintRowPitches(g);
 
 
@@ -206,9 +202,7 @@ public class EditorPanel extends JPanel {
             BORDER_SHIFT + PITCH_MIDI_GAP + (this.currentBeat * BEAT_UNIT_LENGTH),
             TOP_SCREEN_SHIFT + (rowHeight * this.pitchStrings.size()) - fontSize);
     g.setColor(Color.BLACK);
-    System.out.println("x: " + (BORDER_SHIFT + PITCH_MIDI_GAP + (this.currentBeat *
-            BEAT_UNIT_LENGTH))
-            + " y: " + (TOP_SCREEN_SHIFT - fontSize));
+
   }
 
 
@@ -311,7 +305,7 @@ public class EditorPanel extends JPanel {
     int lineStroke = 1;
     int initialPositionFurthest = PITCH_MIDI_GAP + (BEAT_UNIT_LENGTH * 69) - 8;
     if (currentBeat > VisualView.START_SCROLLING_AT_BEAT) {
-      g.setColor(Color.RED);
+      g.setColor(Color.WHITE);
       g.fillRect(((currentBeat - VisualView.START_SCROLLING_AT_BEAT) * BEAT_UNIT_LENGTH),
               fontSize,
               BORDER_SHIFT + PITCH_MIDI_GAP - lineStroke,

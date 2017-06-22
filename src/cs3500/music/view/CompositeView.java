@@ -27,6 +27,7 @@ public class CompositeView implements IMusicEditorView {
   public void initialize() {
     midiView.initialize();
     visualView.initialize();
+    visualView.setCurrentBeat(0);
 
 
   }
