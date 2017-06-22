@@ -263,7 +263,7 @@ public class KeyboardPanel extends JPanel {
   }
 
 
-  public int getKeyboardKeyPressed() throws IllegalArgumentException {
+  public int getPianoKeyPressed() throws IllegalArgumentException {
     Point clickLocation = this.getMousePosition();
     System.out.println(clickLocation);
     for (Rectangle rectangle : keyboardHitBoxes.keySet()) {

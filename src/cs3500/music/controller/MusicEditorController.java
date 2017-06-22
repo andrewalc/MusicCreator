@@ -26,7 +26,7 @@ public class MusicEditorController {
   }
 
   void updateView() {
-    view.updateVisView(model.getAllNotes());
+    view.updateVisAddNotes(model.getAllNotes());
   }
 
   /**
@@ -93,21 +93,19 @@ public class MusicEditorController {
 
     mousePresses.put(MouseEvent.MOUSE_PRESSED, () -> { //the contents of MakeCaps below
       try {
-        int pitch = view.getKeyboardKeyPressed();
+        int pitch = view.getPianoKeyPressed();
         int numTones = Tones.values().length;
         int beatDuration = 1;
         model.addNote(Tones.getToneAtToneVal(pitch % numTones), (pitch / numTones) - 1,
                 view.getCurrentBeat(), beatDuration, 0, 100);
-        updateView();
         if (view.getCurrentBeat() + beatDuration > view.getMaxBeat()) {
           view.rebuildMusic(model.getAllNotes());
         }
-        updateView();
         view.forwardOneBeat();
-
-
         // we added a note, so a change was made and will require rebuilding audio.
         changeMade = true;
+        updateView();
+
       } catch (IllegalArgumentException e) {
         e.getMessage();
       }
@@ -131,10 +129,6 @@ public class MusicEditorController {
     } else {
       while (view.isActive()) {
         view.updateCurrentBeat();
-
-
-        System.out.print("");
-
       }
     }
   }

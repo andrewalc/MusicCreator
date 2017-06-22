@@ -284,7 +284,6 @@ public class MidiView implements IMusicEditorView {
     return (int) sequencer.getTickLength();
   }
 
-  @Override
   public void setCurrentBeat(int currentBeat) {
     sequencer.setTickPosition(currentBeat);
   }
@@ -316,12 +315,12 @@ public class MidiView implements IMusicEditorView {
   }
 
   @Override
-  public int getKeyboardKeyPressed() {
+  public int getPianoKeyPressed() {
     return 0;
   }
 
   @Override
-  public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+  public void updateVisAddNotes(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
   }
 
   @Override

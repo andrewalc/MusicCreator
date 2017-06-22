@@ -110,12 +110,12 @@ public class ConsoleView implements IMusicEditorView {
   }
 
   @Override
-  public int getKeyboardKeyPressed() {
+  public int getPianoKeyPressed() {
     return 0;
   }
 
   @Override
-  public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+  public void updateVisAddNotes(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
 
   }
 

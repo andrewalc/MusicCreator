@@ -12,14 +12,12 @@ import cs3500.music.controller.PianoMouseListener;
  */
 public class CompositeView implements IMusicEditorView {
 
-  MidiView midiView;
-  VisualView visualView;
-  private int currentBeat;
+  private MidiView midiView;
+  private VisualView visualView;
 
   public CompositeView(MidiView midiView, VisualView visualView) {
     this.midiView = midiView;
     this.visualView = visualView;
-    this.currentBeat = visualView.getCurrentBeat();
   }
 
 
@@ -27,9 +25,6 @@ public class CompositeView implements IMusicEditorView {
   public void initialize() {
     midiView.initialize();
     visualView.initialize();
-    visualView.setCurrentBeat(0);
-
-
   }
 
   @Override
@@ -105,15 +100,17 @@ public class CompositeView implements IMusicEditorView {
 
   @Override
   public int getCurrentBeat() {
-    if (midiView.getCurrentBeat() == visualView.getCurrentBeat()) {
+    if (midiView.isPlayingMusic()) {
       return midiView.getCurrentBeat();
     } else {
-      throw new IllegalArgumentException("ERROR: current beats are out of sync!");
+      return visualView.getCurrentBeat();
     }
   }
 
   @Override
   public void updateCurrentBeat() {
+    // If the midi is playing, it will dictate what the current beat is defined for the visual.
+    // Otherwise, the visual view will dictate what the current beat is and make the midi follow.
     if (midiView.isPlayingMusic()) {
       visualView.setCurrentBeat(midiView.getCurrentBeat());
     } else {
@@ -140,13 +137,13 @@ public class CompositeView implements IMusicEditorView {
   }
 
   @Override
-  public int getKeyboardKeyPressed() {
-    return visualView.getKeyboardKeyPressed();
+  public int getPianoKeyPressed() {
+    return visualView.getPianoKeyPressed();
   }
 
   @Override
-  public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
-    visualView.updateVisView(allNotes);
+  public void updateVisAddNotes(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+    visualView.updateVisAddNotes(allNotes);
   }
 
   @Override

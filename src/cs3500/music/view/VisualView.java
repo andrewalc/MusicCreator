@@ -51,8 +51,8 @@ public class VisualView extends JFrame implements IMusicEditorView {
    * following the ArrayList of integer pattern of notes being represented as (int startingBeat,
    * int endBeat, int instrument, int pitch, int volume). Also requires an int representing the
    * last beat ever played in the map of music.
-   *  @param notes    A Map of all notes from a piece of music.
    *
+   * @param notes A Map of all notes from a piece of music.
    */
   public VisualView(Map<Integer, ArrayList<ArrayList<Integer>>> notes) {
     super("MIDI Music Editor");
@@ -71,7 +71,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
     TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes = new TreeMap<>(new
             IntegerComparator());
     sortedNotes.putAll(notes);
-
 
 
     // Two panels
@@ -121,7 +120,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
     Dimension keyBoardPanelSize = keyboardPanel.getPreferredSize();
     keyboardPanel.setBounds(0, 570, keyBoardPanelSize.width, keyBoardPanelSize.height);
     container.add(keyboardPanel);
-
 
 
     // Add the keyboardPanel to the container in the correct location.
@@ -175,9 +173,8 @@ public class VisualView extends JFrame implements IMusicEditorView {
   }
 
 
-  @Override
   public void setCurrentBeat(int currentBeat) {
-
+    // When a beat is set the editor panel shifts accordingly, to the current beat.
     if (currentBeat > START_SCROLLING_AT_BEAT) {
       editorPanel.setLocation((-1 * (currentBeat - START_SCROLLING_AT_BEAT) * EditorPanel
                       .BEAT_UNIT_LENGTH),
@@ -287,12 +284,12 @@ public class VisualView extends JFrame implements IMusicEditorView {
   }
 
   @Override
-  public int getKeyboardKeyPressed() {
-    return keyboardPanel.getKeyboardKeyPressed();
+  public int getPianoKeyPressed() {
+    return keyboardPanel.getPianoKeyPressed();
   }
 
   @Override
-  public void updateVisView(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+  public void updateVisAddNotes(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
 
 
     this.notes = allNotes;
@@ -304,7 +301,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
     sortedNotes.putAll(notes);
     keyboardPanel.updateInfo(this.getNotesAtBeat(notes, currentBeat));
     editorPanel.updateInfo(sortedNotes, maxBeats);
-
     repaint();
   }
 
