@@ -42,6 +42,7 @@ public class KeyboardPanel extends JPanel {
     this.liveNotes = liveNotes;
     this.makeBlackPianoKeyHitBoxes();
     this.makeWhitePianoKeyHitBoxes();
+    setBackground(VisualView.BACKGROUND_COLOR.darker().darker());
   }
 
 
@@ -64,7 +65,7 @@ public class KeyboardPanel extends JPanel {
   @Override
   public Dimension getPreferredSize() {
     return new Dimension(EditorPanel.BORDER_SHIFT + (NUM_WHKEYS * WHKEY_WIDTH) +
-            EditorPanel.BORDER_SHIFT, WHKEY_HEIGHT);
+            EditorPanel.BORDER_SHIFT + EditorPanel.BORDER_SHIFT, WHKEY_HEIGHT);
   }
 
   /**
@@ -168,6 +169,10 @@ public class KeyboardPanel extends JPanel {
 
     // Generate 10 octaves of white keys.
     for (int i = 0; i < NUM_WHKEYS; i++) {
+      // Render the white color of a key.
+      g.setColor(Color.WHITE);
+      g.fillRect((i * WHKEY_WIDTH) + EditorPanel.BORDER_SHIFT,
+              0, WHKEY_WIDTH, WHKEY_HEIGHT);
       for (Integer pitch : rangeOfPitches) {
         // If this keyNumber is a pitch that is being played, render the key orange.
         if (keyNumber == pitch) {

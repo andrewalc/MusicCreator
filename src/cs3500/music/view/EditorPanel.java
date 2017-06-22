@@ -31,6 +31,11 @@ public class EditorPanel extends JPanel {
   private int maxBeats;
   private ArrayList<String> pitchStrings = new ArrayList<String>();
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
+  Color textColor = new Color(220, 223, 224);
+  Color linesColor = new Color(0, 0, 0);
+  Color noteHeadColor = Color.orange;
+  Color noteBody = new Color(165, 144, 0);
+  Color gridBackgroundColor = new Color(71, 71, 71);
 
   /**
    * Constructor for an EditorPanel. Requires the input of a Map of Integer MIDI pitches to
@@ -48,7 +53,7 @@ public class EditorPanel extends JPanel {
     this.notes = notes;
     generatePitchStrings();
     setFontAndRowHeight();
-    setBackground(Color.WHITE);
+    setBackground(VisualView.BACKGROUND_COLOR);
 
 
 
@@ -166,7 +171,7 @@ public class EditorPanel extends JPanel {
   }
 
   private void paintRowPitches(Graphics g) {
-    g.setColor(Color.black);
+    g.setColor(textColor);
 
     int spacing = TOP_SCREEN_SHIFT;
 
@@ -201,7 +206,6 @@ public class EditorPanel extends JPanel {
                     fontSize,
             BORDER_SHIFT + PITCH_MIDI_GAP + (this.currentBeat * BEAT_UNIT_LENGTH),
             TOP_SCREEN_SHIFT + (rowHeight * this.pitchStrings.size()) - fontSize);
-    g.setColor(Color.BLACK);
 
   }
 
@@ -212,7 +216,7 @@ public class EditorPanel extends JPanel {
    * @param g Grpahics g
    */
   private void paintMeasureNumbers(Graphics g) {
-    g.setColor(Color.BLACK);
+    g.setColor(textColor);
     g.setFont(new Font("ComicSans", Font.BOLD, fontSize));
     for (int i = 0; i <= numOfMeasures; i++) {
       g.drawString("" + i * 4, BORDER_SHIFT + PITCH_MIDI_GAP + (i * MEASURE_WIDTH),
@@ -228,7 +232,7 @@ public class EditorPanel extends JPanel {
    * @param g Graphics g.
    */
   public void paintRows(Graphics g) {
-    g.setColor(Color.BLACK);
+    g.setColor(linesColor);
     g.setFont(new Font("ComicSans", Font.BOLD, fontSize));
 
     // Create a g2d graphics object
@@ -240,6 +244,8 @@ public class EditorPanel extends JPanel {
 
     // Go through all pitches we need to render as rows.
     for (String currentPitch : this.pitchStrings) {
+      g2d.setColor(gridBackgroundColor);
+      g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP, spacing - fontSize, rowWidth, rowHeight);
 
       // generate the Pitch headers
       //g.drawString(currentPitch, BORDER_SHIFT, spacing);
@@ -250,18 +256,16 @@ public class EditorPanel extends JPanel {
           for (ArrayList<Integer> note : notes.get(pitchKey)) {
             int startingBeat = note.get(0);
             int endBeat = note.get(1);
-            g2d.setColor(Color.GREEN);
+            g2d.setColor(noteBody);
 
             g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + (startingBeat *
                             BEAT_UNIT_LENGTH), spacing - fontSize, ((endBeat - startingBeat) +
                             1) * BEAT_UNIT_LENGTH,
                     rowHeight);
-            g2d.setColor(Color.BLACK);
+            g2d.setColor(noteHeadColor);
             g2d.fillRect(BORDER_SHIFT + PITCH_MIDI_GAP + (startingBeat *
                             BEAT_UNIT_LENGTH), spacing - fontSize, BEAT_UNIT_LENGTH,
                     rowHeight);
-            g2d.setColor(Color.GREEN);
-
           }
         }
       }
@@ -271,7 +275,7 @@ public class EditorPanel extends JPanel {
       int count = 0;
       int measureSpacing = MEASURE_WIDTH;
       while (count < numOfMeasures) {
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(linesColor);
         g2d.drawLine(BORDER_SHIFT + PITCH_MIDI_GAP + measureSpacing, spacing -
                         fontSize,
                 BORDER_SHIFT + PITCH_MIDI_GAP + measureSpacing, spacing - fontSize +
@@ -305,7 +309,7 @@ public class EditorPanel extends JPanel {
     int lineStroke = 1;
     int initialPositionFurthest = PITCH_MIDI_GAP + (BEAT_UNIT_LENGTH * 69) - 8;
     if (currentBeat > VisualView.START_SCROLLING_AT_BEAT) {
-      g.setColor(Color.WHITE);
+      g.setColor(VisualView.BACKGROUND_COLOR);
       g.fillRect(((currentBeat - VisualView.START_SCROLLING_AT_BEAT) * BEAT_UNIT_LENGTH),
               fontSize,
               BORDER_SHIFT + PITCH_MIDI_GAP - lineStroke,
@@ -314,7 +318,7 @@ public class EditorPanel extends JPanel {
                       initialPositionFurthest, fontSize, 500,
               this.getHeight());
     } else {
-      g.setColor(Color.WHITE);
+      g.setColor(VisualView.BACKGROUND_COLOR);
       g.fillRect(0, fontSize, BORDER_SHIFT + PITCH_MIDI_GAP - lineStroke,
               this.getHeight());
       g.fillRect(initialPositionFurthest, fontSize, 500,

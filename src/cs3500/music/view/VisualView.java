@@ -46,6 +46,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   private JPanel container;
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
   public static final int START_SCROLLING_AT_BEAT = 16;
+  public static final Color BACKGROUND_COLOR = new Color(43, 43, 43);
 
 
   /**
@@ -68,7 +69,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
     setSize(1600, 900);
     setResizable(false);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setBackground(Color.WHITE);
+    setBackground(BACKGROUND_COLOR);
 
 
     // Copy the Map of notes.
@@ -87,7 +88,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
     container.setLayout(null);
     container.setBounds(0, 0, 1600, 900);
 
-    container.setBackground(Color.WHITE);
+    container.setBackground(BACKGROUND_COLOR);
     //container.setPreferredSize(new Dimension(1600, 900));
 
     //container.setMinimumSize(editorPanel.getPreferredSize());
