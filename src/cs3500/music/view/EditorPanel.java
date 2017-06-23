@@ -1,6 +1,11 @@
 package cs3500.music.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.BasicStroke;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -60,6 +65,10 @@ public class EditorPanel extends JPanel {
 
   }
 
+  /**
+   * Helper method that sets the row height and font size, scaled based on the number of pitches
+   * being observed on the screen currently.
+   */
   private void setFontAndRowHeight() {
     // Row height and font scaling for bigger sets of notes.
     if (pitchStrings.size() > 25) {
@@ -71,6 +80,10 @@ public class EditorPanel extends JPanel {
     }
   }
 
+  /**
+   * A Helper method that generates all of the labels for the pitches along the left side of the
+   * editor panel.
+   */
   private void generatePitchStrings() {
     pitchStrings = new ArrayList<>();
     // Generate list of pitch strings
@@ -164,12 +177,14 @@ public class EditorPanel extends JPanel {
       paintMeasureNumbers(g);
       paintCovers(g);
       paintRowPitches(g);
-
-
     }
-
   }
 
+  /**
+   * Writes all of the Pitch labels along the left side of the editor panel.
+   *
+   * @param g the Graphics being used to generate the text objects being displayed on screen.
+   */
   private void paintRowPitches(Graphics g) {
     g.setColor(textColor);
 
@@ -292,6 +307,13 @@ public class EditorPanel extends JPanel {
 
   }
 
+  /**
+   * Updates the info within the editor panel, sending it the latest notes, maxBeats, rowWidth, and
+   * number of measures. Then calls methods to redraw everything accordingly.
+   *
+   * @param sortedNotes All of the notes in the Piece.
+   * @param maxBeats the maximum number of beats in the Piece.
+   */
   public void updateInfo(TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes, int
           maxBeats) {
     this.notes = sortedNotes;
@@ -304,7 +326,11 @@ public class EditorPanel extends JPanel {
 
   }
 
-
+  /**
+   * Paints the side panels in the editor panel to make things look cleaner and more uniform.
+   *
+   * @param g Graphics.
+   */
   private void paintCovers(Graphics g) {
     int lineStroke = 1;
     int initialPositionFurthest = PITCH_MIDI_GAP + (BEAT_UNIT_LENGTH * 69) - 8;
@@ -324,7 +350,5 @@ public class EditorPanel extends JPanel {
       g.fillRect(initialPositionFurthest, fontSize, 500,
               this.getHeight());
     }
-
   }
-
 }

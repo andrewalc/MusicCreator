@@ -45,6 +45,11 @@ public class MidiView implements IMusicEditorView {
 
   }
 
+  /**
+   * Sets the tempo for the music to be played in the Midi.
+   *
+   * @param tempo the tempo being set to.
+   */
   public void setTempo(int tempo) {
     this.tempo = tempo;
   }
