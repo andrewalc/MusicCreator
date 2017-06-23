@@ -14,7 +14,8 @@ import java.util.TreeMap;
 public class Piece {
 
   private TreeMap<Pitch, ArrayList<Note>> allNotes;
-  private int tempo = 0;
+  // EDIT: This is a good default tempo.
+  private int tempo = 220000;
   // represents the very last beat number ever reached in this piece
   private int maxBeats = 0;
 

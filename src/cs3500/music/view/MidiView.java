@@ -23,7 +23,7 @@ import cs3500.music.controller.PianoMouseListener;
  * Also removed the use of a model, instead uses the map of notes as input.
  */
 public class MidiView implements IMusicEditorView {
-
+  // All notes to play.
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
 
   private Sequencer sequencer;
@@ -109,8 +109,18 @@ public class MidiView implements IMusicEditorView {
    */
   public void setSequencer(Sequencer sequencer) {
     this.sequencer = sequencer;
+    try {
+      this.sequencer.open();
+    } catch (MidiUnavailableException e) {
+      e.getMessage();
+    }
   }
 
+  /**
+   * Returns the max beat value of the notes field that came from a music model.
+   *
+   * @return The max beat value of the notes field.
+   */
   private int getModelMaxBeats() {
     int potentialMaxBeats = 0;
     for (ArrayList<ArrayList<Integer>> pitchList : this.notes.values()) {
@@ -233,6 +243,7 @@ public class MidiView implements IMusicEditorView {
   public void initialize() {
     try {
       updateNotes();
+      startMusic();
     } catch (InvalidMidiDataException e) {
       System.out.println(e.getMessage());
     }
@@ -240,6 +251,7 @@ public class MidiView implements IMusicEditorView {
 
   @Override
   public void addKeyListener(KeyboardListener keyboardListener) {
+    // STUB, does not apply to this view.
   }
 
   @Override
@@ -300,9 +312,8 @@ public class MidiView implements IMusicEditorView {
 
   @Override
   public void updateCurrentBeat() {
-
+    // STUB, does not apply to this view.
   }
-
 
   @Override
   public boolean isActive() {
@@ -316,32 +327,37 @@ public class MidiView implements IMusicEditorView {
 
   @Override
   public void addMouseListener(PianoMouseListener mouseListener) {
-
+    // STUB, does not apply to this view.
   }
 
   @Override
   public int getPianoKeyPressed() {
+    // STUB, does not apply to this view.
     return 0;
   }
 
   @Override
   public void updateVisAddNotes(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
+    // STUB, does not apply to this view.
   }
 
   @Override
   public void rebuildMusic(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
     try {
+      // Holds the current beat
       int keepCurrentBeat = this.getCurrentBeat();
       this.notes = allNotes;
       sequencer.close();
       this.sequencer = (MidiSystem.getSequencer());
       sequencer.open();
+      // Rebuild all the notes and load into the Sequencer.
       updateNotes();
+      // Set the current beat to what it was before rebuilding the music.
       setCurrentBeat(keepCurrentBeat);
     } catch (InvalidMidiDataException e) {
       e.getMessage();
     } catch (MidiUnavailableException e) {
-      e.printStackTrace();
+      e.getMessage();
     }
   }
 }

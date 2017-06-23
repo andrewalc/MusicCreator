@@ -1,14 +1,11 @@
 package cs3500.music.view;
 
-import org.w3c.dom.css.Rect;
-
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import javax.swing.JPanel;
@@ -20,18 +17,24 @@ import javax.swing.JPanel;
  * on the keyboard.
  * All notes are in the Arraylist Integer format of:
  * (int startingBeat, int endBeat, int instrument, int pitch, int volume)
+ * EDIT: Added a LinkedHashMap to contain the Rectangle area's the represent the piano keys
+ * ("hitboxes"). Added methods to help tell what piano key was pressed and what pitch it was to
+ * add to the composition.
  */
 public class KeyboardPanel extends JPanel {
 
+  // Constants
   public static final int NUM_WHKEYS = 70;
   public static final int WHKEY_WIDTH = 20;
   public static final int WHKEY_HEIGHT = 300;
   public static final int BLKEY_WIDTH = 10;
   public static final int BLKEY_HEIGHT = 150;
 
-
+  // Contains keys of type Rectangle, representing the hitbox of a key on the piano. Each
+  // rectangle corresponds to an Integer Midi pitch value.
   private LinkedHashMap<Rectangle, Integer> keyboardHitBoxes = new LinkedHashMap<>();
 
+  // All notes that are playing at the current beat
   private ArrayList<ArrayList<Integer>> liveNotes;
 
   /**
@@ -89,6 +92,10 @@ public class KeyboardPanel extends JPanel {
     drawBlackKeys(g, rangeOfPitches);
   }
 
+  /**
+   * Generates all of the hitboxes of the black keys in the Piano panel, and sends them to the
+   * keyboardHitBoxes map.
+   */
   private void makeBlackPianoKeyHitBoxes() {
     // blackKeyNumber represents the MIDI pitch of the key currently being drawn. Should be
     // incremented by 2 each iteration, except when there is no next black key. In that case,
@@ -125,7 +132,8 @@ public class KeyboardPanel extends JPanel {
   }
 
   /**
-   * Generates all of the hitboxes of the white keys in the Piano panel, and sends them to a Map.
+   * Generates all of the hitboxes of the white keys in the Piano panel, and sends them to the
+   * keyboardHitBoxes map.
    */
   private void makeWhitePianoKeyHitBoxes() {
     // keyNumber represents the MIDI pitch of the key currently being drawn. Should be incremented
@@ -262,10 +270,6 @@ public class KeyboardPanel extends JPanel {
         blackSwitchCounter += 1;
       }
     }
-  }
-
-  public HashMap<Rectangle, Integer> getKeyboardHitBoxes() {
-    return new HashMap<>(keyboardHitBoxes);
   }
 
   /**

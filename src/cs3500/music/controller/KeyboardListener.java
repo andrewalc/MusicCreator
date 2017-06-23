@@ -5,13 +5,21 @@ import java.awt.event.KeyListener;
 import java.util.Map;
 
 /**
- * Created by Andrew Alcala on 6/19/2017.
+ * A class representing a KeyListener for the Music Editor. This controller allows the setting of
+ * a Map of Integer(KeyCode) to Runnable, a command. One must create this map first and set this
+ * KeyboardListener to use that map of Runnables to respond with, depending on what keycode was
+ * found on a keypress.
  */
 public class KeyboardListener implements KeyListener {
 
   private Map<Integer, Runnable> keyPressedMap;
 
 
+  /**
+   * Sets the Map of Integer(Keycode) to Runnable (command) to look for on KeyPress.
+   *
+   * @param keyPressedMap The Map of Integer to Runnable.
+   */
   public void setKeyPressedMap(Map<Integer, Runnable> keyPressedMap) {
     this.keyPressedMap = keyPressedMap;
   }
@@ -19,7 +27,7 @@ public class KeyboardListener implements KeyListener {
 
   @Override
   public void keyTyped(KeyEvent e) {
-
+    //STUB, does not apply to controller.
   }
 
   @Override
@@ -31,6 +39,6 @@ public class KeyboardListener implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
-
+    //STUB, does not apply to controller.
   }
 }

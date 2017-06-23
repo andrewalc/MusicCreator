@@ -36,6 +36,7 @@ public class TestMidiView {
 
     MidiView.MidiViewBuilder mockViewBuilder = new MidiView.MidiViewBuilder(model.getAllNotes());
     mockViewBuilder.setSequencer(mock);
+    mockViewBuilder.setTempo(model.getTempo());
     mockView = mockViewBuilder.build();
   }
 
@@ -87,9 +88,9 @@ public class TestMidiView {
             "Note On msg found\n" +
             "Note On msg found\n" +
             "Note Off msg found\n" +
-            "Completed note pairing: note 24 26 1 55 79\n" +
-            "Note Off msg found\n" +
             "Completed note pairing: note 24 26 1 64 82\n" +
+            "Note Off msg found\n" +
+            "Completed note pairing: note 24 26 1 55 79\n" +
             "Note On msg found\n" +
             "Note Off msg found\n" +
             "Completed note pairing: note 26 28 1 67 84\n" +
@@ -160,6 +161,7 @@ public class TestMidiView {
     MidiView.MidiViewBuilder mockViewBuilderTest = new MidiView.MidiViewBuilder(builder.build()
             .getAllNotes());
     mockViewBuilderTest.setSequencer(mock);
+    mockViewBuilderTest.setTempo(245);
     MidiView mockViewTest = mockViewBuilderTest.build();
     mockViewTest.initialize();
     assertEquals(out.toString(), "MockSequencer was opened.\n" +
@@ -178,6 +180,7 @@ public class TestMidiView {
     MidiView.MidiViewBuilder mockViewBuilderTest = new MidiView.MidiViewBuilder(builder.build()
             .getAllNotes());
     mockViewBuilderTest.setSequencer(mock);
+    mockViewBuilderTest.setTempo(245);
     MidiView mockViewTest = mockViewBuilderTest.build();
     mockViewTest.initialize();
     assertEquals(out.toString(), "MockSequencer was opened.\n" +
@@ -204,6 +207,7 @@ public class TestMidiView {
     MidiView.MidiViewBuilder mockViewBuilderTest = new MidiView.MidiViewBuilder(builder.build()
             .getAllNotes());
     mockViewBuilderTest.setSequencer(mock);
+    mockViewBuilderTest.setTempo(2342);
     MidiView mockViewTest = mockViewBuilderTest.build();
     mockViewTest.initialize();
     assertEquals(out.toString(), "MockSequencer was opened.\n" +

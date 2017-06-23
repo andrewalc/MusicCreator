@@ -167,6 +167,11 @@ public class MockSequencer implements Sequencer {
     }
   }
 
+  @Override
+  public void setSequence(InputStream stream) throws IOException, InvalidMidiDataException {
+    // no need to overload.
+
+  }
 
   @Override
   public void start() {
@@ -187,11 +192,6 @@ public class MockSequencer implements Sequencer {
     }
   }
 
-  @Override
-  public void setSequence(InputStream stream) throws IOException, InvalidMidiDataException {
-    // no need to overload.
-
-  }
 
   @Override
   public Sequence getSequence() {

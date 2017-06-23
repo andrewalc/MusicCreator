@@ -19,15 +19,17 @@ import cs3500.music.model.Tones;
  * Class for the editor panel. All painting methods account for scrolling and have and if
  * statement dealing with the proper shift should the startingbeat be over the defined
  * START_SCROLLING_AT_BEAT threshold in the VisualView.
+ * Edit: Added paintCovers to render sidebars to the player.
  */
 public class EditorPanel extends JPanel {
 
-
+  // Constants
   public static final int TOP_SCREEN_SHIFT = 100;
   public static final int BORDER_SHIFT = 70;
   public static final int PITCH_MIDI_GAP = 80;
   public static final int BEAT_UNIT_LENGTH = 20;
   public static final int MEASURE_WIDTH = BEAT_UNIT_LENGTH * 4;
+  // private fields
   private int rowHeight;
   private int fontSize;
   private int rowWidth;
@@ -36,11 +38,11 @@ public class EditorPanel extends JPanel {
   private int maxBeats;
   private ArrayList<String> pitchStrings = new ArrayList<String>();
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
-  Color textColor = new Color(220, 223, 224);
-  Color linesColor = new Color(0, 0, 0);
-  Color noteHeadColor = Color.orange;
-  Color noteBody = new Color(165, 144, 0);
-  Color gridBackgroundColor = new Color(71, 71, 71);
+  private Color textColor = new Color(220, 223, 224);
+  private Color linesColor = new Color(0, 0, 0);
+  private Color noteHeadColor = Color.orange;
+  private Color noteBody = new Color(165, 144, 0);
+  private Color gridBackgroundColor = new Color(71, 71, 71);
 
   /**
    * Constructor for an EditorPanel. Requires the input of a Map of Integer MIDI pitches to
@@ -59,8 +61,6 @@ public class EditorPanel extends JPanel {
     generatePitchStrings();
     setFontAndRowHeight();
     setBackground(VisualView.BACKGROUND_COLOR);
-
-
 
 
   }
@@ -87,7 +87,7 @@ public class EditorPanel extends JPanel {
   private void generatePitchStrings() {
     pitchStrings = new ArrayList<>();
     // Generate list of pitch strings
-    if (this.getNumberOfNotes() > 1) {
+    if (this.getNumberOfNotes() > 0) {
       int currPitch = this.getHighestPitch();
       int lowest = this.getLowestPitch();
       while (true) {
@@ -192,7 +192,6 @@ public class EditorPanel extends JPanel {
 
     // Go through all pitches we need to render as rows.
     for (String currentPitch : this.pitchStrings) {
-
       if (currentBeat > VisualView.START_SCROLLING_AT_BEAT) {
         // generate the Pitch headers
         g.drawString(currentPitch, BORDER_SHIFT + ((currentBeat - VisualView
@@ -298,6 +297,7 @@ public class EditorPanel extends JPanel {
         measureSpacing += MEASURE_WIDTH;
         count++;
       }
+      g2d.setColor(linesColor);
       // draw the measure box for this row
       g2d.drawRect(BORDER_SHIFT + PITCH_MIDI_GAP, spacing - fontSize, rowWidth, rowHeight);
 
@@ -312,7 +312,7 @@ public class EditorPanel extends JPanel {
    * number of measures. Then calls methods to redraw everything accordingly.
    *
    * @param sortedNotes All of the notes in the Piece.
-   * @param maxBeats the maximum number of beats in the Piece.
+   * @param maxBeats    the maximum number of beats in the Piece.
    */
   public void updateInfo(TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes, int
           maxBeats) {

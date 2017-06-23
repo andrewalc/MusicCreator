@@ -607,13 +607,13 @@ public class TestMusicEditorModel {
   @Test
   public void testGetTempoGood1() {
     initData();
-    assertEquals(model0.getTempo(), 0);
+    assertEquals(model0.getTempo(), 220000); // Default tempo.
   }
 
   @Test
   public void testGetTempoGood2() {
     initData();
-    assertEquals(model1.getTempo(), 0);
+    assertEquals(model1.getTempo(), 220000); // Default tempo.
   }
 
   @Test

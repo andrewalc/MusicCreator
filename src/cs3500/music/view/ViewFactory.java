@@ -31,7 +31,7 @@ public class ViewFactory {
               .getAllNotes()));
     }
     if (viewType.equals("console")) {
-      return new ConsoleView(model.toString());
+      return new ConsoleView(model.getAllNotes());
     }
     if (viewType.equals("visual")) {
       return new VisualView(model.getAllNotes()); // maybe plus one
@@ -42,7 +42,7 @@ public class ViewFactory {
       return builder.build();
     }
     throw new IllegalArgumentException("Invalid view type. Must one of: \"console\" , \"visual\"," +
-            " or \"midi\"");
+            " \"midi\", or \"composite\"");
   }
 }
 

@@ -15,6 +15,12 @@ public class CompositeView implements IMusicEditorView {
   private MidiView midiView;
   private VisualView visualView;
 
+  /**
+   * Constructor for the composite view. Requires a MidiView and a VisualView.
+   *
+   * @param midiView   The Midiview to run.
+   * @param visualView The VisualView to run.
+   */
   public CompositeView(MidiView midiView, VisualView visualView) {
     this.midiView = midiView;
     this.visualView = visualView;
@@ -100,10 +106,10 @@ public class CompositeView implements IMusicEditorView {
 
   @Override
   public int getCurrentBeat() {
-    if (midiView.isPlayingMusic()) {
+    if (midiView.getCurrentBeat() == visualView.getCurrentBeat()) {
       return midiView.getCurrentBeat();
     } else {
-      return visualView.getCurrentBeat();
+      throw new IllegalArgumentException("ERROR: current beats are out of sync!");
     }
   }
 
@@ -114,6 +120,7 @@ public class CompositeView implements IMusicEditorView {
     if (midiView.isPlayingMusic()) {
       visualView.setCurrentBeat(midiView.getCurrentBeat());
     } else {
+
       midiView.setCurrentBeat(visualView.getCurrentBeat());
     }
     midiView.updateTempo();

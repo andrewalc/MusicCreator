@@ -84,7 +84,7 @@ public interface IMusicEditorView {
    * Refreshes the view to update it's current beat. Should music be playing, the visual should
    * keep up with the music's current beat. Should the music be stopped, the music should keep up
    * with the visual. This method serves the purpose of keeping both visual and music in sync and
-   * should be called repeatedly.
+   * should be called repeatedly. Mostly for Composite Views.
    */
   void updateCurrentBeat();
 

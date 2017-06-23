@@ -84,3 +84,19 @@ A class whose main function is to assist in translating from txt music to the Mo
 (Class) ViewFactory:
 
 The factory that is activated by the calling of the main class/method. Depending on the given String command, this class' method "getView" will return a builder of the requested view. For the command "console", it will build a console representation; for the command "visual", it will build the JPanel pop-up visualization; for the command "midi", it will build a Midi player and play the song.
+
+(Class) CompositeView
+
+A class that combines both a Visual View and Midi view into one, allowing for the music editor to fully sync its audio and visual components. This class is the ultimate product of our Music Editor and allows the user to control the editor using keyboard keys and mouse clicks. If a user presses the right or left arrow keys, they will advance the music editor playhead forward or backward one beat. If the user presses the home or end keys, the editor will move the playhead to the beginning or the end of the music editor. If a user presses the spacebar, the music will begin playing through MIDI, and if the music is already playing then another spacebar press will pause the music at the current playhead beat. If a user clicks on a piano key at the bottom of the screen, a note of beat duration one will be placed in the editor at the play head beat. The note that is added with have the pitch of the piano key that was clicked on by the mouse.
+
+(Class) KeyboardListener
+
+A class that creates a keylistener to be used in a view. This key listener is create to accept a Map of Integer(Keycodes) to Runnable, commands. The class has a method to set it's mapping and then has a method to call the correct command whenever a key on the keyboard is pressed. If the key is found in the map then the runnable command associated with the key will be executed.
+
+(Class) KeyboardListener
+
+A class that creates a keylistener to be used in a view. This key listener is create to accept a Map of Integer(MouseEvent IDs) to Runnable, commands. The class has a method to set it's mapping and then has a method to call the correct command whenever a mouse button is pressed. If the key is found in the map then the runnable command associated with the key will be executed.
+
+(Class) MusicEditorController
+
+A class that acts as the controller for running the MusicEditor. In this class, the maps for the keylistener and mouselistener are created and set. The controller takes in a IMusicEditorModel and a IMusicEditorView and helps bring them together to act as one. The listeners set are added to the given view and enabled through them. Once it is set, the controller can begin the process of running the program by calling beginControl(). One control has begun, it constantly updates the view to respond to anychanges that appear in the model or within itself. This is the loop that allows the editor to being functioning.

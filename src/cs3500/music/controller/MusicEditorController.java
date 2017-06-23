@@ -8,16 +8,28 @@ import java.util.Map;
 import cs3500.music.model.IMusicEditorModel;
 import cs3500.music.model.Tones;
 import cs3500.music.view.IMusicEditorView;
-import cs3500.music.view.MidiView;
 
 /**
- * Created by Andrew Alcala on 6/19/2017.
+ * Class representing the Music Editor Controller. Takes in a IMusicEditorModel and an
+ * IMusicEditorView and allows a user to control the Editor using key presses and mouse clicks.
+ * The constructor builds a keylistener KeyBoardListener and a mouselistener PianoMouseListener
+ * and sets the listeners with the appropriate commands the it will respond with on an event. To
+ * start the editor, one must call the beginControl method.
  */
 public class MusicEditorController {
-  IMusicEditorModel model;
-  IMusicEditorView view;
-  boolean changeMade = false;
+  private IMusicEditorModel model;
 
+  private IMusicEditorView view;
+  // Used for finding out when it is necessary to rebuild the midi audio.
+  private boolean audioUpdateNecessary = false;
+
+  /**
+   * Constructor for a MusicEditorController. Requires a model and view to use to run both vies
+   * simultaneously.
+   *
+   * @param model The IMusicEditorModel to use in the composite view.
+   * @param view  The IMusicEditorView to use in the composite view.
+   */
   public MusicEditorController(IMusicEditorModel model, IMusicEditorView view) {
     this.model = model;
     this.view = view;
@@ -25,28 +37,14 @@ public class MusicEditorController {
     this.configureMouseListener();
   }
 
-  void updateView() {
-    view.updateVisAddNotes(model.getAllNotes());
-  }
-
   /**
    * Creates and sets a keyboard listener for the view
-   * In effect it creates snippets of code as Runnable object, one for each time a key
-   * is typed, pressed and released, only for those that the program needs.
-   * <p>
-   * In this example, we need to toggle color when user TYPES 'd', make the message
-   * all caps when the user PRESSES 'c' and reverts to the original string when the
-   * user RELEASES 'c'. Thus we create three snippets of code and put them in the appropriate map.
-   * This example shows how to create these snippets of code using lambda functions, a new feature
-   * in Java 8.
-   * <p>
-   * For more information on Java 8's syntax of lambda expressions, go here:
-   * https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html
-   * <p>
-   * The above tutorial has specific example for GUI listeners.
-   * <p>
-   * Last we create our KeyboardListener object, set all its maps and then give it to
-   * the view.
+   * When space is pressed, the music will play if it wasn't playing already, or it will pause if
+   * music was already playing.
+   * When right arrow key is pressed, the editor will move the playhead forward one beat.
+   * When left arrow key is pressed, the editor will move the playhead backward one beat.
+   * When the home key is pressed, the editor will move the playhead to the beginning of the music.
+   * When the end key is pressed, the editor will move the playhead to the end of the music.
    */
   private void configureKeyBoardListener() {
     Map<Integer, Runnable> keyPresses = new HashMap<Integer, Runnable>();
@@ -55,9 +53,9 @@ public class MusicEditorController {
       if (view.isPlayingMusic()) {
         view.pauseMusic();
       } else {
-        if (changeMade) {
+        if (audioUpdateNecessary) {
           view.rebuildMusic(model.getAllNotes());
-          changeMade = false;
+          audioUpdateNecessary = false;
         }
         view.startMusic();
 
@@ -71,9 +69,9 @@ public class MusicEditorController {
       view.backOneBeat();
     });
     keyPresses.put(KeyEvent.VK_HOME, () -> { //the contents of MakeCaps below
-      if (view.isPlayingMusic() && changeMade) {
+      if (view.isPlayingMusic() && audioUpdateNecessary) {
         view.rebuildMusic(model.getAllNotes());
-        changeMade = false;
+        audioUpdateNecessary = false;
       }
       view.goToBeginning();
     });
@@ -81,13 +79,19 @@ public class MusicEditorController {
       view.goToEnd();
     });
 
-
+    // add the keyboard listener to the view.
     KeyboardListener kbd = new KeyboardListener();
     kbd.setKeyPressedMap(keyPresses);
     view.addKeyListener(kbd);
 
   }
 
+  /**
+   * Creates and sets a mouse listener for the view.
+   * Whenever a mouse button is pressed, it will check if the mouse clicked on one of the
+   * keyboard keys. If it did, then it will add a note of duration 1 to the editor at the
+   * playhead beat with the pitch of the piano key that was clicked.
+   */
   private void configureMouseListener() {
     Map<Integer, Runnable> mousePresses = new HashMap<Integer, Runnable>();
 
@@ -101,10 +105,11 @@ public class MusicEditorController {
         if (view.getCurrentBeat() + beatDuration > view.getMaxBeat()) {
           view.rebuildMusic(model.getAllNotes());
         }
+        // Update the view with the added note.
+        view.updateVisAddNotes(model.getAllNotes());
         view.forwardOneBeat();
         // we added a note, so a change was made and will require rebuilding audio.
-        changeMade = true;
-        updateView();
+        audioUpdateNecessary = true;
 
       } catch (IllegalArgumentException e) {
         e.getMessage();
@@ -113,6 +118,7 @@ public class MusicEditorController {
     });
 
 
+    // add the mouse listener to the view.
     PianoMouseListener mouseListener = new PianoMouseListener();
     mouseListener.setMousePressedMap(mousePresses);
     view.addMouseListener(mouseListener);
@@ -120,17 +126,15 @@ public class MusicEditorController {
   }
 
 
+  /**
+   * Initializes the view and begins the editor with user control.
+   */
   public void beginControl() {
-    view.initialize();
     System.out.println("Initializing MIDI Editor...");
-
-    if (view instanceof MidiView) {
-      view.startMusic();
-    } else {
-      while (view.isActive()) {
-        view.updateCurrentBeat();
-      }
+    view.initialize();
+    while (view.isActive()) {
+      view.updateCurrentBeat();
+      System.out.print(" "); // Needed to boost performance.
     }
   }
-
 }

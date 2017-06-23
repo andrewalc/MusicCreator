@@ -42,7 +42,6 @@ public class VisualView extends JFrame implements IMusicEditorView {
   private int maxBeats;
   private EditorPanel editorPanel;
   private KeyboardPanel keyboardPanel;
-  private JScrollPane editorPanelScrolling;
   private JPanel container;
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
   public static final int START_SCROLLING_AT_BEAT = 16;
@@ -86,17 +85,15 @@ public class VisualView extends JFrame implements IMusicEditorView {
     container = new JPanel();
     container.setLayout(null);
     container.setBounds(0, 0, 1600, 900);
-
     container.setBackground(BACKGROUND_COLOR);
 
 
-    editorPanel.setVisible(true);
     Dimension editorPanelSize = editorPanel.getPreferredSize();
     editorPanel.setBounds(0, 0, editorPanelSize.width,
             editorPanelSize.height);
 
     // Enable scroll bars.
-    editorPanelScrolling = new JScrollPane();
+    JScrollPane editorPanelScrolling = new JScrollPane();
     editorPanelScrolling.getViewport().setOpaque(false);
     editorPanelScrolling.setBorder(null);
     editorPanelScrolling.setViewportView(editorPanel);
@@ -128,7 +125,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
    *
    * @return the max beat from this VisualView's "notes"
    */
-  public int getMaxBeatFromNotes() {
+  private int getMaxBeatFromNotes() {
     int potentialMaxBeats = 0;
     for (ArrayList<ArrayList<Integer>> pitchList : this.notes.values()) {
       for (ArrayList<Integer> note : pitchList) {
@@ -149,29 +146,31 @@ public class VisualView extends JFrame implements IMusicEditorView {
    */
   @Override
   public int getCurrentBeat() {
-    return currentBeat;
+    return this.currentBeat;
   }
 
   @Override
   public void updateCurrentBeat() {
-
+    // STUB, does not apply to this view.
   }
 
 
   @Override
   public void setCurrentBeat(int currentBeat) {
+
     // When a beat is set the editor panel shifts accordingly, to the current beat.
     if (currentBeat > START_SCROLLING_AT_BEAT) {
       editorPanel.setLocation((-1 * (currentBeat - START_SCROLLING_AT_BEAT) * EditorPanel
                       .BEAT_UNIT_LENGTH),
               editorPanel.getY());
     } else {
-      editorPanel.setLocation(0, 0);
+      editorPanel.setLocation(0, editorPanel.getY());
     }
-
     this.currentBeat = currentBeat;
     editorPanel.setCurrentBeat(this.currentBeat);
-    keyboardPanel.setNotes(getNotesAtBeat(notes, currentBeat));
+
+    keyboardPanel.setNotes(getNotesAtBeat(notes, this.currentBeat));
+
     revalidate();
     repaint();
   }
@@ -221,26 +220,26 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
   @Override
   public void forwardOneBeat() {
-    if (currentBeat + 1 <= maxBeats) {
-      setCurrentBeat(currentBeat + 1);
+    if (this.currentBeat + 1 <= this.maxBeats) {
+      setCurrentBeat(this.currentBeat + 1);
     }
   }
 
   @Override
   public void backOneBeat() {
-    if (currentBeat - 1 >= 0) {
-      setCurrentBeat(currentBeat - 1);
+    if (this.currentBeat - 1 >= 0) {
+      setCurrentBeat(this.currentBeat - 1);
     }
   }
 
   @Override
   public void startMusic() {
-
+    // STUB, does not apply to this view.
   }
 
   @Override
   public void pauseMusic() {
-
+    // STUB, does not apply to this view.
   }
 
   @Override
@@ -276,11 +275,8 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
   @Override
   public void updateVisAddNotes(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
-
-
     this.notes = allNotes;
     this.maxBeats = getMaxBeatFromNotes() + 1; // IMPORTANT TO PRETEND IT IS 1 BEAT LONGER SEE TOP.
-
     // Copy the Map of notes.
     TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes = new TreeMap<>(new
             IntegerComparator());
@@ -292,7 +288,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
   @Override
   public void rebuildMusic(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
-
+    // STUB, does not apply to this view.
   }
 
 }

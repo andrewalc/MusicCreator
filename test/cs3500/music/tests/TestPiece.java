@@ -955,14 +955,14 @@ public class TestPiece {
   public void testGetTempoGood1() {
     initData();
 
-    assertEquals(p1.getTempo(), 0);
+    assertEquals(p1.getTempo(), 220000); // Default tempo.
   }
 
   @Test
   public void testGetTempoGood2() {
     initData();
 
-    assertEquals(p0.getTempo(), 0);
+    assertEquals(p0.getTempo(), 220000); // Default tempo.
   }
 
   @Test

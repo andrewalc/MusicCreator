@@ -16,9 +16,9 @@ public class Note {
   private int beats;
   private int instrument;
   private int volume;
-  public final static String STR_NOTE_HEAD = "  X  ";
-  public final static String STR_NOTE_SUSTAIN = "  |  ";
-  public final static String STR_NOTE_EMPTY = "     ";
+  public static final String STR_NOTE_HEAD = "  X  ";
+  public static final String STR_NOTE_SUSTAIN = "  |  ";
+  public static final String STR_NOTE_EMPTY = "     ";
 
 
   /**
