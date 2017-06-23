@@ -7,63 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="106c4025-9472-47f2-8388-2e1e2426393c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mystery2Screencap.PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/MusicCreator.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/mystery2Screencap.PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/README.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/df-ttfaf.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lnl.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/mary-little-lamb.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/mystery-1.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/mystery-2.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/mystery-3.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/zoot-lw.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/zoot-zl.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cs3500/music/view/MockCompositeView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/cs3500/music/tests/TestKeyboardListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/cs3500/music/tests/TestPianoMouseListener.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/midi-transcript.txt" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/artifacts/Music_Creator_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/MusicCreator_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/controller/KeyboardListener.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/controller/KeyboardListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/controller/MusicEditorController.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/controller/MusicEditorController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/controller/PianoMouseListener.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/controller/PianoMouseListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/model/Piece.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/model/Piece.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/CompositeView.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/CompositeView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/ConsoleView.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/ConsoleView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/EditorPanel.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/EditorPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/IMusicEditorView.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/IMusicEditorView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/KeyboardPanel.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/KeyboardPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/MidiView$MidiViewBuilder.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/MidiView$MidiViewBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/MidiView.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/MidiView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/MockSequencer.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/MockSequencer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/MusicEditor.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/MusicEditor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/ViewFactory.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/ViewFactory.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/VisualView.class" afterPath="$PROJECT_DIR$/out/production/Music Creator/cs3500/music/view/VisualView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/Music Creator/cs3500/music/tests/TestConsoleView.class" afterPath="$PROJECT_DIR$/out/test/Music Creator/cs3500/music/tests/TestConsoleView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/Music Creator/cs3500/music/tests/TestMidiView.class" afterPath="$PROJECT_DIR$/out/test/Music Creator/cs3500/music/tests/TestMidiView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/Music Creator/cs3500/music/tests/TestMusicEditorModel.class" afterPath="$PROJECT_DIR$/out/test/Music Creator/cs3500/music/tests/TestMusicEditorModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/Music Creator/cs3500/music/tests/TestPiece.class" afterPath="$PROJECT_DIR$/out/test/Music Creator/cs3500/music/tests/TestPiece.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/MusicCreator.jar" afterPath="$PROJECT_DIR$/resources/MusicCreator.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.txt" afterPath="$PROJECT_DIR$/README.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/controller/KeyboardListener.java" afterPath="$PROJECT_DIR$/src/cs3500/music/controller/KeyboardListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/controller/MusicEditorController.java" afterPath="$PROJECT_DIR$/src/cs3500/music/controller/MusicEditorController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/controller/PianoMouseListener.java" afterPath="$PROJECT_DIR$/src/cs3500/music/controller/PianoMouseListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/model/Note.java" afterPath="$PROJECT_DIR$/src/cs3500/music/model/Note.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/model/Piece.java" afterPath="$PROJECT_DIR$/src/cs3500/music/model/Piece.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/CompositeView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/CompositeView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/ConsoleView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/ConsoleView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/EditorPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/IMusicEditorView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/IMusicEditorView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/KeyboardPanel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/KeyboardPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/MidiView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/MidiView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/MockSequencer.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/MockSequencer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/MusicEditor.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/MusicEditor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/ViewFactory.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/ViewFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/VisualView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/VisualView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/cs3500/music/tests/TestConsoleView.java" afterPath="$PROJECT_DIR$/test/cs3500/music/tests/TestConsoleView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/cs3500/music/tests/TestMidiView.java" afterPath="$PROJECT_DIR$/test/cs3500/music/tests/TestMidiView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/cs3500/music/tests/TestMusicEditorModel.java" afterPath="$PROJECT_DIR$/test/cs3500/music/tests/TestMusicEditorModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/cs3500/music/tests/TestPiece.java" afterPath="$PROJECT_DIR$/test/cs3500/music/tests/TestPiece.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -309,7 +254,7 @@
                   <caret line="25" column="6" lean-forward="false" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#977#996#0" expanded="true" />
+                    <element signature="e#976#995#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -1322,7 +1267,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498182192287</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Version 1.">
+      <created>1498255693530</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1498255693530</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1368,7 +1320,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1386,7 +1337,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1474,7 +1425,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Completed Javadoc and comments for everything." />
     <MESSAGE value="Put Javadoc in test class headers, made model constructor private, added a build test to model tests." />
     <MESSAGE value="MidiView Builder, MockSequencer" />
     <MESSAGE value="Tests for console view, midi view, mock" />
@@ -1499,7 +1449,8 @@
     <MESSAGE value="Beginning comments" />
     <MESSAGE value="Builder field is private" />
     <MESSAGE value="Back to normal" />
-    <option name="LAST_COMMIT_MESSAGE" value="Back to normal" />
+    <MESSAGE value="Version 1." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 1." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1794,7 +1745,7 @@
           <caret line="25" column="6" lean-forward="false" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#977#996#0" expanded="true" />
+            <element signature="e#976#995#0" expanded="true" />
           </folding>
         </state>
       </provider>
