@@ -1,6 +1,8 @@
 package cs3500.music.model;
 
 
+import org.omg.CORBA.INTERNAL;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -248,5 +250,25 @@ public final class MusicEditorModel implements IMusicEditorModel {
   public String toString() {
     return this.piece.toString();
 
+  }
+
+  @Override
+  public void setRepeatFromTheTop(int endingBeat) {
+    this.piece.setRepeatFromTheTop(endingBeat);
+  }
+
+  @Override
+  public void setRepeatPair(int startingBeat, int endingBeat) {
+    this.piece.setRepeatPair(startingBeat, endingBeat);
+  }
+
+  @Override
+  public void resetRepeatPairs() {
+    this.piece.resetRepeatPairs();
+  }
+
+  @Override
+  public Map<Integer, Integer> getRepeatPairs() {
+    return this.piece.getRepeatPairs();
   }
 }

@@ -204,6 +204,43 @@ public class MockCompositeView implements IMusicEditorView {
 
   }
 
+  @Override
+  public void receiveRepeatPairs(Map<Integer, Integer> repeatPairs) {
+    try {
+      this.ap.append("Receiving repeat pairs.\n");
+    } catch (IOException e) {
+      e.getMessage();
+    }
+  }
+
+  @Override
+  public Map<Integer, Integer> getRepeatPairs() {
+    try {
+      this.ap.append("Getting repeat pairs.\n");
+    } catch (IOException e) {
+      e.getMessage();
+    }
+    return null;
+  }
+
+  @Override
+  public void resetRepeatPassings() {
+    try {
+      this.ap.append("Resetting status of all repeat pairs.\n");
+    } catch (IOException e) {
+      e.getMessage();
+    }
+  }
+
+  @Override
+  public void setTempo(int tempo) {
+    try {
+      this.ap.append("Setting the views tempo to " + tempo + "\n");
+    } catch (IOException e) {
+      e.getMessage();
+    }
+  }
+
   /**
    * Used to stop the mock view.
    */

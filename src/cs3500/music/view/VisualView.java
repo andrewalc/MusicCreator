@@ -3,6 +3,7 @@ package cs3500.music.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -46,6 +47,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
   public static final int START_SCROLLING_AT_BEAT = 16;
   public static final Color BACKGROUND_COLOR = new Color(43, 43, 43);
+  private Map<Integer, Integer> repeatPairs;
 
 
   /**
@@ -65,6 +67,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
     this.currentBeat = 0;
     // IMPORTANT TO PRETEND IT IS 1 BEAT LONGER SEE TOP JAVA DOC.
     this.maxBeats = this.getMaxBeatFromNotes() + 1;
+    this.repeatPairs = new HashMap<>();
     setSize(1600, 900);
     setResizable(false);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -79,7 +82,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
 
     // Two panels
     keyboardPanel = new KeyboardPanel(this.getNotesAtBeat(notes, currentBeat));
-    editorPanel = new EditorPanel(sortedNotes, maxBeats);
+    editorPanel = new EditorPanel(sortedNotes, maxBeats, this.repeatPairs);
 
     // Create a container to combine both JPanels, set the layout.
     container = new JPanel();
@@ -282,13 +285,39 @@ public class VisualView extends JFrame implements IMusicEditorView {
             IntegerComparator());
     sortedNotes.putAll(notes);
     keyboardPanel.updateInfo(this.getNotesAtBeat(notes, currentBeat));
-    editorPanel.updateInfo(sortedNotes, maxBeats);
+    editorPanel.updateInfo(sortedNotes, maxBeats, this.repeatPairs);
     repaint();
   }
 
   @Override
   public void rebuildMusic(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes) {
     // STUB, does not apply to this view.
+  }
+
+  @Override
+  public void receiveRepeatPairs(Map<Integer, Integer> repeatPairs) {
+    this.repeatPairs = repeatPairs;
+    editorPanel.updateRepeatPairs(this.repeatPairs);
+  }
+
+  @Override
+  public Map<Integer, Integer> getRepeatPairs() {
+    Map<Integer, Integer> copy = new HashMap<>();
+    for(Integer keyEndingBeat : this.repeatPairs.keySet()){
+      int beginningBeatCandidate = this.repeatPairs.get(keyEndingBeat);
+      copy.put(keyEndingBeat, beginningBeatCandidate);
+    }
+    return copy;
+  }
+
+  @Override
+  public void resetRepeatPassings() {
+    //STUB, does not apply to view.
+  }
+
+  @Override
+  public void setTempo(int tempo) {
+    //STUB, does not apply to view.
   }
 
 }

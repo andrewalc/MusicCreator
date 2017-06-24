@@ -27,14 +27,19 @@ public class ViewFactory {
       MidiView.MidiViewBuilder builder = new MidiView.MidiViewBuilder(model.getAllNotes());
       builder.setTempo(model.getTempo());
       MidiView midiView = builder.build();
-      return new CompositeView(midiView, new VisualView(model
-              .getAllNotes()));
+      VisualView visView = new VisualView(model.getAllNotes());
+      // set repeats
+      visView.receiveRepeatPairs(model.getRepeatPairs());
+      return new CompositeView(midiView, visView);
     }
     if (viewType.equals("console")) {
       return new ConsoleView(model.getAllNotes());
     }
     if (viewType.equals("visual")) {
-      return new VisualView(model.getAllNotes()); // maybe plus one
+      VisualView visView = new VisualView(model.getAllNotes());
+      // set repeats
+      visView.receiveRepeatPairs(model.getRepeatPairs());
+      return visView;
     }
     if (viewType.equals("midi")) {
       MidiView.MidiViewBuilder builder = new MidiView.MidiViewBuilder(model.getAllNotes());

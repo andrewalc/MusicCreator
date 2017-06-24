@@ -13,6 +13,7 @@ import cs3500.music.controller.PianoMouseListener;
  */
 public interface IMusicEditorView {
 
+
   /**
    * Creates and displays the view for this view implementation. The method should begin all
    * operations necessary to display the view to the user when it is called.
@@ -136,5 +137,27 @@ public interface IMusicEditorView {
    * added to the composition. Requires the new Map of all notes to be played by the midi view.
    */
   void rebuildMusic(Map<Integer, ArrayList<ArrayList<Integer>>> allNotes);
+
+  /**
+   * Allows the visual view to receive a map of repeat pairs to display visually in the song
+   */
+  void receiveRepeatPairs(Map<Integer, Integer> repeatPairs);
+
+  /**
+   * Getter for the map of repeat pairs.
+   * @return The map of repeat pairs.
+   */
+  Map<Integer, Integer> getRepeatPairs();
+
+  /**
+   * Resets the status of all repeats to be able to repeat again on next playback.
+   */
+  void resetRepeatPassings();
+
+  /**
+   * Sets the tempo for the music to play at.
+   * @param tempo Tempo to play the music at.
+   */
+  void setTempo(int tempo);
 
 }

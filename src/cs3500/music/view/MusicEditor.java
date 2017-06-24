@@ -23,25 +23,25 @@ class MusicEditor {
    *             "composite".
    */
   public static void main(String[] args) {
-    // Need two string args, filename and viewtype.
-    if (args.length != 2) {
-      throw new IllegalArgumentException("Requires two arguments: [File name] and " +
-              "[View type] \n Ex. \"mary-little-lamb.txt\" + \"visual\" ");
-    }
-    String fileName = args[0];
-    String viewType = args[1];
+//    // Need two string args, filename and viewtype.
+//    if (args.length != 2) {
+//      throw new IllegalArgumentException("Requires two arguments: [File name] and " +
+//              "[View type] \n Ex. \"mary-little-lamb.txt\" + \"visual\" ");
+//    }
+//    String fileName = args[0];
+//    String viewType = args[1];
 
     // Build a Music editor model with notes from the file given.
     MusicEditorModel.MusicEditorBuilder modelBuilder = new MusicEditorModel.MusicEditorBuilder();
     try {
-      MusicReader.parseFile(new FileReader(fileName), modelBuilder);
+      MusicReader.parseFile(new FileReader("df-ttfaf.txt"), modelBuilder);
     } catch (FileNotFoundException e) {
       System.out.println(e.getMessage());
     }
     IMusicEditorModel model = modelBuilder.build();
     // Generate a view for the built model base on viewtype input.
     ViewFactory factory = new ViewFactory(model);
-    IMusicEditorView view = factory.getView(viewType);
+    IMusicEditorView view = factory.getView("composite");
     // Start the controller.
     MusicEditorController controller = new MusicEditorController(model, view);
     controller.beginControl();

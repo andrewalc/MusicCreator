@@ -1,7 +1,11 @@
 package cs3500.music.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -18,7 +22,8 @@ public class Piece {
   private int tempo = 220000;
   // represents the very last beat number ever reached in this piece
   private int maxBeats = 0;
-
+  // EDIT: support for sets of tempo repeats, keys are endingbeats, values are startingbeats
+  private HashMap<Integer, Integer> repeatPairs = new HashMap<>();
   /**
    * Constructor that produces a new empty Piece of music, with no notes assigned.
    */
@@ -420,5 +425,57 @@ public class Piece {
   @Override
   public int hashCode() {
     return (31 * this.allNotes.hashCode()) + this.toString().hashCode();
+  }
+
+  public void setRepeatFromTheTop(int endingBeat) {
+    for(Integer keyEndingBeat: this.repeatPairs.keySet()) {
+      int startingBeatCandidate = this.repeatPairs.get(keyEndingBeat);
+      if ((0 >= startingBeatCandidate && 0 <= keyEndingBeat) ||
+              (endingBeat >= startingBeatCandidate && endingBeat <= keyEndingBeat)) {
+        throw new IllegalArgumentException("There is already a repeat pair in this range!");
+      }
+    }
+    this.repeatPairs.put(endingBeat, 0);
+  }
+
+  public void setRepeatPair(int startingBeat, int endingBeat) {
+    // make a copy of the map
+    Map<Integer,Integer> copyRepeatPairs = new HashMap<>();
+    for(Integer keyEndingBeat: this.repeatPairs.keySet()){
+      int startingBeatCandidate = this.repeatPairs.get(keyEndingBeat);
+      copyRepeatPairs.put(keyEndingBeat, startingBeatCandidate);
+    }
+
+
+    for(Integer keyEndingBeat: copyRepeatPairs.keySet()){
+      int startingBeatCandidate = this.repeatPairs.get(keyEndingBeat);
+
+      // Find if this matches a potential pair that has not been completed yet.
+      if(this.repeatPairs.get(keyEndingBeat) == startingBeat &&
+              keyEndingBeat == -1){
+        this.repeatPairs.remove(-1);
+      }
+
+      if((startingBeat >= startingBeatCandidate && startingBeat <= keyEndingBeat) ||
+              (endingBeat >= startingBeatCandidate && endingBeat <= keyEndingBeat)){
+        throw new IllegalArgumentException("There is already a repeat pair in this range!");
+      }
+      // an ending beat of -1 means it is a potential pair, allow this for drawing the starting.
+    }
+    this.repeatPairs.put(endingBeat, startingBeat);
+  }
+
+  public Map<Integer,Integer> getRepeatPairs() {
+    Map<Integer,Integer> copy = new HashMap<>();
+    for(Integer keyEndingBeat: this.repeatPairs.keySet()){
+      int startingBeatCandidate = this.repeatPairs.get(keyEndingBeat);
+      copy.put(keyEndingBeat, startingBeatCandidate);
+    }
+
+    return copy;
+  }
+
+  public void resetRepeatPairs() {
+    this.repeatPairs = new HashMap<>();
   }
 }

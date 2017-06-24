@@ -1,6 +1,9 @@
 package cs3500.music.view;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import cs3500.music.controller.KeyboardListener;
@@ -14,6 +17,7 @@ public class CompositeView implements IMusicEditorView {
 
   private MidiView midiView;
   private VisualView visualView;
+  private Map<Integer, ArrayList<Integer>> repeatPairsAndPass = new HashMap<>();
 
   /**
    * Constructor for the composite view. Requires a MidiView and a VisualView.
@@ -118,13 +122,25 @@ public class CompositeView implements IMusicEditorView {
     // If the midi is playing, it will dictate what the current beat is defined for the visual.
     // Otherwise, the visual view will dictate what the current beat is and make the midi follow.
     if (midiView.isPlayingMusic()) {
+      for(Integer keyEndingBeat: this.getRepeatPairsAndPass().keySet()){
+        int startingBeatingCandidate = this.getRepeatPairsAndPass().get(keyEndingBeat).get(0);
+        if ((midiView.getCurrentBeat() == keyEndingBeat) &&
+                this.getRepeatPairsAndPass().get(keyEndingBeat).get(1) == 1){
+          midiView.pauseMusic();
+          midiView.setCurrentBeat(startingBeatingCandidate);
+          midiView.startMusic();
+          // We passed the repeat so set its passing value to -1.
+          this.getRepeatPairsAndPass().put(keyEndingBeat,
+                  new ArrayList<Integer>(Arrays.asList(startingBeatingCandidate, -1)));
+        }
+      }
       visualView.setCurrentBeat(midiView.getCurrentBeat());
-    } else {
+      //startMusic();
 
+    } else {
       midiView.setCurrentBeat(visualView.getCurrentBeat());
     }
     midiView.updateTempo();
-
   }
 
 
@@ -159,5 +175,45 @@ public class CompositeView implements IMusicEditorView {
     midiView.rebuildMusic(allNotes);
 
   }
+
+  @Override
+  public void receiveRepeatPairs(Map<Integer, Integer> repeatPairs) {
+    visualView.receiveRepeatPairs(repeatPairs);
+    midiView.receiveRepeatPairs(repeatPairs);
+
+    // create the map with repeat pairs, keys are endingbeat, values are an arraylist of integer
+    // of size 2. The arraylist holds the startingbeat in index 0,  and holds a integer, either
+    // -1 or 1, representing whether this pair is active(has not been passed). -1 means it has been
+    // passed, 1 means it has not been passed and is active.
+    for(Integer keyEndingBeat: this.getRepeatPairs().keySet()){
+      int startingBeatingCandidate = this.getRepeatPairs().get(keyEndingBeat);
+      this.repeatPairsAndPass.put(keyEndingBeat,
+              new ArrayList<Integer>(Arrays.asList(startingBeatingCandidate, 1)));
+    }
+  }
+
+  @Override
+  public Map<Integer, Integer> getRepeatPairs() {
+    return visualView.getRepeatPairs();
+  }
+
+  @Override
+  public void resetRepeatPassings() {
+    for(Integer keyEndingBeat: this.getRepeatPairs().keySet()){
+      int startingBeatingCandidate = this.getRepeatPairs().get(keyEndingBeat);
+      this.repeatPairsAndPass.put(keyEndingBeat,
+              new ArrayList<Integer>(Arrays.asList(startingBeatingCandidate, 1)));
+    }
+  }
+
+  @Override
+  public void setTempo(int tempo) {
+    midiView.setTempo(tempo);
+  }
+
+  private Map<Integer, ArrayList<Integer>> getRepeatPairsAndPass(){
+    return this.repeatPairsAndPass;
+  }
+
 
 }

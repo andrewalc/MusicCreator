@@ -1,6 +1,8 @@
 package cs3500.music.model;
 
 
+import sun.rmi.server.InactiveGroupException;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -191,5 +193,34 @@ public interface IMusicEditorModel {
    * @return a String representing the loaded piece's music.
    */
   String toString();
+
+  /**
+   * Creates a repeat at the endingBeat given and will make the music play from the top once the
+   * beat is hit.
+   * @param endingBeat The beat for the repeat to occur on.
+   */
+  void setRepeatFromTheTop(int endingBeat);
+
+  /**
+   * Creates a repeat pair at the startingbeat endingBeat given and will make the music play from
+   * the beginning beat once the ending beat is hit.
+   * @param startingBeat
+   * @param endingBeat
+   * @Throws IllegalArgumentException if the starting beat of ending beat is in an invalid range.
+   */
+  void setRepeatPair(int startingBeat, int endingBeat) throws IllegalArgumentException;
+
+  /**
+   * Removes all set repeat pairs in this composition.
+   */
+  void resetRepeatPairs();
+
+  /**
+   * Returns the map containing all repeat pairs in the music. Keys are endingbeats and values are
+   * their corresponding starting beats.
+   * @return
+   */
+  Map<Integer, Integer> getRepeatPairs();
+
 
 }

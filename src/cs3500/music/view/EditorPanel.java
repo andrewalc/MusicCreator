@@ -7,10 +7,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 import javax.swing.JPanel;
+import javax.swing.plaf.synth.ColorType;
 
 import cs3500.music.model.Tones;
 
@@ -43,6 +46,10 @@ public class EditorPanel extends JPanel {
   private Color noteHeadColor = Color.orange;
   private Color noteBody = new Color(165, 144, 0);
   private Color gridBackgroundColor = new Color(71, 71, 71);
+  private Map<Integer, Integer> repeatPairs;
+  private Color singletonRepeat = new Color(255, 255, 255);
+  private ArrayList<Color> repeatColors =
+          new ArrayList<>(Arrays.asList(Color.CYAN, Color.MAGENTA, Color.YELLOW, Color. GREEN));
 
   /**
    * Constructor for an EditorPanel. Requires the input of a Map of Integer MIDI pitches to
@@ -52,12 +59,14 @@ public class EditorPanel extends JPanel {
    * @param notes    Map of all notes to be displayed in the editor.
    * @param maxBeats Integer value of the last possible beat in the Map of notes.
    */
-  public EditorPanel(Map<Integer, ArrayList<ArrayList<Integer>>> notes, int maxBeats) {
+  public EditorPanel(Map<Integer, ArrayList<ArrayList<Integer>>> notes, int maxBeats,
+                     Map<Integer, Integer> repeatPairs) {
     this.currentBeat = 0;
     this.maxBeats = maxBeats;
     this.rowWidth = (this.maxBeats * BEAT_UNIT_LENGTH);
     this.numOfMeasures = rowWidth / MEASURE_WIDTH;
     this.notes = notes;
+    this.repeatPairs = repeatPairs;
     generatePitchStrings();
     setFontAndRowHeight();
     setBackground(VisualView.BACKGROUND_COLOR);
@@ -173,11 +182,41 @@ public class EditorPanel extends JPanel {
     if (rowWidth > 0) {
       paintMeasureNumbers(g);
       paintRows(g);
+      paintRepeatPairs(g);
       paintPlayLine(g);
       paintMeasureNumbers(g);
       paintCovers(g);
       paintRowPitches(g);
     }
+  }
+
+  private void paintRepeatPairs(Graphics g) {
+
+    Graphics2D g2d = (Graphics2D) g.create();
+    g2d.setStroke(new BasicStroke(5));
+    for(Integer keyEndingBeat: this.repeatPairs.keySet()){
+      if(keyEndingBeat == -1){
+        g2d.setColor(singletonRepeat);
+      }
+      else{
+        g2d.setColor(Color.GREEN);//this.repeatColors.get(new Random().nextInt(this.repeatColors.size() - 1)));
+      }
+      int startingBeatCandidate = this.repeatPairs.get(keyEndingBeat);
+      //draw the starting beat repeat line
+      g2d.drawLine(BORDER_SHIFT + PITCH_MIDI_GAP + (startingBeatCandidate * BEAT_UNIT_LENGTH),
+              TOP_SCREEN_SHIFT -
+                      fontSize,
+              BORDER_SHIFT + PITCH_MIDI_GAP + (startingBeatCandidate * BEAT_UNIT_LENGTH),
+              TOP_SCREEN_SHIFT + (rowHeight * this.pitchStrings.size()) - fontSize);
+      //draw the ending beat repeat line
+      g2d.drawLine(BORDER_SHIFT + PITCH_MIDI_GAP + (keyEndingBeat * BEAT_UNIT_LENGTH),
+              TOP_SCREEN_SHIFT -
+                      fontSize,
+              BORDER_SHIFT + PITCH_MIDI_GAP + (keyEndingBeat * BEAT_UNIT_LENGTH),
+              TOP_SCREEN_SHIFT + (rowHeight * this.pitchStrings.size()) - fontSize);
+
+    }
+
   }
 
   /**
@@ -315,11 +354,12 @@ public class EditorPanel extends JPanel {
    * @param maxBeats    the maximum number of beats in the Piece.
    */
   public void updateInfo(TreeMap<Integer, ArrayList<ArrayList<Integer>>> sortedNotes, int
-          maxBeats) {
+          maxBeats, Map<Integer, Integer> repeatPairs) {
     this.notes = sortedNotes;
     this.maxBeats = maxBeats;
     this.rowWidth = (this.maxBeats * BEAT_UNIT_LENGTH);
     this.numOfMeasures = rowWidth / MEASURE_WIDTH;
+    this.repeatPairs = repeatPairs;
     generatePitchStrings();
     setFontAndRowHeight();
     repaint();
@@ -350,5 +390,10 @@ public class EditorPanel extends JPanel {
       g.fillRect(initialPositionFurthest, fontSize, 500,
               this.getHeight());
     }
+  }
+
+  public void updateRepeatPairs(Map<Integer, Integer> repeatPairs) {
+    this.repeatPairs = repeatPairs;
+    repaint();
   }
 }

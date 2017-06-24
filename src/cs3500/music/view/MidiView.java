@@ -1,6 +1,7 @@
 package cs3500.music.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -30,6 +31,8 @@ public class MidiView implements IMusicEditorView {
 
   private int tempo;
 
+  private Map<Integer, Integer> repeatPairs = new HashMap<>();
+
   /**
    * Constructor for a midi view. Require the input of the Music Editor Model to play the music of.
    */
@@ -50,6 +53,7 @@ public class MidiView implements IMusicEditorView {
    *
    * @param tempo the tempo being set to.
    */
+  @Override
   public void setTempo(int tempo) {
     this.tempo = tempo;
   }
@@ -307,6 +311,10 @@ public class MidiView implements IMusicEditorView {
 
   @Override
   public int getCurrentBeat() {
+    // prevent a fast tempo from going over the beat limit.
+    if(isPlayingMusic() && sequencer.getTickPosition() > this.getMaxBeat()){
+      return getMaxBeat();
+    }
     return (int) sequencer.getTickPosition();
   }
 
@@ -359,5 +367,26 @@ public class MidiView implements IMusicEditorView {
     } catch (MidiUnavailableException e) {
       e.getMessage();
     }
+  }
+
+  @Override
+  public void receiveRepeatPairs(Map<Integer, Integer> repeatPairs) {
+    this.repeatPairs = repeatPairs;
+
+  }
+
+  @Override
+  public Map<Integer, Integer> getRepeatPairs() {
+    Map<Integer, Integer> copy = new HashMap<>();
+    for(Integer keyEndingBeat : this.repeatPairs.keySet()){
+      int beginningBeatCandidate = this.repeatPairs.get(keyEndingBeat);
+      copy.put(keyEndingBeat, beginningBeatCandidate);
+    }
+    return copy;
+  }
+
+  @Override
+  public void resetRepeatPassings() {
+    //STUB, does not apply to view.
   }
 }

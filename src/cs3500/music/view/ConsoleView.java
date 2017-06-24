@@ -346,4 +346,25 @@ public class ConsoleView implements IMusicEditorView {
     //STUB, does not apply to view.
 
   }
+
+  @Override
+  public void receiveRepeatPairs(Map<Integer, Integer> repeatPairs) {
+    //STUB, does not apply to view.
+  }
+
+  @Override
+  public Map<Integer, Integer> getRepeatPairs() {
+    //STUB, does not apply to view.
+    return null;
+  }
+
+  @Override
+  public void resetRepeatPassings() {
+    //STUB, does not apply to view.
+  }
+
+  @Override
+  public void setTempo(int tempo) {
+    //STUB, does not apply to view.
+  }
 }

@@ -22,6 +22,9 @@ public class MusicEditorController {
   private IMusicEditorView view;
   // Used for finding out when it is necessary to rebuild the midi audio.
   private boolean audioUpdateNecessary = false;
+  private int potentialStartingRepeat = -1;
+  private int potentialEndingRepeat = -1;
+  private final int tempoIncrement;
 
   /**
    * Constructor for a MusicEditorController. Requires a model and view to use to run both vies
@@ -33,8 +36,10 @@ public class MusicEditorController {
   public MusicEditorController(IMusicEditorModel model, IMusicEditorView view) {
     this.model = model;
     this.view = view;
+    this.tempoIncrement = (int) (model.getTempo() / 10);
     this.configureKeyBoardListener();
     this.configureMouseListener();
+
   }
 
   /**
@@ -61,6 +66,40 @@ public class MusicEditorController {
 
       }
     });
+    keyPresses.put(KeyEvent.VK_UP, () -> { //the contents of MakeCaps below
+      model.setRepeatFromTheTop(view.getCurrentBeat());
+      view.receiveRepeatPairs(model.getRepeatPairs());
+
+    });
+    keyPresses.put(KeyEvent.VK_DOWN, () -> { //the contents of MakeCaps below
+
+      if(this.potentialStartingRepeat == -1 && this.potentialEndingRepeat == -1){
+        model.setRepeatPair(view.getCurrentBeat(), -1);
+        this.potentialStartingRepeat = view.getCurrentBeat();
+      }
+      else {
+        if(view.getCurrentBeat() <= this.potentialStartingRepeat){
+          throw new IllegalArgumentException("Ending beat must be after starting beat");
+        }
+        this.potentialEndingRepeat = view.getCurrentBeat();
+        try{
+          model.setRepeatPair(this.potentialStartingRepeat, this.potentialEndingRepeat);
+        }
+        catch (IllegalArgumentException e){
+          System.out.println(e.getMessage());
+        }
+        this.potentialStartingRepeat = -1;
+        this.potentialEndingRepeat = -1;
+      }
+      view.receiveRepeatPairs(model.getRepeatPairs());
+
+    });
+    keyPresses.put(KeyEvent.VK_SLASH, () -> { //the contents of MakeCaps below
+      model.resetRepeatPairs();
+      view.receiveRepeatPairs(model.getRepeatPairs());
+      this.potentialStartingRepeat = -1;
+      this.potentialEndingRepeat = -1;
+    });
     keyPresses.put(KeyEvent.VK_RIGHT, () -> { //the contents of MakeCaps below
       view.forwardOneBeat();
 
@@ -68,15 +107,26 @@ public class MusicEditorController {
     keyPresses.put(KeyEvent.VK_LEFT, () -> { //the contents of MakeCaps below
       view.backOneBeat();
     });
+
     keyPresses.put(KeyEvent.VK_HOME, () -> { //the contents of MakeCaps below
       if (view.isPlayingMusic() && audioUpdateNecessary) {
         view.rebuildMusic(model.getAllNotes());
         audioUpdateNecessary = false;
       }
       view.goToBeginning();
+      view.resetRepeatPassings();
     });
     keyPresses.put(KeyEvent.VK_END, () -> { //the contents of MakeCaps below
       view.goToEnd();
+    });
+
+    keyPresses.put(KeyEvent.VK_COMMA, () -> { //the contents of MakeCaps below
+      model.setTempo(model.getTempo() + tempoIncrement);
+      view.setTempo(model.getTempo());
+    });
+    keyPresses.put(KeyEvent.VK_PERIOD, () -> { //the contents of MakeCaps below
+      model.setTempo(model.getTempo() - tempoIncrement);
+      view.setTempo(model.getTempo());
     });
 
     // add the keyboard listener to the view.
@@ -134,7 +184,7 @@ public class MusicEditorController {
     view.initialize();
     while (view.isActive()) {
       view.updateCurrentBeat();
-      System.out.print(" "); // Needed to boost performance.
+      //System.out.print(" "); // Needed to boost performance.
     }
   }
 }
