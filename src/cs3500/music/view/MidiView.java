@@ -58,6 +58,31 @@ public class MidiView implements IMusicEditorView {
     this.tempo = tempo;
   }
 
+  @Override
+  public void beginPracticeMode() {
+
+  }
+
+  @Override
+  public void endPracticeMode() {
+
+  }
+
+  @Override
+  public boolean isInPracticeMode() {
+    return false;
+  }
+
+  @Override
+  public void practiceModeChecking(ArrayList<ArrayList<Integer>> notesAtBeat) {
+
+  }
+
+  @Override
+  public void practiceModeAddClickedPitch(Integer addedPitch, ArrayList<ArrayList<Integer>> notesAtBeat) {
+
+  }
+
   /**
    * Builder class for a MidiView.
    */

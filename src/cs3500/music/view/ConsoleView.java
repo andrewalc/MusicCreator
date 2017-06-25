@@ -367,4 +367,29 @@ public class ConsoleView implements IMusicEditorView {
   public void setTempo(int tempo) {
     //STUB, does not apply to view.
   }
+
+  @Override
+  public void beginPracticeMode() {
+
+  }
+
+  @Override
+  public void endPracticeMode() {
+
+  }
+
+  @Override
+  public boolean isInPracticeMode() {
+    return false;
+  }
+
+  @Override
+  public void practiceModeChecking(ArrayList<ArrayList<Integer>> notesAtBeat) {
+
+  }
+
+  @Override
+  public void practiceModeAddClickedPitch(Integer addedPitch, ArrayList<ArrayList<Integer>> notesAtBeat) {
+
+  }
 }

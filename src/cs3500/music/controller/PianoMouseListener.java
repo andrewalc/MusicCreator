@@ -4,6 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Map;
 
+import javax.swing.*;
+
 /**
  * Class representing a MouseListener for the Music Editor. This controller allows the setting of
  * a Map of Integer(Mouse Event ID) to Runnable, a command. One must create this map first and
@@ -13,10 +15,16 @@ import java.util.Map;
 public class PianoMouseListener implements MouseListener {
 
   private Map<Integer, Runnable> mousePressedMap;
+  private Map<Integer, Runnable> mouseReleasedMap;
+
 
 
   public void setMousePressedMap(Map<Integer, Runnable> mousePressedMap) {
     this.mousePressedMap = mousePressedMap;
+  }
+
+  public void setMouseReleasedMap(Map<Integer, Runnable> mouseReleasedMap) {
+    this.mouseReleasedMap = mouseReleasedMap;
   }
 
   @Override
@@ -26,14 +34,22 @@ public class PianoMouseListener implements MouseListener {
 
   @Override
   public void mousePressed(MouseEvent e) {
-    if (mousePressedMap.containsKey(e.getID())) {
-      mousePressedMap.get(e.getID()).run();
+    try{
+      mousePressedMap.get(e.getButton()).run();
+    }
+    catch(NullPointerException ex){
+      ex.getMessage();
     }
   }
 
   @Override
   public void mouseReleased(MouseEvent e) {
-    //STUB, does not apply to controller.
+    try{
+      mouseReleasedMap.get(e.getButton()).run();
+    }
+    catch(NullPointerException ex){
+      ex.getMessage();
+    }
   }
 
   @Override

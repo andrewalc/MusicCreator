@@ -145,6 +145,7 @@ public interface IMusicEditorView {
 
   /**
    * Getter for the map of repeat pairs.
+   *
    * @return The map of repeat pairs.
    */
   Map<Integer, Integer> getRepeatPairs();
@@ -156,8 +157,39 @@ public interface IMusicEditorView {
 
   /**
    * Sets the tempo for the music to play at.
+   *
    * @param tempo Tempo to play the music at.
    */
   void setTempo(int tempo);
 
+  /**
+   * Transitions the editor into practice mode, for hitting keys to advance the song.
+   */
+  void beginPracticeMode();
+
+  /**
+   * Transisitions the editor back to standard mode and ends practice mode.
+   */
+  void endPracticeMode();
+
+  /**
+   * Returns whether this view is currently in practice mode.
+   *
+   * @return Is the view in practice mode.
+   */
+  boolean isInPracticeMode();
+
+  /**
+   * Method that allows progress in the editor when practice mode is on.
+   * @param notesAtBeat
+   */
+  void practiceModeChecking(ArrayList<ArrayList<Integer>> notesAtBeat);
+
+  /**
+   * Adds a clicked piano key's pitch to the list of pitches needed to pass the current beat in
+   * practice mdoe.
+   * @param addedPitch The keyboard key pitch that was pressed
+   * @param notesAtBeat The list of notes playing that the current beat that the key was pressed.
+   */
+  void practiceModeAddClickedPitch(Integer addedPitch, ArrayList<ArrayList<Integer>> notesAtBeat);
 }

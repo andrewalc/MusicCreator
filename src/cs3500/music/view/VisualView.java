@@ -48,6 +48,7 @@ public class VisualView extends JFrame implements IMusicEditorView {
   public static final int START_SCROLLING_AT_BEAT = 16;
   public static final Color BACKGROUND_COLOR = new Color(43, 43, 43);
   private Map<Integer, Integer> repeatPairs;
+  private boolean practiceMode = false;
 
 
   /**
@@ -318,6 +319,35 @@ public class VisualView extends JFrame implements IMusicEditorView {
   @Override
   public void setTempo(int tempo) {
     //STUB, does not apply to view.
+  }
+
+  @Override
+  public void beginPracticeMode() {
+    this.practiceMode = true;
+    editorPanel.beginPracticeMode();
+    keyboardPanel.beginPracticeMode();
+  }
+
+  @Override
+  public void endPracticeMode() {
+    this.practiceMode = false;
+    editorPanel.endPracticeMode();
+    keyboardPanel.endPracticeMode();
+  }
+
+  @Override
+  public boolean isInPracticeMode() {
+    return this.practiceMode;
+  }
+
+  @Override
+  public void practiceModeChecking(ArrayList<ArrayList<Integer>> notesAtBeat) {
+
+  }
+
+  @Override
+  public void practiceModeAddClickedPitch(Integer addedPitch, ArrayList<ArrayList<Integer>> notesAtBeat) {
+    keyboardPanel.practiceModeColorClickedPitch(addedPitch, notesAtBeat);
   }
 
 }

@@ -39,6 +39,7 @@ public class EditorPanel extends JPanel {
   private int numOfMeasures;
   private int currentBeat;
   private int maxBeats;
+  private boolean practiceMode = false;
   private ArrayList<String> pitchStrings = new ArrayList<String>();
   private Map<Integer, ArrayList<ArrayList<Integer>>> notes;
   private Color textColor = new Color(220, 223, 224);
@@ -360,6 +361,7 @@ public class EditorPanel extends JPanel {
     this.rowWidth = (this.maxBeats * BEAT_UNIT_LENGTH);
     this.numOfMeasures = rowWidth / MEASURE_WIDTH;
     this.repeatPairs = repeatPairs;
+
     generatePitchStrings();
     setFontAndRowHeight();
     repaint();
@@ -394,6 +396,18 @@ public class EditorPanel extends JPanel {
 
   public void updateRepeatPairs(Map<Integer, Integer> repeatPairs) {
     this.repeatPairs = repeatPairs;
+    repaint();
+  }
+
+  public void beginPracticeMode(){
+    this.practiceMode = true;
+    gridBackgroundColor = Color.blue;
+    repaint();
+  }
+
+  public void endPracticeMode(){
+    this.practiceMode = false;
+    gridBackgroundColor = new Color(71, 71, 71);
     repaint();
   }
 }

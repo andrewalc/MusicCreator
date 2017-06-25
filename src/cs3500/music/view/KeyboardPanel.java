@@ -23,6 +23,7 @@ import javax.swing.JPanel;
  */
 public class KeyboardPanel extends JPanel {
 
+  private boolean practiceMode = false;
   // Constants
   public static final int NUM_WHKEYS = 70;
   public static final int WHKEY_WIDTH = 20;
@@ -36,6 +37,9 @@ public class KeyboardPanel extends JPanel {
 
   // All notes that are playing at the current beat
   private ArrayList<ArrayList<Integer>> liveNotes;
+
+  // Notes that have been clicked in practice mode
+  private ArrayList<Integer> pMClickedPitches = new ArrayList<>();
 
   /**
    * Constructor for a KeyboardPanel. Requires a list of notes (in the Arraylist Integer format)
@@ -195,6 +199,14 @@ public class KeyboardPanel extends JPanel {
                   0, WHKEY_WIDTH, WHKEY_HEIGHT);
         }
       }
+      // PRACTICE MODE COLORING
+      for(Integer pressedPitch : this.pMClickedPitches){
+        if (keyNumber == pressedPitch) {
+          g.setColor(Color.CYAN);
+          g.fillRect((i * WHKEY_WIDTH) + EditorPanel.BORDER_SHIFT,
+                  0, WHKEY_WIDTH, WHKEY_HEIGHT);
+        }
+      }
       // Render the black outline of a key.
       g.setColor(Color.black);
       g.drawRect((i * WHKEY_WIDTH) + EditorPanel.BORDER_SHIFT,
@@ -249,6 +261,17 @@ public class KeyboardPanel extends JPanel {
                     BLKEY_HEIGHT);
           }
         }
+        // PRACTICE MODE COLORING
+        for (Integer pressedPitch : this.pMClickedPitches) {
+          // if this key is being played draw an orange key.
+          if (blackKeyNumber == pressedPitch) {
+            g.setColor(Color.CYAN);
+            g.fillRect(i * WHKEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
+                    0,
+                    BLKEY_WIDTH,
+                    BLKEY_HEIGHT);
+          }
+        }
         // Draw a black outline of the black key.
         g.setColor(Color.black);
         g.drawRect(i * WHKEY_WIDTH - (BLKEY_WIDTH / 2) + EditorPanel.BORDER_SHIFT,
@@ -296,5 +319,30 @@ public class KeyboardPanel extends JPanel {
    */
   public void updateInfo(ArrayList<ArrayList<Integer>> notesAtBeat) {
     setNotes(notesAtBeat);
+  }
+
+  public void beginPracticeMode(){
+    this.practiceMode = true;
+  }
+
+  public void endPracticeMode(){
+    this.practiceMode = false;
+    this.pMClickedPitches = new ArrayList<>();
+  }
+
+  public void practiceModeColorClickedPitch(Integer addedPitch, ArrayList<ArrayList<Integer>>
+                                            notesAtBeat) {
+    this.pMClickedPitches.add(addedPitch);
+    boolean containsAll = true;
+    for(ArrayList<Integer> note : notesAtBeat){
+      if(!pMClickedPitches.contains(note.get(3))){
+        containsAll = false;
+        break;
+      }
+    }
+    if(containsAll){
+      this.pMClickedPitches = new ArrayList<>();
+    }
+    repaint();
   }
 }
