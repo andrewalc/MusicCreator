@@ -272,7 +272,7 @@ public class MusicEditorController {
     });
 
 
-    // add the mouse listener to the view.
+    // Add the mouse listener to the view.
     PianoMouseListener mouseListener = new PianoMouseListener();
     mouseListener.setMousePressedMap(mousePresses);
     mouseListener.setMouseReleasedMap(mouseReleases);
